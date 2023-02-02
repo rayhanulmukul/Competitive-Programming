@@ -1,59 +1,133 @@
-#include <bits/stdc++.h>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
+#define    int      long long 
+#define    rep      for(int i = 0; i < n; i++)
+#define    repi     for(int i = a; i < n; i++)
+#define    yes      cout << "yes\n"
+#define    no       cout << "no\n"
+#define    endl     '\n'
+#define    in(n)    int n; cin>>n;
 
-#define ll long long int
-#define int ll
-#define ld long double
-#define pb push_back
-#define mp make_pair
-#define ft front()
-#define bk back()
-#define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
-#define gap ' '
-#define en '\n'
-#define endl en
-#define sz(x) (int(x.size()))
-#define mem(a, b) memset(a, b, sizeof(a))
-#define sor(x)  sort(x.begin(), x.end())
- 
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
-#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
-#define FOR(i,a) F0R(i,0,a)
-#define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
-#define ROF(i,a) R0F(i,0,a)
-#define each(a,x) for (auto& a: x)
-const int MOD = 1e9+7; // 998244353;
-const int MAX = 2e5+5;
-const int N = 1005;
-
-void solve(int tt){
-    int n;
-    cin >> n;
-    string s;
+string reverse(string str){string s;for (int i = str.length() - 1; i >= 0; i--){s += str[i];}return s;}
+bool palindrome(string s){string tem = reverse(s);return tem == s;}
+string lower(string s){int n = s.length();rep{if(s[i] < 'a'){char ch = s[i] + 'a' - 'A' ;s[i] = ch;}}return s;}
+string upper(string s){int n = s.length();rep{if(s[i] >= 'a'){char ch = s[i] + 'A' - 'a' ;s[i] = ch;}}return s;}
+bool comp(pair<int ,int> t, pair<int, int> p){return t.first< p.first ;}
+int nextsquare(int n){float t = sqrt(n);int x = ceil(t);return x*x;}
+bool comp1(int x, int y){
+    return x > y;
+}
+int myceil(double x){
+    int t = x;
+    if(x*10 > t*10){
+        return t+1;
+    }else{
+        return t;
+    }
+}
+int power(int x, int y){
+    int ans = 1;
+    while(y--){
+        ans *= x;
+    }
+    return ans;
+}
+int bin(int x){
+    int ans = 0;
+    int n = log2(x) + 1;
+    int temp;
+    for(int i = 0; i < n; i++){
+        if(x & power(2,i)){
+            temp = 1;
+        }else{
+            temp = 0;
+        }
+        temp = temp* power(10,i);
+        ans += temp;
+    }
+    return ans;
+}
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+int lcm(int a, int b) {
+    return (a * b) / gcd(a, b);
+}
+bool comp4(pair <int, int> x , pair <int, int> y){
+    // if(x.first == y.first){
+    //     return (x.second <= y.second);
+    // }
+    // else {
+    //     return (x.first < y.first)  ;
+    // }
+    return x.first < y.first;
+}
+int frq[1000001];
+const int mod = 1e9+7;
+vector<int> v[200001];
+const int N = 200005;
+int f[N][2],x[N],y[N];
+void solve(){
+    string s,t;
     cin >> s;
-    bitset<32> number(s);
-    int count_powers = 0;
-    int sum = 0;
-    for (unsigned int i = 0; i < n; i++) {
-        if (s[s.length()-1-i] == '1') {
-            sum += (1 << i);
-            count_powers++;
+    cin >> t;
+    int ns = s.size();
+    for(int i = 0; i< ns; i++){
+        frq[s[i] -'a']++;
+    }
+    int nt = t.size();
+    for(int i = 0; i < nt; i++){
+        frq[t[i] -'a']--;
+    }
+    char ch = t[0];
+    bool ok = false;
+    for(int i = 0; i < 26; i++){
+        char ch2 = 'a' + i;
+        if(frq[i] != 0 && ch!= ch2){
+            cout << ch2;
+            frq[i]--;
+            ok = true;
+            break;
         }
     }
-    cout << count_powers << endl;
+    if(!ok){
+        for(int i = 0; i < 26; i++){
+            char ch2 = 'a' + i;
+            if(frq[i] != 0 ){
+                cout << ch2;
+                frq[i]--;
+                break;
+            }
+        }
+        
+    }
+    cout << t;
+    for(int i = 0; i < 26; i++){
+        ch = 'a' + i;
+        while(frq[i]){
+            cout << ch;
+            frq[i]--;
+        }
+    }
+    cout << endl;
 
 }
+
 int32_t main(){
-    #ifndef DEBUG
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
+    ios_base::sync_with_stdio(false); 
+    cin.tie(NULL);
+    #ifndef ONLINE_JUDGE
+    //freopen("input.txt","r",stdin);
+    // freopen("output.txt","w",stdout);
     #endif
     int t = 1;
     cin >> t;
-    for(int i = 1; i <= t; i++){
-        solve(i);
+    int i = 1;
+    while(t--){
+        solve();
     }
     return 0;
 }

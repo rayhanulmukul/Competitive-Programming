@@ -27,22 +27,38 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
-
+int frq[30];
 void solve(int tt){
-    int n;
-    cin >> n;
-    int arr[n];
-    int ans = 0;
-    for(int i = 0; i < n; i++){
-        cin >> arr[i];
-        ans += arr[i];
+    string s,t;
+    cin >> s;
+    cin >> t;
+    map<char, int> m1;
+    map <char, int> m2;
+    for(int i = 0; i < s.size(); i++){
+        m1[s[i]]++;
     }
-    if(ans%n == 0){
-        cout << n << endl;
+    for(int i = 0; i < t.size(); i++){
+        m2[t[i]]++;
     }
-    else{
-        cout << n-1 << endl;
+    string  s1 = " ";
+    for(auto it:m1){
+        char ch = it.first;
+        if(m1[ch] > m2[ch]){
+            int x = it.second;
+            int y = m2[ch];
+            for(int i = y; i < x; i++){
+               s1 += ch;
+            }
+        }
     }
+    cout << s1 << en;
+    for(int i = 0; i < s.size(); i++){
+        if(s[i] != t[i]){
+            swap(s1[0], s1[i]);
+            break;
+        }
+    }
+   // cout << s1 << t << en;
 
 }
 int32_t main(){
@@ -51,7 +67,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
