@@ -37,6 +37,7 @@ void solve(int tt){
         int x;
         cin >> x;
         m[x]++;
+        
     }
     for(auto it:m){
         //cout << it.first << gap << it.second << en;

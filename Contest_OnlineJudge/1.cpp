@@ -31,9 +31,19 @@ const int N = 1005;
 void solve(int tt){
     int n;
     cin >> n;
-    FOR(i, n){
-        cout << i << en;
+    int arr[n];
+    int ans = 0;
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+        ans += arr[i];
     }
+    if(ans%n == 0){
+        cout << n << endl;
+    }
+    else{
+        cout << n-1 << endl;
+    }
+
 }
 int32_t main(){
     #ifndef DEBUG
@@ -41,7 +51,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
