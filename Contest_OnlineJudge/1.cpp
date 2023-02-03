@@ -27,39 +27,33 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
-int frq[30];
+
 void solve(int tt){
-    string s,t;
+    int n;  
+    cin >> n;
+    string s;
     cin >> s;
-    cin >> t;
-    map<char, int> m1;
-    map <char, int> m2;
-    for(int i = 0; i < s.size(); i++){
-        m1[s[i]]++;
-    }
-    for(int i = 0; i < t.size(); i++){
-        m2[t[i]]++;
-    }
-    string  s1 = " ";
-    for(auto it:m1){
-        char ch = it.first;
-        if(m1[ch] > m2[ch]){
-            int x = it.second;
-            int y = m2[ch];
-            for(int i = y; i < x; i++){
-               s1 += ch;
-            }
-        }
-    }
-    cout << s1 << en;
-    for(int i = 0; i < s.size(); i++){
-        if(s[i] != t[i]){
-            swap(s1[0], s1[i]);
+    int x = 0, y = 0;
+    bool ok = 0;
+    int i = 0;
+    while (n--){
+        if(x == 1 && y == 1){
+            ok = 1;
             break;
         }
-    }
-   // cout << s1 << t << en;
+        if(s[i] == 'L') x--;
+        else if(s[i] == 'R') x++;
+        else if(s[i] == 'U') y++;
+        else y--;
+        i++;
+        //cout << x << gap << y << endl;
 
+    }
+    if(x == 1 && y == 1){
+            ok = 1;
+    }
+    if(ok) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
 int32_t main(){
     #ifndef DEBUG
