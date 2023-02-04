@@ -29,11 +29,7 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n;
-    cin >> n;
-    FOR(i, n){
-        cout << i << en;
-    }
+    cout << "Case #" << tt << ": " << en;
 }
 int32_t main(){
     #ifndef DEBUG
