@@ -29,21 +29,26 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n;
+    int n, ma = 0;
     cin >> n;
     string s;
     cin >> s;
-    bitset<32> number(s);
-    int count_powers = 0;
-    int sum = 0;
-    for (unsigned int i = 0; i < n; i++) {
-        if (s[s.length()-1-i] == '1') {
-            sum += (1 << i);
-            count_powers++;
+    for(int i = i; i < n; i++){
+        set <char> s1;
+        set <char> s2;
+        string a = s.substr(i, i);
+        string b = s.substr(i, n-i);
+        for(int i = 0; i < a.size(); i++){
+            s1.insert(a[i]);
         }
+        for(int i = 0; i < b.size(); i++){
+            s2.insert(b[i]);
+        }
+        //cout << a << gap << b << endl;
+        //cout << s1.size() << gap << s2.size() << endl;
+        ma = max(ma, (int)s1.size() + (int)s2.size());
     }
-    cout << count_powers << endl;
-
+    cout << ma << en;
 }
 int32_t main(){
     #ifndef DEBUG
