@@ -1,13 +1,77 @@
 #include <bits/stdc++.h>
+#include<vector>
 using namespace std;
-int main()
-{
-    int i = 3;
-    string s = "Bangladesh";
-    int size = s.size();
-    string s1 = s.substr(0, i);        // 0 = index_start , i = length
-    string s2 = s.substr(i, size - i); // i = index_start , x-i = length
-    cout << "S1 : " << s1 << " "
-         << "s2 : " << s2 << endl;
+
+#define ll long long int
+#define int ll
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define ft front()
+#define bk back()
+#define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
+#define gap ' '
+#define en '\n'
+#define endl en
+#define sz(x) (int(x.size()))
+#define mem(a, b) memset(a, b, sizeof(a))
+#define sor(x)  sort(x.begin(), x.end())
+vector<string> vec_splitter(string s) {
+    s += ',';
+    vector<string> res;
+    while(!s.empty()) {
+        res.push_back(s.substr(0, s.find(',')));
+        s = s.substr(s.find(',') + 1);
+    }
+    return res;
+}
+void debug_out(
+vector<string> __attribute__ ((unused)) args,
+__attribute__ ((unused)) int idx, 
+__attribute__ ((unused)) int LINE_NUM) { cerr << endl; } 
+template <typename Head, typename... Tail>
+void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
+    if(idx > 0) cerr << ", "; else cerr << "Line(" << LINE_NUM << ") ";
+    stringstream ss; ss << H;
+    cerr << args[idx] << " = " << ss.str();
+    debug_out(args, idx + 1, LINE_NUM, T...);
+}
+#ifdef LOCAL
+#define dbg(...) debug_out(vec_splitter(#__VA_ARGS__), 0, __LINE__, __VA_ARGS__)
+#else
+#define dbg(...)
+#endif
+#ifndef ONLINE_JUDGE
+//#define cerr cout
+#include "DEBUG.hpp"
+#else
+#define dbug(...)
+#endif
+#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
+
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
+#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
+#define FOR(i,a) F0R(i,0,a)
+#define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
+#define ROF(i,a) R0F(i,0,a)
+#define each(a,x) for (auto& a: x)
+const int MOD = 1e9+7; // 998244353;
+const int MAX = 2e5+5;
+const int N = 1005;
+
+void solve(int tt){
+    
+}
+int32_t main(){
+    #ifndef DEBUG
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+    #endif
+    int t = 1;
+    cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
+    }
     return 0;
 }

@@ -32,6 +32,14 @@
         "typeindex": "cpp",
         "utility": "cpp",
         "valarray": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "forward_list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "string_view": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "regex": "cpp"
     }
 }

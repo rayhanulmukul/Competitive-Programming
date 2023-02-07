@@ -1,5 +1,5 @@
-"tesla_C++": {
-  "prefix": "ram",
+"C++_tesla": {
+  "prefix": "mar",
   "body": [
     "#include <bits/stdc++.h>",
     "#include<vector>",
@@ -79,5 +79,5 @@
     "    return 0;",
     "}"
   ],
-  "description": "tesla_C++"
+  "description": "C++_tesla"
 }

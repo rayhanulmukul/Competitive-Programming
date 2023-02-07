@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+#include<vector>
+using namespace std;
+
+#define ll long long int
+#define int ll
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define ft front()
+#define bk back()
+#define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
+#define gap ' '
+#define en '\n'
+#define endl en
+#define sz(x) (int(x.size()))
+#define mem(a, b) memset(a, b, sizeof(a))
+#define sor(x)  sort(x.begin(), x.end())
+
+
+#ifndef ONLINE_JUDGE
+//#define cerr cout
+#include "hello.hpp"
+#else
+#define dbg(...){ }
+#endif
+
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
+#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
+#define FOR(i,a) F0R(i,0,a)
+#define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
+#define ROF(i,a) R0F(i,0,a)
+#define each(a,x) for (auto& a: x)
+#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
+const int MOD = 1e9+7; // 998244353;
+const int MAX = 2e5+5;
+const int N = 1005;
+int my_func(int a, int b)
+{
+    return a*b;
+}
+void solve(int tt){
+    int x=5, y=4;
+    string s="Hello";
+    vector<int> v={1,2,3,4,5};
+    set<int> st={34,45};
+    map<int, vector<int> > m;
+
+    for(int i=0;i<3;i++)
+    {
+        for(int j=0;j<4;j++)
+        {
+            m[i].push_back(i+j);
+        }
+    }
+
+    dbg(x, y, s, v, st);
+}
+int32_t main(){
+    #ifndef DEBUG
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+    #endif
+    int t = 1;
+    cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
+    }
+    return 0;
+}
