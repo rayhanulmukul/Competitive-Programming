@@ -16,14 +16,38 @@ using namespace std;
 #define sz(x) (int(x.size()))
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
-
-
+vector<string> vec_splitter(string s) {
+    s += ',';
+    vector<string> res;
+    while(!s.empty()) {
+        res.push_back(s.substr(0, s.find(',')));
+        s = s.substr(s.find(',') + 1);
+    }
+    return res;
+}
+void debug_out(
+vector<string> __attribute__ ((unused)) args,
+__attribute__ ((unused)) int idx, 
+__attribute__ ((unused)) int LINE_NUM) { cerr << endl; } 
+template <typename Head, typename... Tail>
+void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
+    if(idx > 0) cerr << ", "; else cerr << "Line(" << LINE_NUM << ") ";
+    stringstream ss; ss << H;
+    cerr << args[idx] << " = " << ss.str();
+    debug_out(args, idx + 1, LINE_NUM, T...);
+}
+#ifdef LOCAL
+#define dbg(...) debug_out(vec_splitter(#__VA_ARGS__), 0, __LINE__, __VA_ARGS__)
+#else
+#define dbg(...)
+#endif
 #ifndef ONLINE_JUDGE
 //#define cerr cout
-#include "hello.hpp"
+#include "DEBUG.hpp"
 #else
-#define dbg(...){ }
+#define dbug(...)
 #endif
+#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
@@ -32,30 +56,32 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
 #define ROF(i,a) R0F(i,0,a)
 #define each(a,x) for (auto& a: x)
-#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
-int my_func(int a, int b)
-{
-    return a*b;
-}
+
+// Function: F(x) = x^3-4x-9
+// Function: F(x) = x^2 - 3;
+
 void solve(int tt){
-    int x=5, y=4;
-    string s="Hello";
-    vector<int> v={1,2,3,4,5};
-    set<int> st={34,45};
-    map<int, vector<int> > m;
+    int i = 1, max = 7;
+    double a = 1, b = 2, m = 0.0, fa = 0.0, fm = 0.0;
+    cout << "SOLUTION BY BISECTION METHOD" << endl;
 
-    for(int i=0;i<3;i++)
-    {
-        for(int j=0;j<4;j++)
-        {
-            m[i].push_back(i+j);
+    while(i < max){
+        m = (a + b) / 2.0;              // midle point
+        fa = (a * a) - 3;   // F(a)
+        fm = (m * m) - 3;   // F(midle point)
+        dbg(i, a, b, m, fa, fm);
+        if(fa < 0 && fm > 0){
+            b = m;     
         }
+        else{
+            a = m;
+        }
+        i++;
     }
-
-    dbg(x, y, s, v, st);
+    cout << "Root: " << m << endl;
 }
 int32_t main(){
     #ifndef DEBUG
@@ -63,7 +89,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

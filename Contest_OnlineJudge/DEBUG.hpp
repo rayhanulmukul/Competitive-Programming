@@ -25,4 +25,4 @@ ostream &operator<<(ostream &os, const T &c) {
 //Change output format here
 #define out(x) #x " = " << x << "; "
 #define dbug(...)                                                              \
-  cerr << "Line " << __LINE__ << ": " FOR_EACH_MACRO(out, __VA_ARGS__) << "\n"
+  cerr << "(Line_" << __LINE__ << ")=: " FOR_EACH_MACRO(out, __VA_ARGS__) << "\n"

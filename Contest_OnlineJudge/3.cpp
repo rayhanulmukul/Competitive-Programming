@@ -61,7 +61,9 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    
+    for(int i = 0; i < 10000; i++){
+      cout << 19999999999 << en;
+    }
 }
 int32_t main(){
     #ifndef DEBUG
@@ -69,7 +71,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

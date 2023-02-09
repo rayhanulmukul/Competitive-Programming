@@ -16,7 +16,39 @@ using namespace std;
 #define sz(x) (int(x.size()))
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
- 
+vector<string> vec_splitter(string s) {
+    s += ',';
+    vector<string> res;
+    while(!s.empty()) {
+        res.push_back(s.substr(0, s.find(',')));
+        s = s.substr(s.find(',') + 1);
+    }
+    return res;
+}
+void debug_out(
+vector<string> __attribute__ ((unused)) args,
+__attribute__ ((unused)) int idx, 
+__attribute__ ((unused)) int LINE_NUM) { cerr << endl; } 
+template <typename Head, typename... Tail>
+void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
+    if(idx > 0) cerr << ", "; else cerr << "Line(" << LINE_NUM << ") ";
+    stringstream ss; ss << H;
+    cerr << args[idx] << " = " << ss.str();
+    debug_out(args, idx + 1, LINE_NUM, T...);
+}
+#ifdef LOCAL
+#define dbg(...) debug_out(vec_splitter(#__VA_ARGS__), 0, __LINE__, __VA_ARGS__)
+#else
+#define dbg(...)
+#endif
+#ifndef ONLINE_JUDGE
+//#define cerr cout
+#include "DEBUG.hpp"
+#else
+#define dbug(...)
+#endif
+#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
+
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
 #define F0R(i,a,b) for (int i = (a); i < (b); ++i)
@@ -24,27 +56,12 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
 #define ROF(i,a) R0F(i,0,a)
 #define each(a,x) for (auto& a: x)
-const int MOD = 1e5+7; // 998244353;
+const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-   int n, m;
-   cin >> n >> m;
-   int ans = n, j = 0;
-   while(1){
-        //cout << ans << en;
-        int x = ans%m;
-        if(x == 0){
-            cout << "Yes" << en;
-            return;
-        }
-        j++;
-        if(j == MOD) break;
-        ans += x;
-        //cout << ans << " ";
-   } 
-   cout << "No" << en;
+    
 }
 int32_t main(){
     #ifndef DEBUG
@@ -52,7 +69,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
