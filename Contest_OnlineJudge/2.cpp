@@ -1,9 +1,11 @@
+#include "ext/pb_ds/assoc_container.hpp"
+#include "ext/pb_ds/tree_policy.hpp"
 #include <bits/stdc++.h>
 #include<vector>
 using namespace std;
+using namespace __gnu_pbds;
 
 #define ll long long int
-#define int ll
 #define ld long double
 #define pb push_back
 #define mp make_pair
@@ -16,39 +18,8 @@ using namespace std;
 #define sz(x) (int(x.size()))
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
-vector<string> vec_splitter(string s) {
-	s += ',';
-	vector<string> res;
-	while(!s.empty()) {
-		res.push_back(s.substr(0, s.find(',')));
-		s = s.substr(s.find(',') + 1);
-	}
-	return res;
-}
-void debug_out(
-vector<string> __attribute__ ((unused)) args,
-__attribute__ ((unused)) int idx, 
-__attribute__ ((unused)) int LINE_NUM) { cerr << endl; } 
-template <typename Head, typename... Tail>
-void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
-	if(idx > 0) cerr << ", "; else cerr << "Line(" << LINE_NUM << ") ";
-	stringstream ss; ss << H;
-	cerr << args[idx] << " = " << ss.str();
-	debug_out(args, idx + 1, LINE_NUM, T...);
-}
-#ifdef LOCAL
-#define dbg(...) debug_out(vec_splitter(#__VA_ARGS__), 0, __LINE__, __VA_ARGS__)
-#else
-#define dbg(...)
-#endif
-#ifndef ONLINE_JUDGE
-//#define cerr cout
-#include "DEBUG.hpp"
-#else
-#define dbug(...)
-#endif
-#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
-
+#include "main.hpp"
+//dbg(), dbug(), watch(), output_run_time()
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
 #define F0R(i,a,b) for (int i = (a); i < (b); ++i)
@@ -56,48 +27,13 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
 #define ROF(i,a) R0F(i,0,a)
 #define each(a,x) for (auto& a: x)
+#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-	 int n, temp, r, a, b, i;
-		i=1;
-        temp=n;
-        cin>>n;
-        a=0;
-        b=0;
-        while(n>0)
-        {
-            r=n%10;
-            if(r&1)
-            {
-                r/=2;
-                if(a<=b)
-                {
-                    a+=(i*(r+1));
-                    b+=(i*r);
-                }
-                else
-                {
-                    b+=(i*(r+1));
-                    a+=(i*r);
-                }
-				dbg(n, r, a, b, i);
-            }
-            else
-            {
-                r/=2;
-                a+=(i*r);
-                b+=(i*r);
-				dbg(n, r, a, b, i);
-            }
-            i*=10;
-            n/=10;
-			dbg(n, r, a, b, i);
-        }
-        cout<<a<<" "<<b<<endl;
- }
+}
 int32_t main(){
 	#ifndef DEBUG
 		ios_base::sync_with_stdio(false);
