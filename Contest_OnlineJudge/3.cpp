@@ -34,44 +34,53 @@ const int N = 1005;
 void solve(int tt){
     int n;
     cin >> n;
-    string s1[n+1];
-    for(int i = 0; i <= n; i++){
-        getline(cin, s1[i]);
-    }
-    sort(s1, s1+n+1);
-
-
-
-    map <string, int> m1;
-    for(int i = 1; i <= n; i++){
-        m1[s1[i].substr(19, 14)]++;
-    }
-    map <string, int> date;
-    map <string, int> blood;
-    blood[" A+"] = blood[" A-"] = blood[" B+"] = blood[" B-"] = blood[" AB+"] = blood[" AB-"] = blood[" O+"] = blood[" O-"] = 0;
-    for(auto it:m1){
-        string a, b;
-        for(int i = 1; i <= n; i++){
-            string s2 = s1[i].substr(19, 14);
-            if(s2 == it.first){
-                a = s1[i].substr(51, 4);
-                b = s1[i].substr(55, 4);
-            }
+    char a[3][n];
+    FOR(i, 3){
+        FOR(j, n){
+            cin >> a[i][j];
         }
+    }
+    int c = 0, ans = 0, ma = 0;
+    for(int j = 0; j < n; j++){
+        int ok = 0;
+        //cout << j << gap;
+        if(j+1 < n && ((a[0][j] == 'O' && a[0][j+1] == 'O' && a[1][j] == 'O' && a[1][j+1] == 'O') || (a[1][j] == 'O' && a[1][j+1] == 'O' && a[2][j] == 'O' && a[2][j+1] == 'O'))){
+            c++;
+            j++;
+        }
+    }
+    ma = c;
+    c = 0, ans = 0;
+    for(int j = 0; j < n; j++){
+        int ok = 0;
+        //cout << j << gap;
+        if(j+1 < n && ((a[0][j] == 'O' && a[0][j+1] == 'O' && a[1][j] == 'O' && a[1][j+1] == 'O') || (a[1][j] == 'O' && a[1][j+1] == 'O' && a[2][j] == 'O' && a[2][j+1] == 'O'))){
+            c++;
+            ok = 1;
+            j++;
+        }
+       // cout << ok << gap << c <<  j+1 << en;
+        if(ok == 0 && j+1 != n){
+            ans += ceil(c/2.0);
+           //cout << ans << en;
+           c = 0;
+            ok = 0;
+        }
+        //cout << ans << en;
+    }
+   //cout << c << gap;
+   if(c > 0) ans += c;
+    //cout << c << gap;
+    //cout << ans << en;
+   //cout << ans << en;
+  cout << ans <<  ": "  <<  ma << gap;
+   if(ans%2 == 0 && ma%2 == 0){
+       cout << "Case " << tt << ": " << "Grandma" << en;
+   }
+   else{
+       cout << "Case " << tt << ": " << "Jhinuk" << en;
+   }
 
-        date[a]++;
-        blood[b]++;
-    }
-    for(auto it:blood){
-        string s = it.first;
-        if(s[0] == ' ') s.erase(0, 1);
-        cout << s;
-        cout << gap << it.second << en;
-    }
-    for(auto it:date){
-        cout << it.first << gap << it.second << en;
-    }
-    
 }
 int32_t main(){
     #ifndef DEBUG
@@ -79,7 +88,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
