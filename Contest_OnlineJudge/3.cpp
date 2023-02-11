@@ -20,12 +20,6 @@ using namespace __gnu_pbds;
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
 
-#ifndef ONLINE_JUDGE
-#include "main.hpp"
-#else
-#define dbg(...)
-#endif
-//dbug(), watch(), output_run_time()
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
 #define F0R(i,a,b) for (int i = (a); i < (b); ++i)
@@ -33,12 +27,51 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
 #define ROF(i,a) R0F(i,0,a)
 #define each(a,x) for (auto& a: x)
-#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
+    int n;
+    cin >> n;
+    string s1[n+1];
+    for(int i = 0; i <= n; i++){
+        getline(cin, s1[i]);
+    }
+    sort(s1, s1+n+1);
+
+
+
+    map <string, int> m1;
+    for(int i = 1; i <= n; i++){
+        m1[s1[i].substr(19, 14)]++;
+    }
+    map <string, int> date;
+    map <string, int> blood;
+    blood[" A+"] = blood[" A-"] = blood[" B+"] = blood[" B-"] = blood[" AB+"] = blood[" AB-"] = blood[" O+"] = blood[" O-"] = 0;
+    for(auto it:m1){
+        string a, b;
+        for(int i = 1; i <= n; i++){
+            string s2 = s1[i].substr(19, 14);
+            if(s2 == it.first){
+                a = s1[i].substr(51, 4);
+                b = s1[i].substr(55, 4);
+            }
+        }
+
+        date[a]++;
+        blood[b]++;
+    }
+    for(auto it:blood){
+        string s = it.first;
+        if(s[0] == ' ') s.erase(0, 1);
+        cout << s;
+        cout << gap << it.second << en;
+    }
+    for(auto it:date){
+        cout << it.first << gap << it.second << en;
+    }
+    
 }
 int32_t main(){
     #ifndef DEBUG
@@ -46,7 +79,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

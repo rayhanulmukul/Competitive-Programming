@@ -38,8 +38,7 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    dbug(tt, tt, tt, tt, tt);
-    dbg(tt, tt, tt, tt, tt, tt, tt, tt);
+    
 }
 int32_t main(){
     #ifndef DEBUG
