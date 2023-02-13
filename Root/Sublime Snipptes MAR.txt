@@ -22,7 +22,7 @@ using namespace __gnu_pbds;
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
 
-#ifndef ONLINE_JUDGE
+#ifdef TESLA
 #include "main.hpp"
 #else
 #define dbg(...)

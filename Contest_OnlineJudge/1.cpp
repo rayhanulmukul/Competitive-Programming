@@ -20,12 +20,12 @@ using namespace __gnu_pbds;
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
 
-#ifndef ONLINE_JUDGE
+#ifdef TESLA
 #include "main.hpp"
 #else
 #define dbg(...)
 #endif
-//dbg(), dbug(), watch(), output_run_time()
+//dbug(), watch(), output_run_time()
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
 #define F0R(i,a,b) for (int i = (a); i < (b); ++i)
@@ -38,7 +38,7 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    
+    dbg(tt);
 }
 int32_t main(){
     #ifndef DEBUG
