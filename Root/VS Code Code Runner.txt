@@ -35,7 +35,7 @@
         "javascript": "node",
         "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "cpp": "cd $dir && time g++ -std=c++17 -Wall -D LOCAL -Wextra -O2 -Wshadow -Wconversion -Wlogical-op -Wvla -Wno-char-subscripts -D_FORTIFY_SOURCE=2 -Wfloat-equal -DDEBUG  $fileName -o $fileNameWithoutExt && echo Successfully Compiled, Mukul! && time ./$fileNameWithoutExt < in.txt",
+        "cpp": "cd $dir && time g++ -std=c++17 -Wall -DTESLA -Wextra -O2 -Wshadow -Wconversion -Wlogical-op -Wvla -Wno-char-subscripts -D_FORTIFY_SOURCE=2 -Wfloat-equal -DDEBUG  $fileName -o $fileNameWithoutExt && echo Successfully Compiled, Mukul! && time ./$fileNameWithoutExt < in.txt",
         "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "php": "php",
         "python": "python -u",
