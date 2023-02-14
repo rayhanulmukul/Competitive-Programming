@@ -16,7 +16,7 @@ using namespace __gnu_pbds;
 #define gap ' '
 #define en '\n'
 #define endl en
-#define sz(x) (int)(x.size())
+#define sz(x) (int(x.size()))
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
 
@@ -33,24 +33,23 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
 #define ROF(i,a) R0F(i,0,a)
 #define each(a,x) for (auto& a: x)
+#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-	for(int i = 0; i < 10000; i++){
-		rng(1, 1000000000);
-	}
+    
 }
 int32_t main(){
-	#ifndef DEBUG
-		ios_base::sync_with_stdio(false);
-		cin.tie(NULL);
-	#endif
-	int t = 1;
-	cin >> t;
-	for(int i = 1; i <= t; i++){
-		solve(i);
-	}
-	return 0;
+    #ifndef DEBUG
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+    #endif
+    int t = 1;
+    cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
+    }
+    return 0;
 }
