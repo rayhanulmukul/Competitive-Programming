@@ -37,39 +37,26 @@ const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
+// F(x) = x^3 - 4x - 9
+
 void solve(int tt){
-    int a, b, c;
-    cin >> a >> b >> c;
-    int arr[3] = {a, b, c};
-    sort(arr, arr+3);
-    if(arr[0] == arr[1]){
-        if((arr[2]-arr[1])%2 != 0){
-            cout << -1 << endl;
+    int a, b;
+    cin >> a >> b;
+    int fa = 0, fb = 0, m = 0, i = 1;
+    while(i < 20){
+        m = (a+b)/2;
+        fa = (a * a * a) - 4 * a - 9;
+        fb = (m * m * m) - 4 * m - 9;
+        if(fa < 0 && fb > 0){
+            b = m;
         }
         else{
-            cout << (arr[2]-arr[1])/2 << endl;
+            a = m;
         }
+        dbg(i, m, fa, fb, b, a);
+        i++;
     }
-    else{
-        if((arr[1]-arr[0])%2 != 0){
-            cout << -1 << endl;
-        }
-        else{
-            int step = (arr[1]-arr[0])/2;
-            arr[0] += step;
-            arr[1] -= step;
-            arr[2] += step;
-            if(arr[0] == arr[1]){
-                if((arr[2]-arr[1])%2 != 0){
-                    cout << -1 << endl;
-                }
-                else{
-                    cout << (arr[2]-arr[1])/2 + step << endl;
-                }
-            }
-            
-        }
-    }
+    cout << "ROOT is : " << m << en;
 }
 int32_t main(){
     #ifndef DEBUG
@@ -77,7 +64,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    cin >> t;
+   // cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

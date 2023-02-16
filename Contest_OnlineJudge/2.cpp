@@ -16,7 +16,7 @@ using namespace __gnu_pbds;
 #define gap ' '
 #define en '\n'
 #define endl en
-#define sz(x) (int(x.size()))
+#define sz(x) (int)(x.size())
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
 
@@ -33,13 +33,47 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
 #define ROF(i,a) R0F(i,0,a)
 #define each(a,x) for (auto& a: x)
-#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    int ans = 0, ok = 0, ok1 = 1, neg = 0, pos = 0;
+    vector <pair <int, int>> v;
+    for(int i = 0; i < n; i++){
+        if(s[i] == '-'){
+            v.pb({i, -1});
+            neg++;
+        }
+        else if(s[i] == '+'){
+            v.pb({i, 1});
+            pos++;
+        }
+
+    }
+    if((neg == 0 || pos == 0) && v.size() != 0){
+        cout << n-2 << en;
+        return;
+        
+    }
+    if(v.size() == 0){
+        cout << n << en;
+        return;
+    }
+    //dbg(v);
+    for(int i = 0; i < sz(v)-1; i++){
+       //dbg(v[i].first, v[i].second, v[i+1].first, v[i+1].second);
+        if(v[i].first == v[i+1].first - 1) continue;
+        else if(v[i].second != v[i+1].second){
+            ans++;
+        }
+    }
+    cout << ans << endl;
+
 }
 int32_t main(){
     #ifndef DEBUG
