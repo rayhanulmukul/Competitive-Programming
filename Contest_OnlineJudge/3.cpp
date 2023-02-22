@@ -39,6 +39,7 @@ const int N = 1005;
 
 void solve(int tt){
     dbg(tt);
+    // int n, mi = 1e9, ma = -1e9, ans = 0;
 }
 int32_t main(){
     #ifndef DEBUG
