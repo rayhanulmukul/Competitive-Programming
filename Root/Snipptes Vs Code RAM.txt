@@ -25,7 +25,7 @@
 		  "#define gap ' '",
 		  "#define en '\\n'",
 		  "#define endl en",
-		  "#define sz(x) (int(x.size()))",
+		  "#define sz(x) (int)(x.size())",
 		  "#define mem(a, b) memset(a, b, sizeof(a))",
 		  "#define sor(x)  sort(x.begin(), x.end())",
 		  "",
