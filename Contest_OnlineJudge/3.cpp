@@ -16,7 +16,7 @@ using namespace __gnu_pbds;
 #define gap ' '
 #define en '\n'
 #define endl en
-#define sz(x) (int)(x.size())
+#define sz(x) (int(x.size()))
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
 
@@ -38,38 +38,8 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int a, b, c;
-    cin >> a >> b >> c;
-    int arr[3] = {a, b, c};
-    sort(arr, arr+3);
-    if(arr[0] == arr[1]){
-        if((arr[2]-arr[1])%2 != 0){
-            cout << -1 << endl;
-        }
-        else{
-            cout << (arr[2]-arr[1])/2 << endl;
-        }
-    }
-    else{
-        if((arr[1]-arr[0])%2 != 0){
-            cout << -1 << endl;
-        }
-        else{
-            int step = (arr[1]-arr[0])/2;
-            arr[0] += step;
-            arr[1] -= step;
-            arr[2] += step;
-            if(arr[0] == arr[1]){
-                if((arr[2]-arr[1])%2 != 0){
-                    cout << -1 << endl;
-                }
-                else{
-                    cout << (arr[2]-arr[1])/2 + step << endl;
-                }
-            }
-            
-        }
-    }
+    dbg(tt);
+    // int n, mi = 1e9, ma = -1e9, ans = 0;
 }
 int32_t main(){
     #ifndef DEBUG
