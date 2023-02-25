@@ -1,3 +1,4 @@
+/*Implement Raphson Method*/
 #include "ext/pb_ds/assoc_container.hpp"
 #include "ext/pb_ds/tree_policy.hpp"
 #include <bits/stdc++.h>
@@ -38,40 +39,33 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-	int n;
-	cin >> n;
-	vector<int> a(n);
-	int arr[n+1];
-
-	int ans = 0;
-	for(int i = 0; i < n; i++){
-		cin >> a[i];
-	}
-	memset(arr, 0, sizeof(arr));
-
-	arr[a[0]] = 1;
-	for(int i = 1; i < n; i++){
-		int x = a[i];
-		if(arr[x-1] == 0){
-			ans++;
-		}
-		else{
-			arr[x-1] = 0;
-			arr[x] = 1;
-		}
-	}
-	cout << ans+1 << endl;
-	
+    double a, b;
+    cin >> a >> b;
+    int fa = 0, fb = 0, m = 0, i = 1;
+    while(i < 20){
+        m = (a+b)/2;
+        fa = (a * a * a) - 4 * a - 9;
+        fb = (m * m * m) - 4 * m - 9;
+        if(fa < 0 && fb > 0){
+            b = m;
+        }
+        else{
+            a = m;
+        }
+        dbg(i, m, fa, fb, b, a);
+        i++;
+    }
+    cout << "ROOT is m : " << m << en;
 }
 int32_t main(){
-	#ifndef DEBUG
-		ios_base::sync_with_stdio(false);
-		cin.tie(NULL);
-	#endif
-	int t = 1;
-	//cin >> t;
-	for(int i = 1; i <= t; i++){
-		solve(i);
-	}
-	return 0;
+    #ifndef DEBUG
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+    #endif
+    int t = 1;
+    //cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
+    }
+    return 0;
 }

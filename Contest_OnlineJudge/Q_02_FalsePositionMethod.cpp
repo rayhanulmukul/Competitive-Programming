@@ -37,41 +37,48 @@ const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
+// F(x) = x^3 - 4x - 9
+// False Position Method
+int funct(double x){
+    return (x * x * x) - 4 * x - 9;
+}
+void falsemethod(double a, double b){
+    if(funct(a) * funct(b) >= 0){
+        cout << "Invalid Interval" << en;
+        return;
+    }
+    double c = a;
+    int i = 1;
+    while(i < 20){
+        c = (a * funct(b) - b * funct(a)) / (funct(b) - funct(a));
+        if(funct(c) == 0){
+            break;
+        }
+        else if(funct(a) * funct(c) < 0){
+            b = c;
+        }
+        else{
+            a = c;
+        }
+        //dbg(i, c, funct(c), b, a);
+        i++;
+    }
+    cout << "The value of root is : " << c << en;
+}
 void solve(int tt){
-	int n;
-	cin >> n;
-	vector<int> a(n);
-	int arr[n+1];
-
-	int ans = 0;
-	for(int i = 0; i < n; i++){
-		cin >> a[i];
-	}
-	memset(arr, 0, sizeof(arr));
-
-	arr[a[0]] = 1;
-	for(int i = 1; i < n; i++){
-		int x = a[i];
-		if(arr[x-1] == 0){
-			ans++;
-		}
-		else{
-			arr[x-1] = 0;
-			arr[x] = 1;
-		}
-	}
-	cout << ans+1 << endl;
-	
+    double a, b;
+    cin >> a >> b;
+    falsemethod(a, b);
 }
 int32_t main(){
-	#ifndef DEBUG
-		ios_base::sync_with_stdio(false);
-		cin.tie(NULL);
-	#endif
-	int t = 1;
-	//cin >> t;
-	for(int i = 1; i <= t; i++){
-		solve(i);
-	}
-	return 0;
+    #ifndef DEBUG
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+    #endif
+    int t = 1;
+    //cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
+    }
+    return 0;
 }

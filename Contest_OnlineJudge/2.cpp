@@ -42,37 +42,21 @@ void solve(int tt){
     cin >> n;
     string s;
     cin >> s;
-    int ans = 0, ok = 0, ok1 = 1, neg = 0, pos = 0;
-    vector <pair <int, int>> v;
-    for(int i = 0; i < n; i++){
-        if(s[i] == '-'){
-            v.pb({i, -1});
-            neg++;
+    int x = n/2;
+    vector <int> v;
+    for(int i = 0; i < x; i++){
+        if(s[i] != s[n-i-1]){
+            v.pb(i);
         }
-        else if(s[i] == '+'){
-            v.pb({i, 1});
-            pos++;
-        }
-
-    }
-    if((neg == 0 || pos == 0) && v.size() != 0){
-        cout << n-2 << en;
-        return;
-        
-    }
-    if(v.size() == 0){
-        cout << n << en;
-        return;
     }
     //dbg(v);
-    for(int i = 0; i < sz(v)-1; i++){
-       //dbg(v[i].first, v[i].second, v[i+1].first, v[i+1].second);
-        if(v[i].first == v[i+1].first - 1) continue;
-        else if(v[i].second != v[i+1].second){
-            ans++;
+    for(int i = 1; i < sz(v); i++){
+        if(v[i] != v[i-1]+1){
+            cout << "NO" << endl;
+            return;
         }
     }
-    cout << ans << endl;
+    cout << "YES" << endl;
 
 }
 int32_t main(){
