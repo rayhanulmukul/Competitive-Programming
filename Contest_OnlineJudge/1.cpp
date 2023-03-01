@@ -33,33 +33,39 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
 #define ROF(i,a) R0F(i,0,a)
 #define each(a,x) for (auto& a: x)
+//#define all(x) x.begin(), x.end()
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n, mi = 1e9, ma = -1e9, ans = 0;
-    cin >> n;
-    vector<int> a(n);
-    for(int i = 0; i < n; i++){
-        cin >> a[i];
+    string s1, s2;
+    cin >> s1 >> s2;
+    int n = sz(s1);
+    int m = sz(s2);
+    if(s1[0] == s2[0]){
+        cout << "YES" << en;
+        cout << s1[0] << "*" << endl;
+        return;
     }
-    int k;
-    cin >> k;
-    for(int i = 0; i < n; i++){
-        if(a[i] == k){
-            a[i] = -1;
-            ans = a[i] + 1;
+    else if(s1[n-1] == s2[m-1]){
+        cout << "YES" << en;
+        cout << "*" << s1[n-1] << endl;
+        return;
+    }
+    else{
+        for(int i = 0; i < n-1; i++){
+            string s = s1.substr(i, 1);
+            auto  it = find(s2.begin(), s2.end(), s);
+
+            if(it != s1.end()){
+                cout << "YES" << en;
+                cout << "*" << s1.substr(i, 2) << "*" << endl;
+                return;
+            }
         }
+        cout << "NO" << en;
     }
-    for(int i = 0; i < n; i++){
-        if(a[i] != -1){
-            ma = max(ma, a[i]);
-            mi = min(mi, a[i]);
-        }
-    }
-    if(mi > ans) cout << (ma-ans)/2 << endl;
-    else cout << ma/2 << endl;
 }
 int32_t main(){
     #ifndef DEBUG
@@ -67,7 +73,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
