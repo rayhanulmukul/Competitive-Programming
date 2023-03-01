@@ -38,36 +38,40 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int x = n/2;
-    vector <int> v;
-    for(int i = 0; i < x; i++){
-        if(s[i] != s[n-i-1]){
-            v.pb(i);
-        }
-    }
-    //dbg(v);
-    for(int i = 1; i < sz(v); i++){
-        if(v[i] != v[i-1]+1){
-            cout << "NO" << endl;
-            return;
-        }
-    }
-    cout << "YES" << endl;
+	int n;
+	cin >> n;
+	vector<int> a(n);
+	int arr[n+1];
 
+	int ans = 0;
+	for(int i = 0; i < n; i++){
+		cin >> a[i];
+	}
+	memset(arr, 0, sizeof(arr));
+
+	arr[a[0]] = 1;
+	for(int i = 1; i < n; i++){
+		int x = a[i];
+		if(arr[x-1] == 0){
+			ans++;
+		}
+		else{
+			arr[x-1] = 0;
+			arr[x] = 1;
+		}
+	}
+	cout << ans+1 << endl;
+	
 }
 int32_t main(){
-    #ifndef DEBUG
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-    #endif
-    int t = 1;
-    cin >> t;
-    for(int i = 1; i <= t; i++){
-        solve(i);
-    }
-    return 0;
+	#ifndef DEBUG
+		ios_base::sync_with_stdio(false);
+		cin.tie(NULL);
+	#endif
+	int t = 1;
+	//cin >> t;
+	for(int i = 1; i <= t; i++){
+		solve(i);
+	}
+	return 0;
 }

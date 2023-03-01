@@ -37,27 +37,26 @@ const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
-void solve(int tt){
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int x = n/2;
-    vector <int> v;
-    for(int i = 0; i < x; i++){
-        if(s[i] != s[n-i-1]){
-            v.pb(i);
-        }
-    }
-    //dbg(v);
-    for(int i = 1; i < sz(v); i++){
-        if(v[i] != v[i-1]+1){
-            cout << "NO" << endl;
-            return;
-        }
-    }
-    cout << "YES" << endl;
+// F(x) = x^3 - 4x - 9
 
+void solve(int tt){
+    int a, b;
+    cin >> a >> b;
+    int fa = 0, fb = 0, m = 0, i = 1;
+    while(i < 20){
+        m = (a+b)/2;
+        fa = (a * a * a) - 4 * a - 9;
+        fb = (m * m * m) - 4 * m - 9;
+        if(fa < 0 && fb > 0){
+            b = m;
+        }
+        else{
+            a = m;
+        }
+        dbg(i, m, fa, fb, b, a);
+        i++;
+    }
+    cout << "ROOT is : " << m << en;
 }
 int32_t main(){
     #ifndef DEBUG
@@ -65,7 +64,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    cin >> t;
+   // cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
