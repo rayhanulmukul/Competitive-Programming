@@ -1,6 +1,9 @@
+#include "ext/pb_ds/assoc_container.hpp"
+#include "ext/pb_ds/tree_policy.hpp"
 #include <bits/stdc++.h>
 #include<vector>
 using namespace std;
+using namespace __gnu_pbds;
 
 #define ll long long int
 #define int ll
@@ -13,42 +16,16 @@ using namespace std;
 #define gap ' '
 #define en '\n'
 #define endl en
-#define sz(x) (int(x.size()))
+#define sz(x) (int)(x.size())
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
-vector<string> vec_splitter(string s) {
-    s += ',';
-    vector<string> res;
-    while(!s.empty()) {
-        res.push_back(s.substr(0, s.find(',')));
-        s = s.substr(s.find(',') + 1);
-    }
-    return res;
-}
-void debug_out(
-vector<string> __attribute__ ((unused)) args,
-__attribute__ ((unused)) int idx, 
-__attribute__ ((unused)) int LINE_NUM) { cerr << endl; } 
-template <typename Head, typename... Tail>
-void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
-    if(idx > 0) cerr << ", "; else cerr << "Line(" << LINE_NUM << ") ";
-    stringstream ss; ss << H;
-    cerr << args[idx] << " = " << ss.str();
-    debug_out(args, idx + 1, LINE_NUM, T...);
-}
-#ifdef LOCAL
-#define dbg(...) debug_out(vec_splitter(#__VA_ARGS__), 0, __LINE__, __VA_ARGS__)
+
+#ifdef TESLA
+#include "main.hpp"
 #else
 #define dbg(...)
 #endif
-#ifndef ONLINE_JUDGE
-//#define cerr cout
-#include "DEBUG.hpp"
-#else
-#define dbug(...)
-#endif
-#define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
-
+//dbug(), watch(), output_run_time()
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
 #define F0R(i,a,b) for (int i = (a); i < (b); ++i)
@@ -61,7 +38,27 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    
+    int n; cin >> n;
+    string s; cin >> s;
+    int one = 0, zero = 0, ok = 0, ind = 0, ind1 = 0;
+    for(int i = 0; i < n; i++){
+        if(s[i] == '1'){
+            if(ok == 0) {
+                ind = i;
+            }
+            else ind1 = i;
+            ok = 1;
+            one++;
+        }
+        else zero++;
+    }
+    if(one == n || one%2 != 0) cout << -1 << endl;
+    else if(zero == n) cout << 0 << endl;
+
+    else if(ind1-ind > 1) cout << one/2 << en;
+    else if(zero > 1) cout << one/2+1 << en;
+    else cout << -1 << en;
+    dbg(zero, one, ind, ind1);
 }
 int32_t main(){
     #ifndef DEBUG

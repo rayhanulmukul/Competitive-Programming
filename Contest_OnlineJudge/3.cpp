@@ -1,10 +1,7 @@
-#include "ext/pb_ds/assoc_container.hpp"
-#include "ext/pb_ds/tree_policy.hpp"
-#include <bits/stdc++.h>
-#include<vector>
-using namespace std;
-using namespace __gnu_pbds;
+#include <iostream>
+#include <vector>
 
+<<<<<<< Updated upstream
 #define ll long long int
 #define int ll
 #define ld long double
@@ -19,37 +16,75 @@ using namespace __gnu_pbds;
 #define sz(x) (int(x.size()))
 #define mem(a, b) memset(a, b, sizeof(a))
 #define sor(x)  sort(x.begin(), x.end())
+=======
+using namespace std;
+>>>>>>> Stashed changes
 
-#ifdef TESLA
-#include "main.hpp"
-#else
-#define dbg(...)
-#endif
-//dbug(), watch(), output_run_time()
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
-#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
-#define FOR(i,a) F0R(i,0,a)
-#define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
-#define ROF(i,a) R0F(i,0,a)
-#define each(a,x) for (auto& a: x)
-const int MOD = 1e9+7; // 998244353;
-const int MAX = 2e5+5;
-const int N = 1005;
+const int MOD = 1e9 + 7;
 
+<<<<<<< Updated upstream
 void solve(int tt){
     dbg(tt);
     // int n, mi = 1e9, ma = -1e9, ans = 0;
+=======
+// Computes the matrix power A^n modulo MOD using binary exponentiation
+vector<vector<int>> matrix_power(const vector<vector<int>>& A, int n) {
+    if (n == 0) {
+        int sz = A.size();
+        vector<vector<int>> X(sz, vector<int>(sz, 0));
+        for (int i = 0; i < sz; i++) {
+            X[i][i] = 1;
+        }
+        return X;
+    }
+    if (n == 1) {
+        return A;
+    }
+    vector<vector<int>> X = matrix_power(A, n/2);
+    X = matrix_multiply(X, X);
+    if (n % 2 == 1) {
+        X = matrix_multiply(X, A);
+    }
+    return X;
 }
-int32_t main(){
-    #ifndef DEBUG
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-    #endif
-    int t = 1;
-    cin >> t;
-    for(int i = 1; i <= t; i++){
-        solve(i);
+
+// Computes the product A*B modulo MOD
+vector<vector<int>> matrix_multiply(const vector<vector<int>>& A, const vector<vector<int>>& B) {
+    int m = A.size();
+    int n = B.size();
+    int p = B[0].size();
+    vector<vector<int>> C(m, vector<int>(p, 0));
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < p; j++) {
+            for (int k = 0; k < n; k++) {
+                C[i][j] = (C[i][j] + (long long) A[i][k] * B[k][j]) % MOD;
+            }
+        }
+    }
+    return C;
+}
+
+// Computes the n-th Fibonacci number modulo MOD using matrix exponentiation
+int fib(int n) {
+    if (n == 0) {
+        return 0;
+    }
+    vector<vector<int>> A = {{1, 1}, {1, 0}};
+    vector<vector<int>> X = matrix_power(A, n - 1);
+    return X[0][0];
+>>>>>>> Stashed changes
+}
+
+int main() {
+    int f1, f2, n;
+    cin >> f1 >> f2 >> n;
+    if (n == 1) {
+        cout << (f1 % MOD + MOD) % MOD << endl;
+    } else if (n == 2) {
+        cout << (f2 % MOD + MOD) % MOD << endl;
+    } else {
+        int ans = (fib(n) % MOD + MOD) % MOD;
+        cout << ans << endl;
     }
     return 0;
 }

@@ -38,25 +38,26 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    int x = n/2;
-    vector <int> v;
-    for(int i = 0; i < x; i++){
-        if(s[i] != s[n-i-1]){
-            v.pb(i);
-        }
+    vector <pair <int, int>> v;
+    for(int i = 0; i < 4; i++){
+        int x, y;
+        cin >> x >> y;
+        v.pb({x, 1});
+        v.pb({y, -1});
     }
-    //dbg(v);
-    for(int i = 1; i < sz(v); i++){
-        if(v[i] != v[i-1]+1){
-            cout << "NO" << endl;
-            return;
+    sort(v.begin(), v.end());
+    int ans = 0, ma = 0;
+    dbg(v);
+    for(int i = 0; i < v.size()-1; i+=2){
+        if(v[i].second == 1 && v[i+1].second == -1){
+            if(v[i+1].first != v[i+2].first && i+2 < v.size()) ma++;
+            else if(i+2 == v.size()) ma++;
         }
+        //cout << ma << " ";
     }
-    cout << "YES" << endl;
+    dbg(ma);
+    if(ma == 0) cout << 2 << en;
+    else cout << ma*2 << en;
 
 }
 int32_t main(){
@@ -65,7 +66,7 @@ int32_t main(){
         cin.tie(NULL);
     #endif
     int t = 1;
-    cin >> t;
+   // cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
