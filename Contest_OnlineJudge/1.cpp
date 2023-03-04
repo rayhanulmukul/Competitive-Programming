@@ -33,39 +33,26 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
 #define ROF(i,a) R0F(i,0,a)
 #define each(a,x) for (auto& a: x)
-//#define all(x) x.begin(), x.end()
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    string s1, s2;
-    cin >> s1 >> s2;
-    int n = sz(s1);
-    int m = sz(s2);
-    if(s1[0] == s2[0]){
-        cout << "YES" << en;
-        cout << s1[0] << "*" << endl;
-        return;
+    int n; cin >> n;
+    vector <int> a(n);
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
     }
-    else if(s1[n-1] == s2[m-1]){
-        cout << "YES" << en;
-        cout << "*" << s1[n-1] << endl;
-        return;
-    }
-    else{
-        for(int i = 0; i < n-1; i++){
-            string s = s1.substr(i, 1);
-            auto  it = find(s2.begin(), s2.end(), s);
-
-            if(it != s1.end()){
-                cout << "YES" << en;
-                cout << "*" << s1.substr(i, 2) << "*" << endl;
-                return;
-            }
+    queue <int> q;
+    for(int i = 0; i < n; i++){
+        q.push(a[i]);
+        //dbg(q.front(), q.size());
+        while(q.front() < q.size()){
+            q.pop();
         }
-        cout << "NO" << en;
+        cout << q.size() << gap;
     }
+    cout << endl;
 }
 int32_t main(){
     #ifndef DEBUG
