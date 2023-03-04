@@ -1,4 +1,13 @@
-1 3
-10 20
-2 5
-4 8
+6
+aaab
+zzzb
+codeforces
+atcoder
+codeforces
+tokitlx
+aaaa
+aaaaaa
+abcd
+abcd
+c
+f
