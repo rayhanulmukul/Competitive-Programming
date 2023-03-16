@@ -1,18 +1,21 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+
 using namespace std;
 
+const int MAXN = 1005;
+int H, W;
+int A[MAXN][MAXN];
+vector<vector<int>> dp(MAXN, vector<int>(MAXN, 0));
+
 int main() {
-   vector<int> v = {1, 2, 3, 4, 5};
-    int x = 3;
+    cin >> H >> W;
 
-    // Search for element x in vector v
-    auto it = find(v.begin(), v.end(), x);
-
-    if (it != v.end()) {
-        std::cout << "Element " << x << " found at position "
-                  << distance(v.begin(), it) << std::endl;
-    } else {
-        std::cout << "Element not found" << std::endl;
+    for (int i = 1; i <= H; i++) {
+        for (int j = 1; j <= W; j++) {
+            cin >> A[i][j];
+        }
     }
 
     return 0;

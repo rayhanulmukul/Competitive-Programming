@@ -38,21 +38,22 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n; cin >> n;
-    vector <int> a(n);
-    for(int i = 0; i < n; i++){
-        cin >> a[i];
+    int n;
+    cin >> n;
+    int root = 0, row = 0, column = 0, lack = 0;
+    root = ceil(sqrt(n*1.0));
+    lack = root*root - n;
+    //dbg(root, lack);
+    if(lack < root){
+        row = root;
+        column = lack + 1;
     }
-    queue <int> q;
-    for(int i = 0; i < n; i++){
-        q.push(a[i]);
-        //dbg(q.front(), q.size());
-        while(q.front() < q.size()){
-            q.pop();
-        }
-        cout << q.size() << gap;
+    else{
+        column = root;
+        row = n - (root-1)*(root-1);
     }
-    cout << endl;
+    if(root%2 == 0) swap(row, column);
+    cout << "Case " << tt << ": " << column << gap << row << endl;
 }
 int32_t main(){
     #ifndef DEBUG

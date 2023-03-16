@@ -35,32 +35,25 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define each(a,x) for (auto& a: x)
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
-const int N = 10;
+const int N = 1005;
 
+#define f(x) x*x*x - 2*x - 5
 void solve(int tt){
-    vector <int> a(N+1);
-    for(int i = 1; i <= N; i++){
-        a[i] = i;
+    double x0, x1, x2, f0, f1, f2, e = 0.00001;
+    cin >> x0 >> x1;
+    f0 = f(x0);
+    f1 = f(x1);
+    while(1){
+        x2 = x1 - (f1*(x1-x0))/(f1-f0);
+        f2 = f(x2);
+        if(abs(f2) < e) break;
+        x0 = x1;
+        x1 = x2;
+        f0 = f1;
+        f1 = f2;
     }
-    dbg(a);
-
-    vector <vector <int>> adj(N+1);
-    for(int i = 1; i <= 5; i++){
-        for(int j = 1; j <= 5; j++){
-            if(i == j) continue;
-            adj[i].pb(j);
-        }
-    }
-    dbg(adj);
-
-    vector <vector <pair <int, int>>> adj2(N+1);
-    for(int i = 1; i <= 5; i++){
-        for(int j = 1; j <= 5; j++){
-            if(i == j) continue;
-            adj2[i].pb({j, 1});
-        }
-    }
-    dbg(adj2);
+    cout << "Case " << tt << ": " << fixed << setprecision(4) << x2 << endl;
+    cout << "Root is: " << x2 << endl;
 }
 int32_t main(){
     #ifndef DEBUG

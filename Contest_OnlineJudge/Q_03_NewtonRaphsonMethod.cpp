@@ -38,24 +38,12 @@ const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
+
 void solve(int tt){
     double a, b;
     cin >> a >> b;
-    int fa = 0, fb = 0, m = 0, i = 1;
-    while(i < 20){
-        m = (a+b)/2;
-        fa = (a * a * a) - 4 * a - 9;
-        fb = (m * m * m) - 4 * m - 9;
-        if(fa < 0 && fb > 0){
-            b = m;
-        }
-        else{
-            a = m;
-        }
-        dbg(i, m, fa, fb, b, a);
-        i++;
-    }
-    cout << "ROOT is m : " << m << en;
+    // NewtonRapson Method 
+    
 }
 int32_t main(){
     #ifndef DEBUG
