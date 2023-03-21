@@ -1,4 +1,13 @@
+rafsanjany antor8:37 PM
+1.Brute force-based algorithm,
+2. Greedy algorithm
+3. Recursive algorithm
+4. Backtracking 
+5. Divide and conquer algorithm
+6. Dynamic programming algorithm,
+7. Randomized algorithm. 
 
+1. Sorting algorithms, Searching, Hashing,
 
 D=01
 

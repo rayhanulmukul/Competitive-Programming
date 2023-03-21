@@ -1,38 +1,75 @@
+
+// A C++ program to find convex hull of a set of points
 #include <bits/stdc++.h>
-using namespace std;
-
-
-struct TreeNode {
-      int val;
-      TreeNode *left;
-      TreeNode *right;
-      TreeNode() : val(0), left(nullptr), right(nullptr) {}
-      TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-      TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-class Solution {
-public:
-    bool isSameTree(TreeNode* root1, TreeNode* root2) {
-        queue <TreeNode*> q1;
-        queue <TreeNode*> q2;
-        q1.push(root1);
-        q1.push(root2);
-        while(!q1.empty() and !q2.empty()){
-            auto node1 = q1.front();
-            auto node2 = q2.front();
-            q1.pop();
-            q2.pop();
-            if(node1 == NULL or node2 == NULL){
-                if(node1 != node2) return false;
-                continue;
-            }
-            if(node1 -> val != node2 -> val) return false;
-            q1.push(node1 -> left);
-            q1.push(node1 -> right);
-
-            q2.push(node2 -> left);
-            q2.push(node2 -> right);
+using namespace std; 
+struct Point					// To store the co-ordinates of every point
+{
+    int x, y;
+} ;
+// To find orientation of ordered triplet (p, q, r).
+// The function returns following values
+// 0 --> p, q and r are colinear
+// 1 --> Clockwise
+// 2 --> Counterclockwise
+int orientation(Point p, Point q, Point r)
+{
+    int val = (q.y - p.y) * (r.x - q.x) -
+              (q.x - p.x) * (r.y - q.y);
+    if (val == 0) return 0; 	 // colinear
+    return (val > 0)? 1: 2; 	// clock or counterclock wise
+}
+// Prints convex hull of a set of n points
+void convexHull(Point points[], int n)
+	{
+    // There must be at least 3 points
+    if (n < 3) return;
+    // Initialize Result
+    vector<Point> hull;
+    // Find the leftmost point
+    int l = 0;
+    for (int i = 1; i < n; i++)
+        if (points[i].x < points[l].x)
+            l = i;
+    // Start from leftmost point, keep moving counterclockwise
+    // until reach the start point again.  This loop runs O(h)
+    // times where h is number of points in result or output.
+    int p = l, q;
+    do
+    {
+        // Add current point to result
+        hull.push_back(points[p]);
+        // Search for a point 'q' such that orientation(p, x,
+        // q) is counterclockwise for all points 'x'. The idea
+        // is to keep track of last visited most counterclock-
+        // wise point in q. If any point 'i' is more counterclock-
+        // wise than q, then update q.
+        q = (p+1)%n;
+        for (int i = 0; i < n; i++)
+        {
+           // If i is more counterclockwise than current q, then
+           // update q
+           if (orientation(points[p], points[i], points[q]) == 2)
+               q = i;
         }
-        return true;
+        // Now q is the most counterclockwise with respect to p
+        // Set p as q for next iteration, so that q is added to
+        // result 'hull'
+        p = q;
+    } while (p != l);  // While we don't come to first point
+    // Print Result
+    for (int i = 0; i < hull.size(); i++)
+        cout << "(" << hull[i].x << ", "
+              << hull[i].y << ")\n";
+}
+// Driver program to test above functions
+int main()
+{
+    int n1; cin >> n1;
+    Point points[n1];
+    for(int i = 0; i < n1; ++i){
+        cin >> points[i].x >> points[i].y;
     }
-};
+    int n = sizeof(points)/sizeof(points[0]);
+    convexHull(points, n);
+    return 0;
+}

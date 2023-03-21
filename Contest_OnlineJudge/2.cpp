@@ -1,76 +1,175 @@
-#include "ext/pb_ds/assoc_container.hpp"
-#include "ext/pb_ds/tree_policy.hpp"
-#include <bits/stdc++.h>
-#include<vector>
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <iostream>
+
 using namespace std;
-using namespace __gnu_pbds;
 
-#define ll long long int
-#define int ll
-#define ld long double
-#define pb push_back
-#define mp make_pair
-#define ft front()
-#define bk back()
-#define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
-#define gap ' '
-#define en '\n'
-#define endl en
-#define sz(x) (int)(x.size())
-#define mem(a, b) memset(a, b, sizeof(a))
-#define sor(x)  sort(x.begin(), x.end())
+class Point
+{
+public:
+    int x;
+    int y;
+};
+int orientation(Point p, Point q, Point r)
+{
+    int ori = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
 
-#ifdef TESLA
-#include "main.hpp"
-#else
-#define dbg(...)
-#endif
-//dbug(), watch(), output_run_time()
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
-#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
-#define FOR(i,a) F0R(i,0,a)
-#define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
-#define ROF(i,a) R0F(i,0,a)
-#define each(a,x) for (auto& a: x)
-const int MOD = 1e9+7; // 998244353;
-const int MAX = 2e5+5;
-const int N = 10;
-
-void solve(int tt){
-    vector <int> a(N+1);
-    for(int i = 1; i <= N; i++){
-        a[i] = i;
-    }
-    dbg(a);
-
-    vector <vector <int>> adj(N+1);
-    for(int i = 1; i <= 5; i++){
-        for(int j = 1; j <= 5; j++){
-            if(i == j) continue;
-            adj[i].pb(j);
-        }
-    }
-    dbg(adj);
-
-    vector <vector <pair <int, int>>> adj2(N+1);
-    for(int i = 1; i <= 5; i++){
-        for(int j = 1; j <= 5; j++){
-            if(i == j) continue;
-            adj2[i].pb({j, 1});
-        }
-    }
-    dbg(adj2);
+    if (ori == 0)
+        return 0;
+    return (ori > 0) ? 1 : 2;
 }
-int32_t main(){
-    #ifndef DEBUG
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-    #endif
-    int t = 1;
-    //cin >> t;
-    for(int i = 1; i <= t; i++){
-        solve(i);
+int distance(Point a, Point b, Point c)
+{
+    int x1 = a.x - b.x;
+    int y1 = a.y - b.y;
+    int dist1 = (y1 * y1) + (x1 * x1);
+    int y2 = a.y - c.y;
+    int x2 = a.x - c.x;
+    int dist2 = (y2 * y2) + (x2 * x2);
+    return dist1 - dist2;
+}
+bool comp(Point a, Point b)
+{
+    if (a.x == b.x)
+        return a.y < b.y;
+    return a.x < b.x;
+}
+int main()
+{
+    // code
+    int T;
+    cin >> T;
+
+    while (T--)
+    {
+        int n, i;
+        cin >> n;
+        Point p[n];
+        vector<Point> chull;
+        for (i = 0; i < n; i++)
+        {
+            cin >> p[i].x >> p[i].y;
+        }
+        if (n > 3)
+        {
+            int xmin = 10000, xminindex;
+            for (i = 0; i < n; i++)
+            {
+                if (p[i].x < xmin)
+                {
+                    xmin = p[i].x;
+                    xminindex = i;
+                }
+                if (xmin == p[i].x)
+                {
+                    if (p[i].y < p[xminindex].y)
+                        xminindex = i;
+                }
+            }
+
+            int P = xminindex;
+            int Q;
+
+            bool flag = 1, possible = 1;
+            chull.push_back(p[P]);
+            while (P != xminindex || flag)
+            {
+                flag = 0;
+
+                Q = (P + 1) % n;
+                for (i = 0; i < n; i++)
+                {
+                    if (orientation(p[P], p[i], p[Q]) == 2)
+                    {
+                        Q = i;
+                        // change=1;
+                    }
+                    else if (orientation(p[P], p[i], p[Q]) == 0) // colinear case
+                    {
+                        int dist = distance(p[P], p[Q], p[i]);
+
+                        if (dist < 0)
+                        { // if condition is like
+                          // a.-------b.------c.
+                          // we get dist<0 as ab-ac<0
+                          // so we transfer next to c and proceed
+                          // as if we don't then it takes the point next to a as next
+
+                            Q = i;
+                        }
+                    }
+                }
+
+                P = Q;
+                if (P == xminindex)
+                    break;
+                chull.push_back(p[P]);
+            }
+            if (possible)
+            {
+                sort(chull.begin(), chull.end(), comp);
+                set<pair<int, int>> hullset;
+                for (i = 0; i < chull.size(); i++)
+                {
+                    hullset.insert(make_pair(chull[i].x, chull[i].y));
+                }
+                // auto it;
+                set<pair<int, int>>::iterator it2 = hullset.begin(), it3 = hullset.begin(), it4;
+                it2++;
+                for (auto it : hullset)
+                {
+                    bool x = true;
+
+                    if (it2 == hullset.end() && x)
+                        cout << it.first << ' ' << it.second << '\n';
+                    else if (x)
+                        cout << it.first << ' ' << it.second << ',' << ' ';
+
+                    it2++;
+                    it3++;
+                }
+            }
+            else
+            {
+                cout << -1 << '\n';
+            }
+        }
+
+        if (n == 3 && !chull.size())
+        {
+            bool cl = false;
+            sort(p, p + n, comp);
+            for (i = 0; i < n - 1; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (p[i].x == p[j].x && p[i].y == p[j].y)
+                    {
+                        cl = true;
+                        break;
+                    }
+                }
+                if (cl)
+                    break;
+            }
+            if (!cl)
+            {
+                for (i = 0; i < n; i++)
+                {
+                    if (i == n - 1)
+                        cout << p[i].x << ' ' << p[i].y << '\n';
+                    else
+                        cout << p[i].x << ' ' << p[i].y << ',' << ' ';
+                }
+            }
+            else
+            {
+                cout << -1 << '\n';
+            }
+        }
+        else if (n < 3)
+            cout << -1 << '\n';
     }
     return 0;
 }

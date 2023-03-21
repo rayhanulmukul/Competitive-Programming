@@ -85,7 +85,8 @@
         "syncstream": "cpp",
         "thread": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "stack": "cpp"
     },
     "C_Cpp.dimInactiveRegions": false
 }

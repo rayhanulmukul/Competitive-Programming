@@ -1,4 +1,3 @@
-/*Implement Raphson Method*/
 #include "ext/pb_ds/assoc_container.hpp"
 #include "ext/pb_ds/tree_policy.hpp"
 #include <bits/stdc++.h>
@@ -37,29 +36,41 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
+    
+struct Point { int x, y; };
 
-double f(double x)
-{
-    return x*x*x - x*x + 2;
+int orientation(Point p, Point q, Point r) {
+    //cout << "Orientation : " << (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y) << endl;
+    //dbg(p.x, p.y, q.x, q.y, r.x, r.y);
+    return (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);  // 0, 1, 2 = colinear, clockwise, counterclockwise
 }
-double df(double x)
-{
-    return 3*x*x - 2*x;
-}
-void newtonRaphson(double x)
-{
-    double h = f(x) / df(x);
-    while (abs(h) >= 0.0001)
-    {
-        h = f(x) / df(x);
-        x = x - h;
+vector<Point> convexHull(vector<Point> points) {
+    int n = points.size();       
+    sort(points.begin(), points.end(), [](Point a, Point b) {
+        return (a.x == b.x) ? a.y < b.y : a.x < b.x;
+    });
+    
+    vector<Point> hull;
+    for (int i = 0; i < 2*n; i++) {
+        int j = (i < n) ? i : 2*n - 1 - i;
+        while (hull.size() >= 2 && orientation(hull[hull.size()-2], hull.back(), points[j]) <= 0)
+            hull.pop_back();
+        hull.push_back(points[j]);
     }
-    cout << "The value of the root is : " << x;
+    hull.pop_back();
+    return hull;
 }
 void solve(int tt){
-    double x0 = -20; // Initial guess
-    newtonRaphson(x0);
-    
+    vector<Point> points;
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i++){
+        int x, y;
+        cin >> x >> y;
+        points.pb({x, y});
+    }
+    vector<Point> hull = convexHull(points);
+    for (Point p : hull) cout << "(" << p.x << ", " << p.y << ")" << endl;
 }
 int32_t main(){
     #ifndef DEBUG

@@ -40,20 +40,23 @@ const int N = 1005;
 void solve(int tt){
     int n;
     cin >> n;
-    int root = 0, row = 0, column = 0, lack = 0;
-    root = ceil(sqrt(n*1.0));
-    lack = root*root - n;
-    //dbg(root, lack);
-    if(lack < root){
-        row = root;
-        column = lack + 1;
+    string s;
+    cin >> s;
+    string ans = "";
+    transform(s.begin(), s.end(), s.begin(), ::tolower);
+    ans += s[0];
+    for(int i = 1; i < n; i++){
+        if(s[i] != s[i - 1]){
+            ans += s[i];
+        }
+    }
+    if(ans == "meow"){
+        cout << "YES" << en;
     }
     else{
-        column = root;
-        row = n - (root-1)*(root-1);
+        cout << "NO" << en;
     }
-    if(root%2 == 0) swap(row, column);
-    cout << "Case " << tt << ": " << column << gap << row << endl;
+
 }
 int32_t main(){
     #ifndef DEBUG

@@ -41,18 +41,23 @@ const int N = 1005;
 void solve(int tt){
     double x0, x1, x2, f0, f1, f2, e = 0.00001;
     cin >> x0 >> x1;
-    f0 = f(x0);
-    f1 = f(x1);
     while(1){
+        f0 = f(x0);
+        f1 = f(x1);
+        if(f0 == f1){
+            cout << "Division by zero error!" << endl;
+            return;
+        }
         x2 = x1 - (f1*(x1-x0))/(f1-f0);
         f2 = f(x2);
+        dbg(tt, x0, x1, x2, f0, f1, f2);
         if(abs(f2) < e) break;
         x0 = x1;
         x1 = x2;
         f0 = f1;
         f1 = f2;
+        tt++;
     }
-    cout << "Case " << tt << ": " << fixed << setprecision(4) << x2 << endl;
     cout << "Root is: " << x2 << endl;
 }
 int32_t main(){
