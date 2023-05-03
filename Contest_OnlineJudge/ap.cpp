@@ -6,6 +6,7 @@ using namespace std;
 using namespace __gnu_pbds;
 
 #define ll long long int
+#define int ll
 #define ld long double
 #define pb push_back
 #define mp make_pair
@@ -37,21 +38,12 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n;
-    cin >> n;
-    for(int i = 0; ; i++){
-        int x = pow(3, i);
-        if(x > n) break;
-        for(int j = 0;; j++){
-            int y = pow(5, j);
-            if(y > n) break;
-            if(x + y == n){
-                cout << i << gap << j << en;
-                return;
-            }
-        }
+    int i, s = 0;
+    int n = 100;
+    for(i = 5; i <= 10; i = 1 + 1){
+        printf("%d", i);
+        if(i = 6) break;
     }
-    cout << -1 << en;
 }
 int32_t main(){
     #ifndef DEBUG
