@@ -43,10 +43,10 @@ void solve(int tt){
     
 }
 int32_t main(){
-    #ifndef DEBUG
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-    #endif
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
     int t = 1;
     cin >> t;
     for(int i = 1; i <= t; i++){

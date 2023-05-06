@@ -48,20 +48,34 @@ void solve(int tt){
         a.pb(x);
         m[x]++;
     }
+    sort(a.begin(), a.end());
+    if(a[0] == a[n-1] && a[0] == 0){
+        cout << 0 << endl;
+        return;
+    }
+    if(m.size() == 1){
+        cout << -1 << endl;
+        return;
+    }
     int ans = 0;
-    for(auto it:a){
-        if(m[it] > 1){
-            int x = m[it];
-            ans += n-x;
-            n--;
-            m[it]--;
-        }
-        else{
-            ans += n-1;
-            n--;
+    for(auto it : m){
+        ans += it.second;
+    }
+    vector <int> b;
+    for(auto it:m){
+        int temp = it.second;
+        int temp1 = ans - temp;
+        if(temp1 == it.first or it.first == n){
+            b.pb(temp1);
         }
     }
-    cout << ans << en;
+    if(b.size() == 1){
+        cout << b[0] << en;
+    }
+    else{
+        cout << -1 << en;
+    }
+
 }
 int32_t main(){
     #ifndef DEBUG
