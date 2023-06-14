@@ -38,7 +38,7 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    cout << tt << en;
+    
 }
 int32_t main(){
 #ifndef DEBUG

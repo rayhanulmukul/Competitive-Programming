@@ -1,76 +1,134 @@
+#include "ext/pb_ds/assoc_container.hpp"
+#include "ext/pb_ds/tree_policy.hpp"
 #include <bits/stdc++.h>
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include<vector>
 using namespace std;
+using namespace __gnu_pbds;
 
-struct Point {
-    int x, y;
-};
+#define ll long long int
+#define int ll
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define ft front()
+#define bk back()
+#define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
+#define gap ' '
+#define en '\n'
+#define endl en
+#define sz(x) (int)(x.size())
+#define mem(a, b) memset(a, b, sizeof(a))
+#define sor(x)  sort(x.begin(), x.end())
 
-int cross_product(Point a, Point b, Point c) {
-    int x1 = b.x - a.x;
-    int y1 = b.y - a.y;
-    int x2 = c.x - a.x;
-    int y2 = c.y - a.y;
-    return x1 * y2 - x2 * y1;
-}
+#ifdef TESLA
+#include "main.hpp"
+#else
+#define dbg(...)
+#endif
+//dbug(), watch(), output_run_time()
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
+#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
+#define FOR(i,a) F0R(i,0,a)
+#define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
+#define ROF(i,a) R0F(i,0,a)
+#define each(a,x) for (auto& a: x)
+const int MOD = 1e9+7; // 998244353;
+const int MAX = 2e5+5;
+const int N = 1005;
 
-bool compare_points(Point a, Point b) {
-    return a.x < b.x || (a.x == b.x && a.y < b.y);
-}
+void solve(int tt){
+    string s1, s2;
+    getline(cin, s1);
+    getline(cin, s2);
+    int i = 0, ok = 0;
 
-vector<Point> convex_hull(vector<Point>& points) {
-    int n = points.size();
-    if (n <= 1) return points;
-
-    sort(points.begin(), points.end(), compare_points);
-
-    vector<Point> hull;
-
-    for (int i = 0; i < n; ++i) {
-        while (hull.size() >= 2 && cross_product(hull[hull.size()-2], hull[hull.size()-1], points[i]) <= 0) {
-            hull.pop_back();
+    while(1){
+        i = 0;
+        if(s1[i] == '0'){
+            s1.erase(s1.begin() + i);
         }
-        hull.push_back(points[i]);
-    }
-
-    int lower_hull_size = hull.size();
-
-    for (int i = n-2; i >= 0; --i) {
-        while (hull.size() > lower_hull_size && cross_product(hull[hull.size()-2], hull[hull.size()-1], points[i]) <= 0) {
-            hull.pop_back();
+        else{
+            break;
         }
-        hull.push_back(points[i]);
+    }
+    i = 0;
+    ok = 0;
+    while(1){
+        i = 0;
+        if(s2[i] == '0'){
+            s2.erase(s2.begin() + i);
+        }
+        else{
+            break;
+        }
+    }
+    for(int i = 0; i < s1.size(); i++){
+        if(s1[i] == '.'){
+            ok = 1;
+            break;
+        }
+    }
+    if(ok == 1){
+        i = s1.size() - 1;
+            while(1){
+            i = s1.size() - 1;
+            if(s1[i] == '0'){
+                s1.erase(s1.begin() + i);
+            }
+            else{
+                if(s1[i] == '.') s1.erase(s1.begin() + i);
+                break;
+            }
+        }
+    }
+    ok = 0;
+    for(int i = 0; i < s2.size(); i++){
+        if(s2[i] == '.'){
+            ok = 1;
+            break;
+        }
+    }
+    if(ok == 1){
+        int j = s2.size() - 1;
+        while(1){
+            i = s2.size() - 1;
+            if(s2[i] == '0'){
+                s2.erase(s2.begin() + i);
+            }
+            else{
+                if(s2[i] == '.') s2.erase(s2.begin() + i);
+                break;
+            }
+        }
+    }
+    dbg(s1, s2);
+    if(s1.size() > s2.size()){
+        cout << 1 << en;
+    }
+    else if(s1.size() < s2.size()){
+        cout << -1 << en;
+    }
+    else if(s1 == s2){
+        cout << 0 << endl;
+    }
+    else if(s1 > s2){
+        cout << 1 << endl;
+    }
+    else{ 
+        cout << -1 << endl;
     }
 
-    hull.pop_back();
-    return hull;
 }
-
-int main() {
-    int n;
-    cin >> n;
-
-    vector<Point> points(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> points[i].x >> points[i].y;
+int32_t main(){
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
+    int t = 1;
+    //cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
     }
-
-    vector<Point> hull = convex_hull(points);
-
-    set <pair<int,int>> my;
-    for (int i = 0; i < hull.size(); ++i) {
-        int x1 = hull[i].x;
-        int y1 = hull[i].y;
-        my.insert({x1, y1});
-    }
-
-    cout << hull.size() << endl;
-    for(auto it:hull){
-        cout << "(" << it.x << ", " << it.y << ")" << endl;
-    }
-
-
     return 0;
 }

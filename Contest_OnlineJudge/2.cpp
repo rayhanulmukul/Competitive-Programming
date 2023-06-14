@@ -38,50 +38,13 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n;
-    cin >> n;
-    vector<int> a;
-    map <int, int> m;
-    for(int i = 0; i < n; i++){
-        int x;
-        cin >> x;
-        a.pb(x);
-        m[x]++;
-    }
-    sort(a.begin(), a.end());
-    if(a[0] == a[n-1] && a[0] == 0){
-        cout << 0 << endl;
-        return;
-    }
-    if(m.size() == 1){
-        cout << -1 << endl;
-        return;
-    }
-    int ans = 0;
-    for(auto it : m){
-        ans += it.second;
-    }
-    vector <int> b;
-    for(auto it:m){
-        int temp = it.second;
-        int temp1 = ans - temp;
-        if(temp1 == it.first or it.first == n){
-            b.pb(temp1);
-        }
-    }
-    if(b.size() == 1){
-        cout << b[0] << en;
-    }
-    else{
-        cout << -1 << en;
-    }
-
+    
 }
 int32_t main(){
-    #ifndef DEBUG
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-    #endif
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
     int t = 1;
     cin >> t;
     for(int i = 1; i <= t; i++){
