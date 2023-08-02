@@ -37,88 +37,32 @@ const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
-
-int call(string s){
-    int maxm = -1, ans = 0;
-    int n = s.size();
-    for(int i = n-1; i >= 0; i--){
-        if(s[i] == 'A'){
-            if(maxm <= 1){
-                ans += 1;
-                maxm = 1;
-            }
-            else ans -= 1;
-        }
-        else if(s[i] == 'B'){
-            if(maxm <= 10){
-                ans += 10;
-                maxm = 10;
-            }
-            else ans -= 10;
-        }
-        else if(s[i] == 'C'){
-            if(maxm <= 100){
-                ans += 100;
-                maxm = 100;
-            }
-            else ans -= 100;
-        }
-        else if(s[i] == 'D'){
-            if(maxm <= 1000){
-                ans += 1000;
-                maxm = 1000;
-            }
-            else ans -= 1000;
-        }
-        else if(s[i] == 'E'){
-            if(maxm <= 10000){
-                ans += 10000;
-                maxm = 10000;
-            }
-            else ans -= 10000;
-        }
+bool check(int mid, vector <int>& a, int k){
+    for(int i = 1; i <= k; i++){
+        int attack = upper_bound(a.begin(), a.end(), mid) - a.begin();
+        mid -= attack;
     }
-    return ans;
+    return (mid >= 1);
 }
 void solve(int tt){
-    int maxans = 0;
-    string s; cin >> s;
-    int n = s.size();
-    maxans = call(s);
-    for(char ch = 'A'; ch <= 'E'; ch++){
-        int flag = -1;
-        for(int i = 0; i < n; i++){
-            if(s[i] == ch){
-                flag = i;
-                break;
-            }
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+    }
+    int low = 0, high = 1e12, ans = 0;
+    while(low <= high){
+        int mid = (low + high) / 2;
+        if(check(mid, a, k)){
+            ans = mid;
+            high = mid - 1;
         }
-        if(flag != -1){
-            string s1 = s;
-            for(char cha = ch+1; cha <= 'E'; cha++){
-                s1[flag] = cha;
-                maxans = max(maxans, call(s1));
-            }
-            dbg(s1);
+        else{
+            low = mid + 1;
         }
     }
-    for(char ch = 'A'; ch <= 'E'; ch++){
-        int flag = -1;
-        for(int i = n-1; i >= 0; i--){
-            if(s[i] == ch){
-                flag = i;
-                break;
-            }
-        }
-        if(flag != -1){
-            for(char cha = ch-1; cha >= 'A'; cha--){
-                string s1 = s;
-                s1[flag] = cha;
-                maxans = max(maxans, call(s1));
-            }
-        }
-    }
-   cout << maxans << en;
+    cout << ans << endl;
 }
 int32_t main(){
 #ifndef DEBUG
