@@ -38,23 +38,28 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n, m;
-    cin >> n >> m;
-    string s; 
-    cin >> s;
-    set <string> st;
-    for(int i = 0 ;i < m; i++){
-        int x, y; cin >> x >> y;
-        string s1, s2, s0;
-        s0 = s.substr(0, x-1);
-        s1 = s.substr(x-1, y-x+1);
-        s2 = s.substr(y, n-y+1);
-        sort(s1.begin(), s1.end());
-        string ans = s0 + s1 + s2;
-        st.insert(ans);
-        //dbg(s0, s1, s2, ans, st);
+    int n, k;
+    cin >> n >> k;
+    double arr[n+5];
+    double pref[n+5];
+    for(int i = 1; i <= n; i++){
+        cin >> arr[i];
+        double sum = 0;
+        for(int j = 1; j <= arr[i]; j++){
+            sum += (j/arr[i]);
+        }
+        if(i == 1) pref[i] = sum;
+        else pref[i] = pref[i-1] + sum;
+        dbg(arr[i], sum, pref[i]);
     }
-    cout << st.size() << en;
+    double ans = 0;
+    for(int i = 1; i <= n; i++){
+        double sum = pref[i+k-1] - pref[i-1];
+        ans = max(ans, sum);
+        dbg(pref[i+k-1], pref[i-1], sum, ans);
+    }
+    cout << fixed << setprecision(12) << ans;
+    
 }
 int32_t main(){
 #ifndef DEBUG
@@ -62,7 +67,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

@@ -1,37 +1,54 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
-
+#include "ext/pb_ds/assoc_container.hpp"
+#include "ext/pb_ds/tree_policy.hpp"
+#include <bits/stdc++.h>
+#include<vector>
 using namespace std;
+using namespace __gnu_pbds;
 
-string findShortestContainingString(const string& a, const string& b, const string& c) {
-    string combined = a + b + c;
-    int n = combined.length();
+#define ll long long int
+#define int ll
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define ft front()
+#define bk back()
+#define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
+#define gap ' '
+#define en '\n'
+#define endl en
+#define sz(x) (int)(x.size())
+#define mem(a, b) memset(a, b, sizeof(a))
+#define sor(x)  sort(x.begin(), x.end())
 
-    int startPosA = combined.find(a);
-    int startPosB = combined.find(b);
-    int startPosC = combined.find(c);
+#ifdef TESLA
+#include "main.hpp"
+#else
+#define dbg(...)
+#endif
+//dbug(), watch(), output_run_time()
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
+#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
+#define FOR(i,a) F0R(i,0,a)
+#define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
+#define ROF(i,a) R0F(i,0,a)
+#define each(a,x) for (auto& a: x)
+const int MOD = 1e9+7; // 998244353;
+const int MAX = 2e5+5;
+const int N = 1005;
 
-    int endPosA = startPosA + a.length() - 1;
-    int endPosB = startPosB + b.length() - 1;
-    int endPosC = startPosC + c.length() - 1;
-
-    int shortestLen = min({endPosA, endPosB, endPosC}) - max({startPosA, startPosB, startPosC}) + 1;
-
-    return combined.substr(max({startPosA, startPosB, startPosC}), shortestLen);
+void solve(int tt){
+    
 }
-
-int main() {
-    string a, b, c;
-    cout << "Enter string a: ";
-    cin >> a;
-    cout << "Enter string b: ";
-    cin >> b;
-    cout << "Enter string c: ";
-    cin >> c;
-
-    string result = findShortestContainingString(a, b, c);
-    cout << "The lexicographically smallest string containing all three substrings is: " << result << endl;
-
+int32_t main(){
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
+    int t = 1;
+    cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
+    }
     return 0;
 }
