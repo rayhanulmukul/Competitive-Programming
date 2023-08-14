@@ -47,7 +47,7 @@ int power(int a, int b){
     return res;
 }
 void build(string &s, int mid){
-    int n = s.size(); 
+    int n = s.size();
     int x = 1, y = 1;
     int bg1 = power(29, MOD-2);
     int bg2 = power(31, MOD-2);
@@ -62,6 +62,7 @@ void build(string &s, int mid){
         hash.second += num*y; hash.second %= MOD;
         //dbg(hash, s, mid);
     }
+    //dbg(hash, s, mid);
     mp[hash] = 0;
     dbg(mp, hash, s, mid);
     for(int i = mid; i < n; i++){
@@ -75,7 +76,6 @@ void build(string &s, int mid){
         hash.second += num*y; hash.second %= MOD;
         mp[hash] = i-mid+1;
     }
-    dbg(mp, hash, s, mid, en);
 }
 int check(string &s, int mid){
     int n = s.size();
@@ -119,7 +119,7 @@ void solve(int tt){
         dbg(l, r, mid, res);
         mp.clear();
         build(s, mid);
-        if(check(s, mid) == 8){
+        if(check(s, mid)){
             dbg(mid);
             res = mid;
             l = mid+1;
