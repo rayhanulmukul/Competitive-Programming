@@ -36,99 +36,32 @@ const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
-map <pair <int, int>, int> mp;
-int power(int a, int b){
-    int res = 1;
-    while(b){
-        if(b&1) res = (res*a)%MOD;
-        a = (a*a)%MOD;
-        b >>= 1;
-    }
-    return res;
-}
-void build(string &s, int mid){
-    int n = s.size(); 
-    int x = 1, y = 1;
-    int bg1 = power(29, MOD-2);
-    int bg2 = power(31, MOD-2);
-    pair <int, int> hash = {0, 0};
-    for(int i = 0; i < mid; i++){
-        if(i > 0){
-            x = (x*29)%MOD;
-            y = (y*31)%MOD;
-        }
-        int num = s[i]-'a';
-        hash.first += num*x; hash.first %= MOD;
-        hash.second += num*y; hash.second %= MOD;
-        //dbg(hash, s, mid);
-    }
-    mp[hash] = 0;
-    dbg(mp, hash, s, mid);
-    for(int i = mid; i < n; i++){
-        int num = s[i-mid]-'a';
-        hash.first -= num; if(hash.first < 0) hash.first += MOD;
-        hash.first *= bg1; hash.first %= MOD;
-        hash.second -= num; if(hash.second < 0) hash.second += MOD;
-        hash.second *= bg2; hash.second %= MOD;
-        num = s[i]-'a';
-        hash.first += num*x; hash.first %= MOD;
-        hash.second += num*y; hash.second %= MOD;
-        mp[hash] = i-mid+1;
-    }
-    dbg(mp, hash, s, mid, en);
-}
-int check(string &s, int mid){
-    int n = s.size();
-    int x = 1, y = 1;
-    int bg1 = power(29, MOD-2);
-    int bg2 = power(31, MOD-2);
-    pair <int, int> hash = {0, 0};
-    for(int i = 0; i < mid; i++){
-        if(i > 0){
-            x = (x*29)%MOD;
-            y = (y*31)%MOD;
-        }
-        int num = s[i]-'a';
-        hash.first += num*x; hash.first %= MOD;
-        hash.second += num*y; hash.second %= MOD;
-        //dbg(hash, s, mid);
-    }
-    //dbg(mp);
-    if(mp[hash] >= mid) return true;
-    for(int i = mid; i < n; i++){
-        int num = s[i-mid]-'a';
-        hash.first -= num; if(hash.first < 0) hash.first += MOD;
-        hash.first *= bg1; hash.first %= MOD;
-        hash.second -= num; if(hash.second < 0) hash.second += MOD;
-        hash.second *= bg2; hash.second %= MOD;
-        num = s[i]-'a';
-        hash.first += num*x; hash.first %= MOD;
-        hash.second += num*y; hash.second %= MOD;
-        if(mp[hash] > i) return true;
-    }
-    return false;
-}
 void solve(int tt){
-    int n; cin >> n;
+    int n;
+    cin >> n;
     string s;
     cin >> s;
-    int l = 0, r = s.size()/2;
-    int res = 0;
-    while(l <= r){
-        int mid = (l+r)/2;
-        dbg(l, r, mid, res);
-        mp.clear();
-        build(s, mid);
-        if(check(s, mid) == 8){
-            dbg(mid);
-            res = mid;
-            l = mid+1;
+    int ans = 1;
+    for(int i = 2; i < n; i+= 2){
+        int x = s[i-2] - '0';
+        int y = s[i-1] - '0';
+        int bike = s[i] - '0';
+        int cnt = 0;
+        int car = x or y;
+        if(car == bike){
+            cnt++;
         }
-        else{
-            r = mid-1;
+        car = x and y;
+        if(car == bike){
+            cnt++;
         }
+        car = x xor y;
+        if(car == bike){
+            cnt++;
+        }
+        ans = (ans * (cnt%MOD))%MOD;
     }
-    cout << res << endl;
+    cout << ans << en;
 }
 int32_t main(){
 #ifndef DEBUG
@@ -136,7 +69,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

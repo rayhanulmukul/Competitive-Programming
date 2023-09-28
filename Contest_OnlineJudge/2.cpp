@@ -9,7 +9,6 @@ using namespace __gnu_pbds;
 #define int ll
 #define ld long double
 #define pb push_back
-#define mp make_pair
 #define ft front()
 #define bk back()
 #define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
@@ -40,26 +39,56 @@ const int N = 1005;
 void solve(int tt){
     int n, k;
     cin >> n >> k;
-    double arr[n+5];
-    double pref[n+5];
-    for(int i = 1; i <= n; i++){
-        cin >> arr[i];
-        double sum = 0;
-        for(int j = 1; j <= arr[i]; j++){
-            sum += (j/arr[i]);
+    if(n > k){
+        cout << -1 << en;
+    }
+    else{
+        int total = k;
+        vector <int> v;
+        n /= 1;
+        while(n-- && n > 0){
+            int x = total/(n+1);
+            dbg(x, total);
+            if(total - 1 >= 1 && total - 1 <= 1e5){
+                v.pb(1);
+                total--;
+            }
+            else if(x >= 1 && x <= 1e5){
+                if(x%2 == 0){
+                    v.pb(x - 1);
+                    total -= x - 1;
+                }
+                else{
+                    v.pb(x);
+                    total -= x;
+                }
+            }
+            if(total - 2 > 1 && total - 2 <= 1e5){
+                v.pb(2);
+                total -= 2;
+            }
+            else if(x >= 2 && x <= 1e5){
+                if(x%2 == 0){
+                    v.pb(x);
+                    total -= x;
+                }
+                else{
+                    v.pb(x - 1);
+                    total -= x - 1;
+                }
+            }
         }
-        if(i == 1) pref[i] = sum;
-        else pref[i] = pref[i-1] + sum;
-        dbg(arr[i], sum, pref[i]);
+        dbg(v);
+        if(v.size() != k){
+            cout << -1 << en;
+        }
+        else{
+            for(auto x : v){
+                cout << x << gap;
+            }
+            cout << en;
+        }
     }
-    double ans = 0;
-    for(int i = 1; i <= n; i++){
-        double sum = pref[i+k-1] - pref[i-1];
-        ans = max(ans, sum);
-        dbg(pref[i+k-1], pref[i-1], sum, ans);
-    }
-    cout << fixed << setprecision(12) << ans;
-    
 }
 int32_t main(){
 #ifndef DEBUG
@@ -67,7 +96,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
