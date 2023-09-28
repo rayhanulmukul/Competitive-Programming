@@ -43,51 +43,60 @@ void solve(int tt){
         cout << -1 << en;
     }
     else{
-        int total = k;
-        vector <int> v;
-        n /= 1;
-        while(n-- && n > 0){
-            int x = total/(n+1);
-            dbg(x, total);
-            if(total - 1 >= 1 && total - 1 <= 1e5){
-                v.pb(1);
-                total--;
+        int totalSum = 0, group, avgSum, rem;
+        avgSum = k/n, rem = k%n, group = n/2;
+        totalSum = k;
+        //dbg(avgSum, totalSum);
+        vector <int> arr;
+        for(int i = 0; i < group; i++){
+            if(avgSum > 0 && avgSum <= 1e5 && avgSum%2 != 0){
+                arr.push_back(avgSum);
+                totalSum -= avgSum;
             }
-            else if(x >= 1 && x <= 1e5){
-                if(x%2 == 0){
-                    v.pb(x - 1);
-                    total -= x - 1;
-                }
-                else{
-                    v.pb(x);
-                    total -= x;
-                }
+            else if(avgSum-1 > 0 && avgSum-1 <= 1e5 && (avgSum-1)%2 != 0){
+                arr.push_back(avgSum-1);
+                totalSum -= avgSum-1;
             }
-            if(total - 2 > 1 && total - 2 <= 1e5){
-                v.pb(2);
-                total -= 2;
+            else if(avgSum+1 > 0 && avgSum+1 <= 1e5 && (avgSum+1)%2 != 0){
+                arr.push_back(avgSum+1);
+                totalSum -= avgSum+1;
             }
-            else if(x >= 2 && x <= 1e5){
-                if(x%2 == 0){
-                    v.pb(x);
-                    total -= x;
-                }
-                else{
-                    v.pb(x - 1);
-                    total -= x - 1;
-                }
+            else{
+                cout << -1 << en;
+                return;
             }
         }
-        dbg(v);
-        if(v.size() != k){
-            cout << -1 << en;
+        dbg(totalSum, arr);
+        for(int i = 0; i < group-1; i++){
+            if(avgSum > 0 && avgSum <= 1e5 && avgSum%2 == 0){
+                arr.push_back(avgSum);
+                totalSum -= avgSum;
+            }
+            else if(avgSum-1 > 0 && avgSum-1 <= 1e5 && (avgSum-1)%2 == 0){
+                arr.push_back(avgSum-1);
+                totalSum -= avgSum-1;
+            }
+            else if(avgSum+1 > 0 && avgSum+1 <= 1e5 && (avgSum+1)%2 == 0){
+                arr.push_back(avgSum+1);
+                totalSum -= avgSum+1;
+            }
+            else{
+                cout << -1 << en;
+                return;
+            }
         }
-        else{
-            for(auto x : v){
-                cout << x << gap;
+        dbg(totalSum, arr); 
+        if(totalSum%2 == 0 && totalSum > 0 && totalSum <= 1e5){
+            arr.push_back(totalSum);
+            for(int i = 0; i < n; i++){
+                cout << arr[i] << gap;
             }
             cout << en;
         }
+        else{
+            cout << -1 << en;
+            return;
+        } 
     }
 }
 int32_t main(){
