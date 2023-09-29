@@ -37,67 +37,32 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n, k;
-    cin >> n >> k;
-    if(n > k){
-        cout << -1 << en;
+    string s;
+    cin >> s;
+    map <char, int> mp;
+    for(auto x : s){
+        mp[x]++;
     }
-    else{
-        int totalSum = 0, group, avgSum, rem;
-        avgSum = k/n, rem = k%n, group = n/2;
-        totalSum = k;
-        //dbg(avgSum, totalSum);
-        vector <int> arr;
-        for(int i = 0; i < group; i++){
-            if(avgSum > 0 && avgSum <= 1e5 && avgSum%2 != 0){
-                arr.push_back(avgSum);
-                totalSum -= avgSum;
-            }
-            else if(avgSum-1 > 0 && avgSum-1 <= 1e5 && (avgSum-1)%2 != 0){
-                arr.push_back(avgSum-1);
-                totalSum -= avgSum-1;
-            }
-            else if(avgSum+1 > 0 && avgSum+1 <= 1e5 && (avgSum+1)%2 != 0){
-                arr.push_back(avgSum+1);
-                totalSum -= avgSum+1;
-            }
-            else{
-                cout << -1 << en;
-                return;
+    //"blue", "green", "yellow", "red", "purple", "orange", "pink", "grey", "cyan", "brown", "ash", "silver", "gold", "white", "black" 
+    vector <string> str;
+    str.pb("blue"), str.pb("green"), str.pb("yellow"), str.pb("red"), str.pb("purple"), str.pb("orange"), str.pb("pink"), str.pb("grey"), str.pb("cyan"), str.pb("brown"), str.pb("ash"), str.pb("silver"), str.pb("gold"), str.pb("white"), str.pb("black");
+    int ans = 0;
+    for(int i = 0; i < sz(str); i++){
+        string x = str[i];
+        int cnt = 0;
+        for(auto y : x){
+            if(mp[y] > 0){
+                cnt++;
             }
         }
-        dbg(totalSum, arr);
-        for(int i = 0; i < group-1; i++){
-            if(avgSum > 0 && avgSum <= 1e5 && avgSum%2 == 0){
-                arr.push_back(avgSum);
-                totalSum -= avgSum;
-            }
-            else if(avgSum-1 > 0 && avgSum-1 <= 1e5 && (avgSum-1)%2 == 0){
-                arr.push_back(avgSum-1);
-                totalSum -= avgSum-1;
-            }
-            else if(avgSum+1 > 0 && avgSum+1 <= 1e5 && (avgSum+1)%2 == 0){
-                arr.push_back(avgSum+1);
-                totalSum -= avgSum+1;
-            }
-            else{
-                cout << -1 << en;
-                return;
+        if(cnt == sz(x)){
+            ans++;
+            for(auto y : x){
+                mp[y]--;
             }
         }
-        dbg(totalSum, arr); 
-        if(totalSum%2 == 0 && totalSum > 0 && totalSum <= 1e5){
-            arr.push_back(totalSum);
-            for(int i = 0; i < n; i++){
-                cout << arr[i] << gap;
-            }
-            cout << en;
-        }
-        else{
-            cout << -1 << en;
-            return;
-        } 
-    }
+    }                
+    cout << ans << en;
 }
 int32_t main(){
 #ifndef DEBUG

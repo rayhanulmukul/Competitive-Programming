@@ -41,27 +41,24 @@ void solve(int tt){
     cin >> n;
     string s;
     cin >> s;
-    int ans = 1;
-    for(int i = 2; i < n; i+= 2){
-        int x = s[i-2] - '0';
-        int y = s[i-1] - '0';
-        int bike = s[i] - '0';
-        int cnt = 0;
-        int car = x or y;
-        if(car == bike){
-            cnt++;
+    int ans = -1;
+    for(int i = 0; i < n; i++){
+        if(s[i] == '8'){
+            ans = i;
+            break;
         }
-        car = x and y;
-        if(car == bike){
-            cnt++;
-        }
-        car = x xor y;
-        if(car == bike){
-            cnt++;
-        }
-        ans = (ans * (cnt%MOD))%MOD;
     }
-    cout << ans << en;
+    dbg(ans);
+    if(ans == -1){
+        cout << "NO" << endl;
+        return;
+    }
+    if(n - ans >= 11){
+        cout << "YES" << endl;
+    }
+    else{
+        cout << "NO" << endl;
+    }
 }
 int32_t main(){
 #ifndef DEBUG

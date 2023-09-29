@@ -1,105 +1,151 @@
-#include "ext/pb_ds/assoc_container.hpp"
-#include "ext/pb_ds/tree_policy.hpp"
-#include <bits/stdc++.h>
-#include<vector>
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+#define ll long long
+#define int long long int
+#define endl "\n"
+#define F first
+#define S second
+#define uni(x) x.erase(unique(all(x)), x.end())
+#define deb(args...){string _s = #args;replace(_s.begin(), _s.end(), ',', ' ');stringstream _ss(_s);istream_iterator<string> _it(_ss);err(_it, args);}
+#define all(v) v.begin(), v.end()
+#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
+#define multi_ordered_set tree<int, null_type,less_equal<int>, rb_tree_tag,tree_order_statistics_node_update>
+#define index_of(x) order_of_key(x)
+#define value_index(x) find_by_order(x)
+ll modpow(ll a, ll b,ll m) {ll res = 1; while (b) {if (b & 1) res = res * a % m; a = a * a % m; b >>= 1;} return res;}
 using namespace std;
 using namespace __gnu_pbds;
-
-#define ll long long int
-#define int ll
-#define ld long double
-#define pb push_back
-#define ft front()
-#define bk back()
-#define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
-#define gap ' '
-#define en '\n'
-#define endl en
-#define sz(x) (int)(x.size())
-#define mem(a, b) memset(a, b, sizeof(a))
-#define sor(x)  sort(x.begin(), x.end())
-
-#ifdef TESLA
-#include "main.hpp"
-#else
-#define dbg(...)
-#endif
-//dbug(), watch(), output_run_time()
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
-#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
-#define FOR(i,a) F0R(i,0,a)
-#define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
-#define ROF(i,a) R0F(i,0,a)
-#define each(a,x) for (auto& a: x)
-const int MOD = 1e9+7; // 998244353;
-const int MAX = 2e5+5;
-const int N = 1005;
-
-void solve(int tt){
-    int n, k;
-    cin >> n >> k;
-    if(n > k){
-        cout << -1 << en;
-    }
-    else{
-        int x = n/2;
-        int one = x*1;
-        x--;
-        int two = x*2;
-        int temp = k - (one+two);
-        //dbg(k, one, two, temp);
-        if(one+two > k || (temp)%2 != 0 || temp < 1){
-            cout << -1 << en;
-        }
-        else{
-            int ans = n/2;
-            int even = k - one;
-            int total = even;
-            even /= ans;
-            //dbg(ans, even);
-            if(even > 1e5){
-                cout << -1 << en;
-                return;
-            }
-            for(int i = 0; i < ans; i++){
-                cout << 1 << gap;
-            }
-            while(ans--){
-                //dbg(ans, total );
-                if(ans == 0){
-                    cout << total;
-                    break;
-                }
-                else if(total - ans*2 > 1 && total - ((ans-1)*2) <= 1e5){
-                    cout << 2 << gap;
-                    total -= 2;
-                }
-                else{
-                    int cnt = total/ans;
-                    if(cnt%2 != 0){
-                        cout << cnt-1 << gap;
-                        total -= cnt-1;
-                    }
-                    else{
-                        cout << cnt << gap;
-                        total -= cnt;
-                    }
-                }
-            }
-            cout << en;
-        }
-    }
+template <typename T>
+ostream &operator<<(ostream &os, const vector<T> &v)
+{
+    os << '{';
+    for (const auto &x : v)
+        os << " " << x;
+    return os << '}';
 }
-int32_t main(){
-#ifndef DEBUG
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-#endif
-    int t = 1;
-    cin >> t;
-    for(int i = 1; i <= t; i++){
+void err(istream_iterator<string> it) {}
+template <typename T, typename... Args>
+void err(istream_iterator<string> it, T a, Args... args)
+{
+    cerr << *it << " = " << a << endl;
+    err(++it, args...);
+}
+int dx[]={0, 0, 1, -1, 1, 1, -1, -1};
+int dy[]={1, -1, 0, 0, 1, -1, 1, -1};
+const int N=2e5+5,M=1e9+7;
+void solve(int tt){
+    int n,k,i;
+    cin>>n>>k;
+    int val=n+n/2;
+    int val1=100000*(n/2)+99999*(n/2);
+    if(k<val || k>val1 || (k%2==0 && n%4 ) || (k%2 && n%4==0))
+    {
+        cout<<-1<<endl;
+        return;
+    }
+    int ar[n+1];
+    int av=k/n;
+    int m=k%n;
+    for(i=1;i<=n;i++)
+    {
+        ar[i]=av;
+        if(i<=m)
+        {
+            ar[i]++;
+        }
+    }
+    int cnt=0;
+    for(i=1;i<=n;i++)
+    {
+        if(ar[i]%2==0)
+        {
+            cnt++;
+        }
+    }
+    if(cnt>=(n/2))
+    {
+        val=cnt-(n/2); 
+        val1=val; 
+        for(i=1;i<=n;i++)
+        {
+            if(val==0)
+            {
+                break;
+            }
+            if(ar[i]%2==0)
+            {
+                ar[i]--;
+                val--;
+            }
+        }
+        for(i=1;i<=n;i++)
+        {
+            if(val1==0)
+            {
+                break;
+            }
+            if(ar[i]+2<=100000)
+            {
+                ar[i]+=2;
+                val1-=2;
+            }
+        }
+    }
+    else
+    {
+        val=(n/2)-cnt; 
+        val1=val; 
+        for(i=1;i<=n;i++)
+        {
+            if(val==0)
+            {
+                break;
+            }
+            if(ar[i]%2)
+            {
+                ar[i]--;
+                val--;
+            }
+        }
+        for(i=1;i<=n;i++)
+        {
+            if(val1==0)
+            {
+                break;
+            }
+           if(ar[i]+2<=100000)
+            {
+                ar[i]+=2;
+                val1-=2;
+            }
+        }
+    }
+    if(val1>0)
+    {
+        cout<<-1<<endl;
+        return;
+    }
+    for(i=1;i<=n;i++)
+    {
+        cout<<ar[i]<<" ";
+    }
+    cout<<endl;
+    
+} 
+
+int32_t main()
+{
+    #ifdef DEBUG
+        //freopen("input.txt", "r", stdin);
+        // freopen("output.txt","w", stdout);
+    #else
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL); 
+    #endif
+    ll test_case = 1;
+    cin>>test_case;
+    for(int i = 1; i <= test_case; i++){
         solve(i);
     }
-    return 0;
 }
