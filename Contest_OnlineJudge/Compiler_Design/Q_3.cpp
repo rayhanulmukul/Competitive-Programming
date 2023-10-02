@@ -37,19 +37,43 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int a, b;
-    cin >> a >> b;
-    int ans = 1e9, ind = 0;
-    for(int i = 0; i < 30; i++){
-        if(((a >> i) & 1) != ((b >> i) & 1)){
-            int x = (a ^ (1 << i)) - (b ^ (1 << i));
-            if(abs(x) < ans){
-                ans = abs(x);
-                ind = i;
+    string s;
+    getline(cin, s);
+    int n = s.size();
+    for(int i = 0; i < n; i++){
+        if(i+2 < n && s[i] == 'C' && s[i+1] == 'S' && s[i+2] == 'E'){
+            cout << "Computer Science & Engineering" << en;
+        }
+        else if(s[i] >= '1' && s[i] <= '4'){
+            if(s[i] == '1'){
+            cout << "1st year" << en;
+            }
+            else if(s[i] == '2'){
+                cout << "2nd year" << en;
+            }
+            else if(s[i] == '3'){
+                cout << "3rd year" << en;
+            }
+            else if(s[i] == '4'){
+                cout << "4th year" << en;
             }
         }
+        else if(s[i] == '1'){
+            cout << "1st Semester" << en;
+        }
+        else if(s[i] == '2'){
+            cout << "2nd Semester" << en;
+        }
+        else if(s[i] == '4'){
+            cout << "Compiler Design" << en;
+        }
+        else if(s[i] == '1'){
+            cout << "Theory" << en;
+        }
+        else if(s[i] == '2'){
+            cout << "Lab" << en;
+        }
     }
-    dbg(ans, ind);
 }
 int32_t main(){
 #ifndef DEBUG
@@ -57,7 +81,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

@@ -36,20 +36,40 @@ const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
 const int N = 1005;
 
+//"Md. Tareq Zaman, Part-3, 2011"
 void solve(int tt){
-    int a, b;
-    cin >> a >> b;
-    int ans = 1e9, ind = 0;
-    for(int i = 0; i < 30; i++){
-        if(((a >> i) & 1) != ((b >> i) & 1)){
-            int x = (a ^ (1 << i)) - (b ^ (1 << i));
-            if(abs(x) < ans){
-                ans = abs(x);
-                ind = i;
-            }
+    string s;
+    getline(cin, s);
+    int words = 0, letters = 0, digits = 0, characters = 0;
+    string letters1 = "", digits1 = "", characters1 = "";
+    for(int i = 0; i < s.size(); i++){
+        if(s[i] >= '0' && s[i] <= '9'){
+            digits++;
+            digits1 += s[i];
+        }
+        if((s[i] >= 'a' && s[i] <= 'z') or (s[i] >= 'A' && s[i] <= 'Z')){
+            letters++;
+            letters1 += s[i];
+        }
+        if(i+1 < s.size() && s[i] == ' ' && s[i+1] != ' '){
+            words++;
+        }
+        if(s[i] == '.' or s[i] == '-' or s[i] == ',' or s[i] == ';' or s[i] == ':' or s[i] == '\'' or s[i] == '!' or s[i] == '?'){
+            characters++;
+            characters1 += s[i];
         }
     }
-    dbg(ans, ind);
+    cout << "Words = " << words + 1 << endl;
+    cout << "Letters = " << letters << endl;
+    cout << "Digits = " << digits << endl;
+    cout << "Characters = " << characters << endl;
+
+    cout << en;
+
+    cout << "Letters1 = " << letters1 << endl;
+    cout << "Digits1 = " << digits1 << endl;
+    cout << "Characters1 = " << characters1 << endl;
+
 }
 int32_t main(){
 #ifndef DEBUG
@@ -57,7 +77,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

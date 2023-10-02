@@ -9,7 +9,6 @@ using namespace __gnu_pbds;
 #define int ll
 #define ld long double
 #define pb push_back
-#define mp make_pair
 #define ft front()
 #define bk back()
 #define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
@@ -38,28 +37,49 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n, k;
-    cin >> n >> k;
-    double arr[n+5];
-    double pref[n+5];
-    for(int i = 1; i <= n; i++){
-        cin >> arr[i];
-        double sum = 0;
-        for(int j = 1; j <= arr[i]; j++){
-            sum += (j/arr[i]);
-        }
-        if(i == 1) pref[i] = sum;
-        else pref[i] = pref[i-1] + sum;
-        dbg(arr[i], sum, pref[i]);
+    int n, m, k;
+    cin >> n >> m >> k;
+    vector <int> a(n), b(m);
+    vector <int> c, d;
+    int ans = 0, mna = 2e18, mxa = -2e18, mnb = 2e18, mxb = -2e18;
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+        ans += a[i];
+        mna = min(mna, a[i]);
+        mxa = max(mxa, a[i]);
+    } 
+    c.push_back(mna), c.push_back(mxa);
+    for(int i = 0; i < m; i++){
+        cin >> b[i];
+        mnb = min(mnb, b[i]);  
+        mxb = max(mxb, b[i]);
     }
-    double ans = 0;
-    for(int i = 1; i <= n; i++){
-        double sum = pref[i+k-1] - pref[i-1];
-        ans = max(ans, sum);
-        dbg(pref[i+k-1], pref[i-1], sum, ans);
+    d.push_back(mnb), d.push_back(mxb);
+    sort(c.begin(), c.end());
+    sort(d.begin(), d.end());
+    if(k%2 == 1){
+        int x = c[0];
+        c[0] = max(c[0], d[1]);
+        dbg(x, c);
+        cout << ans - x + c[0] << endl;
     }
-    cout << fixed << setprecision(12) << ans;
-    
+    else{
+        int final = c[1];
+        int x, x0;
+        x = c[0];
+        dbg("main", c, d);
+        c[0] = max(c[0], d[1]);
+        d[1] = min(d[1], x);
+        dbg("Odd : ", c, d);
+        sort(c.begin(), c.end());
+        sort(d.begin(), d.end());
+        x = c[1];
+        x0 = d[0];
+        d[0] = max(d[0], c[1]);
+        c[1] = min(c[1], x0);
+        dbg("Even", ans, c, d);
+        cout << ans - final + c[1] << en;
+    }
 }
 int32_t main(){
 #ifndef DEBUG
@@ -67,7 +87,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

@@ -37,19 +37,37 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int a, b;
-    cin >> a >> b;
-    int ans = 1e9, ind = 0;
-    for(int i = 0; i < 30; i++){
-        if(((a >> i) & 1) != ((b >> i) & 1)){
-            int x = (a ^ (1 << i)) - (b ^ (1 << i));
-            if(abs(x) < ans){
-                ans = abs(x);
-                ind = i;
+    string s;
+    getline(cin, s);
+    int n = s.size();
+    string vowels = "", consonants = "";
+    for(int i = 0; i < n; i++){
+        if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' ||
+           s[i] == 'o' || s[i] == 'u' || s[i] == 'A' ||
+           s[i] == 'E' || s[i] == 'I' || s[i] == 'O' ||
+           s[i] == 'U'){
+                for(int j = i; ; j++){
+                    if(s[j] == ' ' || j == n){
+                        vowels += s[j];
+                        i = j;
+                        break;
+                    }
+                    vowels += s[j];
+                }
+           }
+        else if(s[i] >= 'a' && s[i] <= 'z' || s[i] >= 'A' && s[i] <= 'Z'){
+            for(int j = i; ; j++){
+                if(s[j] == ' ' || j == n){
+                    consonants += s[j];
+                    i = j;
+                    break;
+                }
+                consonants += s[j];
             }
         }
     }
-    dbg(ans, ind);
+    cout << "Vowels: " << vowels << endl;
+    cout << "Consonants: " << consonants << endl;
 }
 int32_t main(){
 #ifndef DEBUG
@@ -57,7 +75,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
