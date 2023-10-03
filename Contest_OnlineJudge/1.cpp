@@ -37,57 +37,10 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n, m, k;
-    cin >> n >> m >> k;
-    vector <int> a(n), b(m);
-    vector <int> c, d;
-    int ans = 0, mna = 2e18, mxa = -2e18, mnb = 2e18, mxb = -2e18;
-    for(int i = 0; i < n; i++){
-        cin >> a[i];
-        ans += a[i];
-        mna = min(mna, a[i]);
-        mxa = max(mxa, a[i]);
-    } 
-    c.push_back(mna), c.push_back(mxa);
-    for(int i = 0; i < m; i++){
-        cin >> b[i];
-        mnb = min(mnb, b[i]);  
-        mxb = max(mxb, b[i]);
-    }
-    d.push_back(mnb), d.push_back(mxb);
-    sort(c.begin(), c.end());
-    sort(d.begin(), d.end());
-    if(k%2 == 1){
-        int x = c[0];
-        c[0] = max(c[0], d[1]);
-        dbg(x, c);
-        cout << ans - x + c[0] << endl;
-    }
-    else{
-        vector <int> temp = c;
-        int x, x0;
-        x = c[0];
-        dbg("main", c, d);
-        c[0] = max(c[0], d[1]);
-        d[1] = min(d[1], x);
-        dbg("Odd : ", c, d);
-        sort(c.begin(), c.end());
-        sort(d.begin(), d.end());
-        x = c[1];
-        x0 = d[0];
-        d[0] = max(d[0], c[1]);
-        c[1] = min(c[1], x0);
-        dbg("Even", ans, c, d);
-
-        int ans1 = 0, ans2 = 0;
-        for(int i = 0; i < 2; i++){
-            ans1 += c[i];
-        }
-        for(int i = 0; i < 2; i++){
-            ans2 += temp[i];
-        }
-        cout << ans - ans2 + ans1 << endl;
-    }
+    int n;
+    cin >> n;
+    int a = 12, b = 10, c  =  11, d = 9;
+    if(tt == 3) dbg(n, tt, a, b, c, d);
 }
 int32_t main(){
 #ifndef DEBUG
