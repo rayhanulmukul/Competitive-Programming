@@ -37,19 +37,7 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int a, b;
-    cin >> a >> b;
-    int ans = 1e9, ind = 0;
-    for(int i = 0; i < 30; i++){
-        if(((a >> i) & 1) != ((b >> i) & 1)){
-            int x = (a ^ (1 << i)) - (b ^ (1 << i));
-            if(abs(x) < ans){
-                ans = abs(x);
-                ind = i;
-            }
-        }
-    }
-    dbg(ans, ind);
+    
 }
 int32_t main(){
 #ifndef DEBUG

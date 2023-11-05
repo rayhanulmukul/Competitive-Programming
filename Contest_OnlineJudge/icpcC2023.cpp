@@ -39,28 +39,48 @@ const int N = 1005;
 void solve(int tt){
     int n;
     cin >> n;
-
-    int left = 1, right = sqrt(n) + 1;
-    right = sqrt(right) + 1;
-    dbg(right);
-    for(int i = 1; i <= right ; i++){
-        int product = i;
-        int k = i - 1;
-        while(k--){
-            product *= i;
-        }
-        if(product == n){
-            cout << i << en;
-            return;
-        }
-        else if(product > n){
-            dbg(product, n);
-            cout << -1 << en;
-            return;
-        }
-        dbg(i, product);
+    int a, b;
+    cin >> a >> b;
+    vector <int> v(n+1);
+    for(int i = 1; i <= n; i++){
+        cin >> v[i];
     }
-    cout << -1 << en;
+    sort(v.begin(), v.end());
+    int ans = 0;
+    v[0] = -1e5;
+    dbg(v);
+    for(int i = 1; i <= n; i++){
+        int x = v[i];
+        int left = i+1, right = n;
+        int low = n+1;
+        while(left <= right){
+            int mid = (left + right) / 2;
+            if(b >= x + v[mid]){
+                low = mid;
+                left = mid + 1;
+            }
+            else{
+                right = mid - 1;
+            }
+        }
+        //dbg(x, i, low);
+        int high = n+1;
+        left = i+1, right = n;
+        while(left <= right){
+            int mid = (left + right) / 2;
+            if(a <= x + v[mid]){
+                high = mid;
+                right = mid - 1;
+            }
+            else{
+                left = mid + 1;
+            }
+        }
+        dbg(low, high);
+        if(low==n+1 || high==n+1) continue;
+        ans += low - high+1;
+    }
+    cout << "Case " << tt << ": " << ans << endl;
 }
 int32_t main(){
 #ifndef DEBUG
@@ -68,7 +88,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

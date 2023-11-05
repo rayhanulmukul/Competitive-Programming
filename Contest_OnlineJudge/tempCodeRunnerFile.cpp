@@ -1,5 +1,2 @@
-#ifdef TESLA
-#include "main.hpp"
-#else
-#define dbg(...)
-#endif
+
+            if(sum > 1) attack += sum;
