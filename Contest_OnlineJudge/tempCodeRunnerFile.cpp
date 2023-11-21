@@ -1,1 +1,1 @@
-    // Use binomial coefficient to calculate combinations
+1

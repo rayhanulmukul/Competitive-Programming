@@ -1,133 +1,65 @@
-///   ***   ---   |||		 In the name of ALLAH		|||   ---   ***   ///
-
-
-
-#include<bits/stdc++.h>
+#include "ext/pb_ds/assoc_container.hpp"
+#include "ext/pb_ds/tree_policy.hpp"
+#include <bits/stdc++.h>
+#include<vector>
 using namespace std;
+using namespace __gnu_pbds;
 
+#define ll long long int
+#define int ll
+#define ld long double
+#define pb push_back
+#define ft front()
+#define bk back()
+#define pi 2*acos(0.0)     /// acos(-1) , 3.14159265359
+#define gap ' '
+#define en '\n'
+#define endl en
+#define sz(x) (int)(x.size())
+#define mem(a, b) memset(a, b, sizeof(a))
+#define sor(x)  sort(x.begin(), x.end())
 
-typedef long long ll;
-typedef vector<int> vi;
-typedef vector<ll> vl;
-typedef vector<vi> vvi;
-typedef vector<vl> vvl;
-typedef pair<int,int> pii;
-typedef pair<double, double> pdd;
-typedef pair<ll, ll> pll;
-typedef vector<pii> vii;
-typedef vector<pll> vll;
-typedef double dl;
+#ifdef TESLA
+#include "main.hpp"
+#else
+#define dbg(...)
+#endif
+//dbug(), watch(), output_run_time()
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
+#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
+#define FOR(i,a) F0R(i,0,a)
+#define R0F(i,a,b) for (int i = (b)-1; i >= (a); --i)
+#define ROF(i,a) R0F(i,0,a)
+#define each(a,x) for (auto& a: x)
+const int MOD = 1e9+7; // 998244353;
+const int MAX = 2e5+5;
+const int N = 1005;
 
-#define endl '\n'
-#define PB push_back
-#define F first
-#define S second
-#define all(a) (a).begin(),(a).end()
-#define rall(a) (a).rbegin(),(a).rend()
-#define sz(x) (int)x.size()
-
-const double PI = acos(-1);
-const double eps = 1e-9;
-const int inf = 2000000000;
-const ll infLL = 9000000000000000000;
-#define MOD 1000000007
-
-#define mem(a,b) memset(a, b, sizeof(a) )
-#define sqr(a) ((a) * (a))
-
-#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
-#define fraction() cout.unsetf(ios::floatfield); cout.precision(10); cout.setf(ios::fixed,ios::floatfield);
-#define file() freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
-//
-//debug
-template<typename F,typename S>ostream&operator<<(ostream&os,const pair<F,S>&p){return os<<"("<<p.first<<", "<<p.second<<")";}
-template<typename T>ostream&operator<<(ostream&os,const vector<T>&v){os<<"{";for(auto it=v.begin();it!=v.end();++it){if(it!=v.begin())os<<", ";os<<*it;}return os<<"}";}
-template<typename T>ostream&operator<<(ostream&os,const set<T>&v){os<<"[";for(auto it=v.begin();it!=v.end();++it){if(it!=v.begin())os<<",";os<<*it;}return os<<"]";}
-template<typename T>ostream&operator<<(ostream&os,const multiset<T>&v) {os<<"[";for(auto it=v.begin();it!=v.end();++it){if(it!=v.begin())os<<", ";os<<*it;}return os<<"]";}
-template<typename F,typename S>ostream&operator<<(ostream&os,const map<F,S>&v){os<<"[";for(auto it=v.begin();it!=v.end();++it){if(it!=v.begin())os<<", ";os<<it->first<<" = "<<it->second;}return os<<"]";}
-#define dbg(args...) do {cerr << #args << " : "; faltu(args); } while(0)
-void faltu(){cerr << endl;}
-template<typename T>void faltu(T a[],int n){for(int i=0;i<n;++i)cerr<<a[i]<<' ';cerr<<endl;}
-template<typename T,typename...hello>void faltu(T arg,const hello&...rest){cerr<<arg<<' ';faltu(rest...);}
-//#else
-//#define dbg(args...)
-
-ll gcd ( ll a, ll b ) { return __gcd ( a, b ); }
-ll lcm ( ll a, ll b ) { return a * ( b / gcd ( a, b ) ); }
-
-
-int dx[] = { 0, 0, +1, -1, -1  +1, -1, +1 };
-int dy[] = { +1, -1, 0, 0, -1, +1, +1, -1 };
-
-inline void normal(ll &a) { a %= MOD; (a < 0) && (a += MOD); }
-inline ll modMul(ll a, ll b) { a %= MOD, b %= MOD; normal(a), normal(b); return (a*b)%MOD; }
-inline ll modAdd(ll a, ll b) { a %= MOD, b %= MOD; normal(a), normal(b); return (a+b)%MOD; }
-inline ll modSub(ll a, ll b) { a %= MOD, b %= MOD; normal(a), normal(b); a -= b; normal(a); return a; }
-inline ll modPow(ll b, ll p) { ll r = 1; while(p) { if(p&1) r = modMul(r, b); b = modMul(b, b); p >>= 1; } return r; }
-inline ll modInverse(ll a) { return modPow(a, MOD-2); }
-inline ll modDiv(ll a, ll b) { return modMul(a, modInverse(b)); }
-
-const int mx = 1e5+123;
-vii adj[mx];
-ll dist[mx];
-
-void dijkstra ( int s, int n )
-{
-    for ( int i = 0; i <= n; i++ ) dist[i] = infLL; /// initilization
-    dist[s] = 0; /// initilizing source distance
-    priority_queue < pll, vll, greater<pll> > pq;
-    pq.push ( { 0, s } ); /// pushing source in queue
-
-    while ( !pq.empty() ) {
-        int u = pq.top().S; /// u = 4
-        ll curD = pq.top().F; // curD = 3
-        pq.pop();
-
-        if ( dist[u] < curD ) continue; // important
-
-        for ( auto p : adj[u] ) {
-            int v = p.F;
-            ll w = p.S;
-            if ( curD + w < dist[v] ) { // relax operation
-                dist[v] = curD + w;
-                pq.push ( { dist[v], v } );
-            }
-        }
+void solve(int tt){
+    int n, q;
+    cin >> n >> q;
+    for(int i = 1; i < n; i++){
+        cout << i << gap << i+1 << endl;
     }
-
-}
-
-int main()
-{
-	optimize();
-
-    int n, m;
-    cin >> n >> m;
-    for ( int i = 1; i <= m; i++ ) {
-        int u, v, w;
-        cin >> u >> v >> w;
-        adj[u].PB ( { v, w } );
-        adj[v].PB ( { u, w } );
+    int prev = n - 1;
+    while(q--){
+        int x;
+        cin >> x;
+        if(x == prev) cout << "-1 -1 -1\n";
+        else cout << n << gap << prev << gap << x << en;
+        prev = x;
     }
-
-    dijkstra ( 1, n );
-
-    for ( int i = 1; i < n; i++ ) cout << dist[i] << " ";
-    cout << endl;
-
-	return 0;
 }
-
-/*
-
-5 7
-1 3 3
-1 2 2
-1 4 6
-2 0 6
-2 3 7
-0 4 3
-3 4 5
-
-
-*/
+int32_t main(){
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
+    int t = 1;
+    cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
+    }
+    return 0;
+}
