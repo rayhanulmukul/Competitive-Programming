@@ -37,19 +37,25 @@ const int MAX = 2e5+5;
 const int N = 1005;
 
 void solve(int tt){
-    int n, q;
-    cin >> n >> q;
-    for(int i = 1; i < n; i++){
-        cout << i << gap << i+1 << endl;
+    int n;
+    cin >> n;
+    vector <int> a(n);
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
     }
-    int prev = n - 1;
-    while(q--){
-        int x;
-        cin >> x;
-        if(x == prev) cout << "-1 -1 -1\n";
-        else cout << n << gap << prev << gap << x << en;
-        prev = x;
+    dbg(a);
+    vector<pair<int, int>> dp(n + 1, {0, 1});
+    int sum = 0;
+    dbg(dp);
+    for (int i = n - 1; i >= 0; i--) {
+        pair<int, int>& current = dp[i + 1];
+        dp[i] = {current.first + a[i], current.second};
+        dbg(current, i, a[i], dp[i]);
+        dp[i] = max(dp[i], make_pair(current.first + sum + a[i], current.second + 1));
+        dbg(dp[i], sum, a[i], en);
+        sum += a[i];
     }
+    cout << dp[0].first << endl;
 }
 int32_t main(){
 #ifndef DEBUG

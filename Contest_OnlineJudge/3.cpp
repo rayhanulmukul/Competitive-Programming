@@ -1,50 +1,60 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+
 using namespace std;
-#define ll long long int
-#define Faster ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 
-#ifdef TESLA
-#include "main.hpp"
-#else
-#define dbg(...)
-#endif
-
-int main(){
-   Faster;
-   int t;                  cin>>t;
-   while(t--){
-      int n;               cin>>n;
-      vector<ll> a(n);
-      for(int i=0;i<n;i++){
-         cin>>a[i];
-      }
-
-      map<ll,int> freq;
-      for(int i=0;i<n;i++){
-         freq[a[i]]++;
-      }
-      
-      ll ans=0,cons=0;
-      sort(a.begin(),a.end());
-      for(int i=0;i<n;i++){
-         cons++;
-         if(i==n-1 or a[i+1]!=a[i]){
-            dbg(a[i], cons);
-            ans+=((cons*(cons-1LL))/2LL);
-            cons=0;
-         }
-         for(ll j=1;;j++){
-            ll rhs=a[i]*(1LL<<j);
-            dbg(a[i], rhs, j, freq[rhs], ans);
-            if(rhs>a[n-1])break;
-            if(!freq[rhs])continue;
-            if(rhs-a[i]==j){
-               ans+=freq[rhs];
+// Function to check if the array 'a' satisfies the conditions
+bool isValid(const vector<int>& a, const vector<vector<int>>& M) {
+    int n = a.size();
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (i != j && (a[i] | a[j]) != M[i][j]) {
+                return false;
             }
-         }
-      }
+        }
+    }
+    return true;
+}
 
-      cout<<ans<<endl;
-   }
-   return 0; 
+// Function to print the array 'a'
+void printArray(const vector<int>& a) {
+    int n = a.size();
+    for (int i = 0; i < n; ++i) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    srand(time(0));
+
+    int n;
+    cout << "Enter the value of n: ";
+    cin >> n;
+
+    vector<vector<int>> M(n, vector<int>(n));
+
+    cout << "Enter the elements of matrix M:" << endl;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            cin >> M[i][j];
+        }
+    }
+
+    vector<int> a(n);
+
+    // Try to find a valid array by generating random values
+    do {
+        for (int i = 0; i < n; ++i) {
+            a[i] = rand() % (1 << 30); // Random value between 0 and 2^30 - 1
+        }
+    } while (!isValid(a, M));
+
+    cout << "Found a valid array to open the lock:" << endl;
+    printArray(a);
+
+    return 0;
 }
