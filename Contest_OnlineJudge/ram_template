@@ -57,6 +57,6 @@
 		  "    return 0;",
 		  "}"
 		],
-		"description": "tesla_C++"
+		"description": "Tesla's template"
 	  }
 }
