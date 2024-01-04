@@ -1,1 +1,2 @@
-first[i]
+
+    reverse(mind.begin(), mind.end());

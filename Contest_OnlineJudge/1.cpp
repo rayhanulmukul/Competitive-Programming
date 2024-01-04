@@ -33,38 +33,40 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int n, m;
-    cin >> n >> m;
-    vector <vector <int>> mat(n, vector <int> (m));
-    FOR(i, n){
-        FOR(j, m){
-            cin >> mat[i][j];
-        }
+    int n, k;
+    cin >> n >> k;
+    vector <int> v(n), odd, even;
+    for(int i = 0; i < n; i++){
+        cin >> v[i];
+        if(i % 2 == 0)
+            even.pb(v[i]);
+        else
+            odd.pb(v[i]);
     }
-    vector <int> rows(mat.size());
-    vector <int> colums(mat[0].size());
-    FOR(i, n){
-        FOR(j, m){
-            if(mat[i][j] == 1){
-                dbg(i, j);
-                rows[i]++;
-                colums[j]++;
-            }
+    sort(even.begin(), even.end());
+    sort(odd.begin(), odd.end());
+    int j = even.size() - 1;
+    int i = 0;
+    while(k-- && i < odd.size() && j >= 0){
+        if(even[j] < odd[i]){
+            swap(even[j], odd[i]);
         }
+        j--;
+        i++;
     }
-    dbg(mat);
-    dbg(rows, colums);
-    int sum = 0;
-    FOR(i, n){
-        FOR(j, m){
-            if(mat[i][j] == 1){
-                if(rows[i] == 1 && colums[j] == 1){
-                    sum++;
-                }
-            }
-        }
+    int motu = 0, tomu = 0;
+    for(int i = 0; i < even.size(); i++){
+        motu += even[i];
     }
-    cout << sum << en;
+    for(int i = 0; i < odd.size(); i++){
+        tomu += odd[i];
+    }
+    if(tomu >= motu){
+        cout << "NO" << endl;
+    }
+    else{
+        cout << "YES" << endl;
+    }
 }
 int32_t main(){
 #ifndef DEBUG
