@@ -5,6 +5,8 @@
 using namespace std;
 using namespace __gnu_pbds;
 
+#define ll long long int
+#define int ll
 #define ld long double
 #define pb push_back
 #define ft front()
@@ -29,22 +31,19 @@ const int N = 1005;
 const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
-class Solution {
-public:
-    int numberOfBeams(vector<string>& bank) {
-        int prev = 0, ans = 0;
-        for (auto& row : bank) {
-            int count= 0;
-            for (auto& cell : row) {
-                if (cell == '1') {
-                    count++;
-                }
-            }
-            if(count != 0){
-                ans += (prev * count);
-                prev = count;
-            }
-        }
-        return ans;
+
+void solve(int tt){
+    
+}
+int32_t main(){
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
+    int t = 1;
+    cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
     }
-};
+    return 0;
+}

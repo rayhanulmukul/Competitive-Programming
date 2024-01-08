@@ -1,2 +1,2 @@
 
-    reverse(mind.begin(), mind.end());
+        dp[i] = 1;

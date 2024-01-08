@@ -33,7 +33,14 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    
+    int n;
+    cin >> n;
+    vector <int> s(n);
+    for(int i = 0; i < n; i++){
+        cin >> s[i];
+    }
+    vector <int> firstSplit, secondSplit;
+    for()
 }
 int32_t main(){
 #ifndef DEBUG

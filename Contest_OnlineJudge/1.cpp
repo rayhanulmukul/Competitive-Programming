@@ -33,40 +33,9 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int n, k;
-    cin >> n >> k;
-    vector <int> v(n), odd, even;
-    for(int i = 0; i < n; i++){
-        cin >> v[i];
-        if(i % 2 == 0)
-            even.pb(v[i]);
-        else
-            odd.pb(v[i]);
-    }
-    sort(even.begin(), even.end());
-    sort(odd.begin(), odd.end());
-    int j = even.size() - 1;
-    int i = 0;
-    while(k-- && i < odd.size() && j >= 0){
-        if(even[j] < odd[i]){
-            swap(even[j], odd[i]);
-        }
-        j--;
-        i++;
-    }
-    int motu = 0, tomu = 0;
-    for(int i = 0; i < even.size(); i++){
-        motu += even[i];
-    }
-    for(int i = 0; i < odd.size(); i++){
-        tomu += odd[i];
-    }
-    if(tomu >= motu){
-        cout << "NO" << endl;
-    }
-    else{
-        cout << "YES" << endl;
-    }
+    int a, b;
+    cin >> a >> b;
+    cout << abs(a - b) << en;
 }
 int32_t main(){
 #ifndef DEBUG
