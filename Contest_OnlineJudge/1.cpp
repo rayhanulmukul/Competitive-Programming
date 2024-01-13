@@ -33,9 +33,13 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
+<<<<<<< Updated upstream
     int a, b;
     cin >> a >> b;
     cout << abs(a - b) << en;
+=======
+    dbg(tt);
+>>>>>>> Stashed changes
 }
 int32_t main(){
 #ifndef DEBUG
