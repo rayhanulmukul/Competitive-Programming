@@ -1,41 +1,72 @@
-#include <iostream>
-#include <vector>
-
+#include "ext/pb_ds/assoc_container.hpp"
+#include "ext/pb_ds/tree_policy.hpp"
+#include <bits/stdc++.h>
 using namespace std;
+using namespace __gnu_pbds;
 
-// Function to calculate the digit sum of a number
-int digitSum(int n) {
-    int sum = 0;
-    while (n > 0) {
-        sum += n % 10;
-        n /= 10;
+#define ll long long int
+#define int ll
+#define ld long double
+#define pb push_back
+#define ft front()
+#define bk back()
+#define pi 2*acos(0.0)
+#define gap ' '
+#define en '\n'
+#define endl en
+#define mem(a, b) memset(a, b, sizeof(a))
+#ifdef TESLA
+#include "main.hpp"
+#else
+#define dbg(...)
+#endif
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
+#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
+#define FOR(i,a) F0R(i,0,a)
+const int MOD = 1e9+7; // 998244353;
+const int MAX = 2e5+5;
+const int N = 1005;
+const int INF = 1e18;
+int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
+int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
+
+void solve(int tt){
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
     }
-    return sum;
-}
-
-// Function to count the number of good integers less than or equal to N
-int countGoodIntegers(int N) {
-    int count = 0;
-
-    for (int i = 1; i <= N; ++i) {
-        if (i % digitSum(i) == 0) {
-            ++count;
+    int val = a[0];
+    int i = 0, j = n - 1;
+    while(i < n){
+        if(a[i] == val){
+            i++;
         }
+        else break;
     }
+    while(j > 0){
+        if(a[j] == val){
+            j--;
+        }
+        else break;
+    }
+    if(j < i){
+        cout << 0 << en;
+    }
+    else cout << j - i + 1 << en;
 
-    return count;
 }
-
-int main() {
-    // Input N
-    int N;
-    cout << "Enter the value of N: ";
-    cin >> N;
-
-    // Count the number of good integers
-    int result = countGoodIntegers(N);
-
-    cout << "Number of good integers less than or equal to " << N << ": " << result << endl;
-
+int32_t main(){
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
+    int t = 1;
+    cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
+    }
     return 0;
 }

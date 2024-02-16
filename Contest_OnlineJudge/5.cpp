@@ -1,7 +1,6 @@
 #include "ext/pb_ds/assoc_container.hpp"
 #include "ext/pb_ds/tree_policy.hpp"
 #include <bits/stdc++.h>
-#include<vector>
 using namespace std;
 using namespace __gnu_pbds;
 
@@ -31,35 +30,9 @@ const int N = 1005;
 const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
-int findNthGoodInteger(int n) {
-    int count = 0;
-    int num = 0;
 
-    while (count < n) {
-        int temp = num;
-        bool isGood = true;
-
-        while (temp > 0) {
-            int digit = temp % 10;
-            if (digit % 2 != 0) {
-                isGood = false;
-                break;
-            }
-            temp /= 10;
-        }
-
-        if (isGood) {
-            count++;
-        }
-
-        num++;
-    }
-    return num - 1; // Subtract 1 to get the N-th good integer
-}
 void solve(int tt){
-    int n;
-    cin >> n;
-    cout << findNthGoodInteger(n) << endl;
+    
 }
 int32_t main(){
 #ifndef DEBUG
@@ -67,7 +40,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

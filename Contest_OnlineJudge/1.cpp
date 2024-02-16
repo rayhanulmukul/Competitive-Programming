@@ -32,7 +32,34 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    
+    int n;
+    cin >> n;
+    vector <int> a(n);
+    FOR(i, n){
+        cin >> a[i];
+    }
+    if(n == 1){
+        cout << "YES" << endl;
+    }
+    else if(n == 2){
+        if(a[0] <= a[1]){
+            cout << "YES" << endl;
+        }
+        else{
+            cout << "NO" << endl;
+        }
+    }
+    else if(n == 3){
+        vector <int> v = {a[0], a[1], a[2]};
+        sort(v.begin(), v.end());
+        if(v[1] == a[1]){
+            cout << "YES" << en;
+        }
+        else{
+            cout << "NO" << en;
+        }
+    }
+    else cout << "YES" << en;
 }
 int32_t main(){
 #ifndef DEBUG
