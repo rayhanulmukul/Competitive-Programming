@@ -34,22 +34,23 @@ int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 void solve(int tt){
     string s;
     getline(cin, s);
-    if(s.size() == 0){
-        getline(cin, s);
-    }
     int n = s.size();
-    dbg(s);
+    if(n == 0){
+        return;
+    }
+    //dbg(s);
     string day = s.substr(0, 2);
     string month = s.substr(3, 2);
     string year = s.substr(6, 4);
     string weekDay = s.substr(11, 3);
-    dbg(day, month, year, weekDay);
+    //dbg(day, month, year, weekDay);
     int d = stoi(day);
     cout << "|---------------------------|" << endl;
     cout << "|Sun|Mon|Tue|Wed|Thu|Fri|Sat|" << endl;
     cout << "|---------------------------|" << endl;
     cout << "|";
     int cnt = 0;
+    string givenDay[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     if(weekDay == "Sun"){
         cnt = 0;
     }else if(weekDay == "Mon"){
@@ -69,27 +70,49 @@ void solve(int tt){
     else if(weekDay == "Sat"){
         cnt = 6;
     }
-
     int mon1 = 31, mon2 = 28, mon3 = 31, mon4 = 30, mon5 = 31, mon6 = 30, mon7 = 31, mon8 = 31, mon9 = 30, mon10 = 31, mon11 = 30, mon12 = 31;
     if(month == "02"){
-        if((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || (stoi(year) % 400 == 0)){
+        if(((stoi(year) % 4 == 0 && stoi(year) % 100 != 0)) || (stoi(year) % 400 == 0)){
             mon2 = 29;
         }
     }
     int mon = stoi(month);
     int year1 = stoi(year);
-    if(mon == 2){
-        int x = d - (d / 7) * 7;
-        cnt = abs(cnt - x);
-        dbg(x, cnt);
+    int arr[12] = {mon1, mon2, mon3, mon4, mon5, mon6, mon7, mon8, mon9, mon10, mon11, mon12};
+    for(int k = 1; k <= 12; k++){
+        if(k == mon){
+            if(d > 6){
+            d %= 7;
+            for(int i = 0; i < 7; i++){
+                if(givenDay[i] == weekDay){
+                    cnt = i;
+                    break;
+                }
+            }
+            for(int i = 0; i < d; i++){
+                cnt--;
+                if(cnt < 0){
+                    cnt = 6;
+                }
+            }
+            cnt++;
+            cnt %= 7;
+        }
+        //dbg(x, cnt);
+        int nextDay = (6 - cnt + 1) + 4 * 7;
+        //dbg(nextDay, cnt);
         int cnt1 = 0;
         for(int i = 1; i <= cnt; i++){
-            cout << " - |";
+            if(nextDay < arr[k - 1]){
+                cout << " " << nextDay + 1 << "|";
+                nextDay++;
+            }
+            else cout << " - |";
             cnt1++;
         }
         int i;
         int week = 1;
-        for(i = 1; i <= mon2; i++){
+        for(i = 1; i <= arr[k - 1]; i++){
             if(cnt1 == 7){
                 week++;
                 if(week == 6) break;
@@ -105,8 +128,10 @@ void solve(int tt){
             }
             cnt1++;
         }
-        for(int j = mon2 + 1; j <= 35; j++){
-            if(cnt1 == 7){
+        //dbg(mon1, week);
+        for(int j = arr[k - 1] + 1; j <= 35; j++){
+            if(week == 6) break;
+            else if(cnt1 == 7){
                 week++;
                 if(week == 6) break;
                 cout << endl;
@@ -119,9 +144,9 @@ void solve(int tt){
         }
         cout << en;
         cout << "|---------------------------|" << endl;
-        dbg(i);
+        cout << en;
+        }
     }
-    
 }
 int32_t main(){
 #ifndef DEBUG
@@ -130,7 +155,7 @@ int32_t main(){
 #endif
     int t = 1;
     cin >> t;
-    for(int i = 1; i <= t; i++){
+    for(int i = 1; i <= t  + 1; i++){
         solve(i);
     }
     return 0;
