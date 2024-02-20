@@ -1,74 +1,127 @@
-#include<bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-#define ll long long
-#define int long long int
-#define endl "\n"
-#define F first
-#define S second
-#define uni(x) x.erase(unique(all(x)), x.end())
-#define deb(args...){string _s = #args;replace(_s.begin(), _s.end(), ',', ' ');stringstream _ss(_s);istream_iterator<string> _it(_ss);err(_it, args);}
-#define all(v) v.begin(), v.end()
-#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
-#define multi_ordered_set tree<int, null_type,less_equal<int>, rb_tree_tag,tree_order_statistics_node_update>
-#define index_of(x) order_of_key(x)
-#define value_index(x) find_by_order(x)
-ll modpow(ll a, ll b,ll m) {ll res = 1; while (b) {if (b & 1) res = res * a % m; a = a * a % m; b >>= 1;} return res;}
+#include "ext/pb_ds/assoc_container.hpp"
+#include "ext/pb_ds/tree_policy.hpp"
+#include <bits/stdc++.h>
 using namespace std;
 using namespace __gnu_pbds;
-template <typename T>
-ostream &operator<<(ostream &os, const vector<T> &v)
-{
-    os << '{';
-    for (const auto &x : v)
-        os << " " << x;
-    return os << '}';
-}
-void err(istream_iterator<string> it) {}
-template <typename T, typename... Args>
-void err(istream_iterator<string> it, T a, Args... args)
-{
-    cerr << *it << " = " << a << endl;
-    err(++it, args...);
-}
-int dx[]={0, 0, 1, -1, 1, 1, -1, -1};
-int dy[]={1, -1, 0, 0, 1, -1, 1, -1};
-int hash58 = 288230376151711717;
-int hash32 = 1610612741;
-const int N=2e5+5,M=1e9+7;
+
+#define ll long long int
+#define int ll
+#define ld long double
+#define pb push_back
+#define ft front()
+#define bk back()
+#define pi 2*acos(0.0)
+#define gap ' '
+#define en '\n'
+#define endl en
+#define mem(a, b) memset(a, b, sizeof(a))
+#ifdef TESLA
+#include "main.hpp"
+#else
+#define dbg(...)
+#endif
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
+#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
+#define FOR(i,a) F0R(i,0,a)
+const int MOD = 1e9+7; // 998244353;
+const int MAX = 2e5+5;
+const int N = 1005;
+const int INF = 1e18;
+int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
+int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
+
 void solve(int tt){
-    int k,x,n;
-    cin>>k>>x>>n;
-    int c=1;
-    n--;
-    for(int i=0;i<x;i++)
-    {
-        int val=c/(k-1)+1;
-        if(val>n)
-        {
-            cout<<"NO"<<endl;
-            return;
-        }
-        cout << val << " ";
-        c+=val;
-        n-=val;
+    string s;
+    getline(cin, s);
+    if(s.size() == 0){
+        getline(cin, s);
     }
-    cout<<"YES"<<endl;
+    int n = s.size();
+    dbg(s);
+    string day = s.substr(0, 2);
+    string month = s.substr(3, 2);
+    string year = s.substr(6, 4);
+    string weekDay = s.substr(11, 3);
+    dbg(day, month, year, weekDay);
+    int d = stoi(day);
+    cout << "|---------------------------|" << endl;
+    cout << "|Sun|Mon|Tue|Wed|Thu|Fri|Sat|" << endl;
+    cout << "|---------------------------|" << endl;
+    cout << "|";
+    int cnt = 0;
+    if(weekDay == "Sun"){
+        cnt = 0;
+    }else if(weekDay == "Mon"){
+        cnt = 1;
+    }else if(weekDay == "Tue"){
+        cnt = 2;
+    }
+    else if(weekDay == "Wed"){
+        cnt = 3;
+    }
+    else if(weekDay == "Thu"){
+        cnt = 4;
+    }
+    else if(weekDay == "Fri"){
+        cnt = 5;
+    }
+    else if(weekDay == "Sat"){
+        cnt = 6;
+    }
 
-} 
-
-int32_t main()
-{
-    #ifdef DEBUG
-        //freopen("input.txt", "r", stdin);
-        // freopen("output.txt","w", stdout);
-    #else
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL); 
-    #endif
-    ll test_case = 1;
-    cin>>test_case;
-    for(int i = 1; i <= test_case; i++){
+    int mon1 = 31, mon2 = 28, mon3 = 31, mon4 = 30, mon5 = 31, mon6 = 30, mon7 = 31, mon8 = 31, mon9 = 30, mon10 = 31, mon11 = 30, mon12 = 31;
+    if(month == "02"){
+        if((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || (stoi(year) % 400 == 0)){
+            mon2 = 29;
+        }
+    }
+    int mon = stoi(month);
+    int year1 = stoi(year);
+    if(mon == 1){
+        int cnt1 = 0;
+        int nextDay = mon2 - cnt;
+        //dbg(nextDay, cnt);
+        for(int i = 0; i <= cnt + 1; i++){
+            if(nextDay < mon2){
+                cout << nextDay + 1 << " |";
+                nextDay++;
+            }
+            else cout << " - |";
+            cnt1++;
+        }
+        int i;
+        int week = 1;
+        for(i = 1; i <= mon2; i++){
+            if(cnt1 == 7){
+                week++;
+                if(week == 6) break;
+                cout << endl;
+                cout << "|---------------------------|" << endl;
+                cout << "|";
+                cnt1 = 0;
+            }
+            if(i < 10){
+                cout << " " << i << " |";
+            }else{
+                cout << i << " |";
+            }
+            cnt1++;
+        }
+        cout << en;
+        cout << "|---------------------------|" << endl;
+    }
+    cout << en;
+}
+int32_t main(){
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
+    int t = 1;
+    cin >> t;
+    for(int i = 1; i <= t; i++){
         solve(i);
     }
+    return 0;
 }

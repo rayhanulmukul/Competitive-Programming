@@ -32,49 +32,96 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int n;
-    cin >> n;
-    vector <int> a(n), b(n);
-    map <int, int> mp;
-    FOR(i, n){
-        cin >> a[i];
-        mp[a[i]]++;
+    string s;
+    getline(cin, s);
+    if(s.size() == 0){
+        getline(cin, s);
     }
-    b = a;
-    sort(b.begin(), b.end());
-    int cnt = 0;   
-    int x, y;
-    FOR(i, n){
-        if(a[i] != b[i]){
-            x = a[i];
-            y = b[i];
-            cnt++;
-        }
+    int n = s.size();
+    dbg(s);
+    string day = s.substr(0, 2);
+    string month = s.substr(3, 2);
+    string year = s.substr(6, 4);
+    string weekDay = s.substr(11, 3);
+    dbg(day, month, year, weekDay);
+    int d = stoi(day);
+    cout << "|---------------------------|" << endl;
+    cout << "|Sun|Mon|Tue|Wed|Thu|Fri|Sat|" << endl;
+    cout << "|---------------------------|" << endl;
+    cout << "|";
+    int cnt = 0;
+    if(weekDay == "Sun"){
+        cnt = 0;
+    }else if(weekDay == "Mon"){
+        cnt = 1;
+    }else if(weekDay == "Tue"){
+        cnt = 2;
     }
-    dbg(cnt, x, y);
-    if(cnt <= 2){
-        int ind1 = -1, ind2 = -1;
-        bool ok = 0;
-        for(int i = 0; i < n; i++){
-            if(a[i] == x and !ok){
-                ind1 = i;
-                ok = 1; 
-            }
-            else if(a[i] == y){
-                ind2 = i;
-            }
-        }
-        dbg(ind1, ind2);
-        if((ind1 + 1 == ind2 || ind2 + 1 == ind1) && ind1 != -1 && ind2 != -1){
-            if(mp[x] > 1 or mp[y] > 1){
-                cout << "YES" << en;
-            }
-            else cout << "NO" << en;
-        }
-        else cout << "YES" << en;
+    else if(weekDay == "Wed"){
+        cnt = 3;
     }
-    else cout << "NO" << en;
+    else if(weekDay == "Thu"){
+        cnt = 4;
+    }
+    else if(weekDay == "Fri"){
+        cnt = 5;
+    }
+    else if(weekDay == "Sat"){
+        cnt = 6;
+    }
 
+    int mon1 = 31, mon2 = 28, mon3 = 31, mon4 = 30, mon5 = 31, mon6 = 30, mon7 = 31, mon8 = 31, mon9 = 30, mon10 = 31, mon11 = 30, mon12 = 31;
+    if(month == "02"){
+        if((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || (stoi(year) % 400 == 0)){
+            mon2 = 29;
+        }
+    }
+    int mon = stoi(month);
+    int year1 = stoi(year);
+    if(mon == 2){
+        int x = d - (d / 7) * 7;
+        cnt = abs(cnt - x);
+        dbg(x, cnt);
+        int cnt1 = 0;
+        for(int i = 1; i <= cnt; i++){
+            cout << " - |";
+            cnt1++;
+        }
+        int i;
+        int week = 1;
+        for(i = 1; i <= mon2; i++){
+            if(cnt1 == 7){
+                week++;
+                if(week == 6) break;
+                cout << endl;
+                cout << "|---------------------------|" << endl;
+                cout << "|";
+                cnt1 = 0;
+            }
+            if(i < 10){
+                cout << "  " << i << "|";
+            }else{
+                cout << " " << i << "|";
+            }
+            cnt1++;
+        }
+        for(int j = mon2 + 1; j <= 35; j++){
+            if(cnt1 == 7){
+                week++;
+                if(week == 6) break;
+                cout << endl;
+                cout << "|---------------------------|" << endl;
+                cout << "|";
+                cnt1 = 0; 
+            }
+            cout << " - |";
+            cnt1++;
+        }
+        cout << en;
+        cout << "|---------------------------|" << endl;
+        dbg(i);
+    }
+    
 }
 int32_t main(){
 #ifndef DEBUG
