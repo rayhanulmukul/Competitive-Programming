@@ -31,6 +31,7 @@ const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
+int t;
 void solve(int tt){
     string s;
     getline(cin, s);
@@ -143,8 +144,11 @@ void solve(int tt){
             cnt1++;
         }
         cout << en;
-        cout << "|---------------------------|" << endl;
-        cout << en;
+        //dbg(t, tt);
+        if(tt == t + 1) cout << "|---------------------------|" << endl;
+        else{
+            cout << "|---------------------------|" << endl << endl;
+        }
         }
     }
 }
@@ -153,7 +157,6 @@ int32_t main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 #endif
-    int t = 1;
     cin >> t;
     for(int i = 1; i <= t  + 1; i++){
         solve(i);
