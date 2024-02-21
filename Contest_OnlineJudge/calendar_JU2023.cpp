@@ -82,7 +82,6 @@ void solve(int tt){
     int arr[12] = {mon1, mon2, mon3, mon4, mon5, mon6, mon7, mon8, mon9, mon10, mon11, mon12};
     for(int k = 1; k <= 12; k++){
         if(k == mon){
-            if(d > 6){
             d %= 7;
             for(int i = 0; i < 7; i++){
                 if(givenDay[i] == weekDay){
@@ -98,57 +97,56 @@ void solve(int tt){
             }
             cnt++;
             cnt %= 7;
-        }
-        //dbg(x, cnt);
-        int nextDay = (6 - cnt + 1) + 4 * 7;
-        //dbg(nextDay, cnt);
-        int cnt1 = 0;
-        for(int i = 1; i <= cnt; i++){
-            if(nextDay < arr[k - 1]){
-                cout << " " << nextDay + 1 << "|";
-                nextDay++;
+            //dbg(x, cnt);
+            int nextDay = (6 - cnt + 1) + 4 * 7;
+            //dbg(nextDay, cnt);
+            int cnt1 = 0;
+            for(int i = 1; i <= cnt; i++){
+                if(nextDay < arr[k - 1]){
+                    cout << " " << nextDay + 1 << "|";
+                    nextDay++;
+                }
+                else cout << " - |";
+                cnt1++;
             }
-            else cout << " - |";
-            cnt1++;
-        }
-        int i;
-        int week = 1;
-        for(i = 1; i <= arr[k - 1]; i++){
-            if(cnt1 == 7){
-                week++;
+            int i;
+            int week = 1;
+            for(i = 1; i <= arr[k - 1]; i++){
+                if(cnt1 == 7){
+                    week++;
+                    if(week == 6) break;
+                    cout << endl;
+                    cout << "|---------------------------|" << endl;
+                    cout << "|";
+                    cnt1 = 0;
+                }
+                if(i < 10){
+                    cout << "  " << i << "|";
+                }else{
+                    cout << " " << i << "|";
+                }
+                cnt1++;
+            }
+            //dbg(mon1, week);
+            for(int j = arr[k - 1] + 1; j <= 35; j++){
                 if(week == 6) break;
-                cout << endl;
-                cout << "|---------------------------|" << endl;
-                cout << "|";
-                cnt1 = 0;
+                else if(cnt1 == 7){
+                    week++;
+                    if(week == 6) break;
+                    cout << endl;
+                    cout << "|---------------------------|" << endl;
+                    cout << "|";
+                    cnt1 = 0; 
+                }
+                cout << " - |";
+                cnt1++;
             }
-            if(i < 10){
-                cout << "  " << i << "|";
-            }else{
-                cout << " " << i << "|";
+            cout << en;
+            //dbg(t, tt);
+            if(tt == t + 1) cout << "|---------------------------|" << endl;
+            else{
+                cout << "|---------------------------|" << endl << endl;
             }
-            cnt1++;
-        }
-        //dbg(mon1, week);
-        for(int j = arr[k - 1] + 1; j <= 35; j++){
-            if(week == 6) break;
-            else if(cnt1 == 7){
-                week++;
-                if(week == 6) break;
-                cout << endl;
-                cout << "|---------------------------|" << endl;
-                cout << "|";
-                cnt1 = 0; 
-            }
-            cout << " - |";
-            cnt1++;
-        }
-        cout << en;
-        //dbg(t, tt);
-        if(tt == t + 1) cout << "|---------------------------|" << endl;
-        else{
-            cout << "|---------------------------|" << endl << endl;
-        }
         }
     }
 }
