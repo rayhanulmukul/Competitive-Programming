@@ -1,3 +1,4 @@
+/*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
 #include "ext/pb_ds/assoc_container.hpp"
 #include "ext/pb_ds/tree_policy.hpp"
 #include <bits/stdc++.h>
@@ -31,31 +32,34 @@ const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
+vector <int> fact1;
+void fact(){
+    fact1.pb(1);
+    for(int i = 1; i <=100; i++){
+        fact1.pb(fact1.back()*i);
+    }
+}
 void solve(int tt){
     int n;
     cin >> n;
-    string s1, s2;
-    cin >> s1 >> s2;
-    //dbg(s1, s2);
-    for(int i = 0; i < n; i++){
-        int x = s1[i] - 'A';
-        int y = s2[i] - 'A';
-        int cal = abs(x - y);
-        if(cal % 3 == 0 && x <= y){
-            cout << cal/3 << gap;
+    int arr[1000] = {1};
+    int carry = 0, k = 0;
+    for(int i = 1; i <= n; i++){
+        for(int j = 0; j <= k; j++){
+            arr[j] = arr[j] * i + carry;
+            dbg(arr[j]);
+            carry = arr[j] / 10;
+            arr[j] = arr[j] % 10;
         }
-        else{
-            int cnt = 0;
-            while(x != y){
-                cnt++;
-                x += 3;
-                if(x > 25){
-                    x -= 26;
-                }
-                //dbg(x, y);
-            }
-            cout << cnt << gap;
+        while(carry){
+            k++;
+            arr[k] = carry % 10;
+            carry /= 10;
         }
+    }
+    dbg(k);
+    for(int i = k; i >= 0; i--){
+        cout << arr[i];
     }
     cout << en;
 }
@@ -65,6 +69,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
+    fact();
     cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
