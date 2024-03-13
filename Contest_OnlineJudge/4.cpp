@@ -33,7 +33,18 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    
+    int n, d;
+    cin >> n >> d;
+    vector <int> a(n);
+    for(int &x : a) cin >> x;
+    vector <int> rotaite(n);
+    for(int i = 0; i < n; i++){
+        rotaite[i] = a[(i + d) % n];
+    }
+    for(int i = 0; i < n; i++){
+        cout << rotaite[i] << gap;
+    }
+    cout << endl;
 }
 int32_t main(){
 #ifndef DEBUG
@@ -41,7 +52,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

@@ -33,17 +33,17 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    
+	
 }
 int32_t main(){
 #ifndef DEBUG
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
 #endif
-    int t = 1;
-    cin >> t;
-    for(int i = 1; i <= t; i++){
-        solve(i);
-    }
-    return 0;
+	int t = 1;
+	cin >> t;
+	for(int i = 1; i <= t; i++){
+		solve(i);
+	}
+	return 0;
 }

@@ -32,36 +32,8 @@ const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
-vector <int> fact1;
-void fact(){
-    fact1.pb(1);
-    for(int i = 1; i <=100; i++){
-        fact1.pb(fact1.back()*i);
-    }
-}
 void solve(int tt){
-    int n;
-    cin >> n;
-    int arr[1000] = {1};
-    int carry = 0, k = 0;
-    for(int i = 1; i <= n; i++){
-        for(int j = 0; j <= k; j++){
-            arr[j] = arr[j] * i + carry;
-            dbg(arr[j]);
-            carry = arr[j] / 10;
-            arr[j] = arr[j] % 10;
-        }
-        while(carry){
-            k++;
-            arr[k] = carry % 10;
-            carry /= 10;
-        }
-    }
-    dbg(k);
-    for(int i = k; i >= 0; i--){
-        cout << arr[i];
-    }
-    cout << en;
+    
 }
 int32_t main(){
 #ifndef DEBUG
@@ -69,7 +41,6 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    fact();
     cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
