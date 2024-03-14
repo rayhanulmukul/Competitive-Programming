@@ -33,18 +33,26 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int n, d;
-    cin >> n >> d;
-    vector <int> a(n);
-    for(int &x : a) cin >> x;
-    vector <int> rotaite(n);
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    // bucket game and bucket all ball removed gets points
+    int alice = 0, bob = 0;
     for(int i = 0; i < n; i++){
-        rotaite[i] = a[(i + d) % n];
+        cin >> a[i];
+        if(a[i] % 2 == 1){
+            alice++;
+        }
+        else bob++;
     }
-    for(int i = 0; i < n; i++){
-        cout << rotaite[i] << gap;
+    if(alice > bob){
+        cout << "Alice\n";
     }
-    cout << endl;
+    else if(alice < bob){
+        cout << "Bob\n";
+    }
+    else cout << "Draw\n";
+
 }
 int32_t main(){
 #ifndef DEBUG
@@ -52,7 +60,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }

@@ -33,7 +33,12 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-	
+	string a = "11";
+	string b = "0011";
+	if(a < b){
+		cout << "a is less than b\n";
+	}
+	else cout << "a is greater than b\n";
 }
 int32_t main(){
 #ifndef DEBUG
@@ -41,7 +46,7 @@ int32_t main(){
 	cin.tie(NULL);
 #endif
 	int t = 1;
-	cin >> t;
+	//cin >> t;
 	for(int i = 1; i <= t; i++){
 		solve(i);
 	}
