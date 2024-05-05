@@ -33,7 +33,59 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    cout << tt << en;
+    int n;
+    cin >> n;
+    n += 10;
+    n %= 30;
+    char grid[5][30];
+    FOR(i, 5){
+        FOR(j, 30){
+            grid[i][j] = '.';
+        }
+    }
+    int x = n;
+    int y = (x + 9) % 30;
+    // dbg(x, y);
+    if(x <= y && y < 30){
+        grid[2][x] = 'T';
+        grid[2][y] = 'H';
+        for(int i = 2; i < 3; i++){
+            for(int j = x + 1; j < y; j++){
+                grid[i][j] = '-';
+            }
+        }
+
+        cout << "Case #" << tt << ":\n";
+        FOR(i, 5){
+            FOR(j, 30){
+                cout << grid[i][j];
+            }
+            cout << endl;
+        }
+    }
+    else{
+        grid[2][x] = 'T';
+        grid[2][y] = 'H';
+        for(int i = 2; i < 3; i++){
+            for(int j = x + 1; j < 30; j++){
+                grid[i][j] = '-';
+            }
+        }
+        for(int i = 2; i < 3; i++){
+            for(int j = 0; j < y; j++){
+                grid[i][j] = '-';
+            }
+        }
+
+        cout << "Case #" << tt << ":\n";
+        FOR(i, 5){
+            FOR(j, 30){
+                cout << grid[i][j];
+            }
+            cout << endl;
+        }
+    
+    }
 }
 int32_t main(){
 #ifndef DEBUG

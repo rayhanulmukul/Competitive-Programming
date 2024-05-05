@@ -1,41 +1,15 @@
 {
-    "workbench.colorTheme": "Community Material Theme Ocean",
-    "editor.fontSize": 16,
+    "editor.fontSize": 18,
     "code-runner.clearPreviousOutput": true,
     "code-runner.runInTerminal": true,
-    "code-runner.saveAllFilesBeforeRun": true,
-    "code-runner.saveFileBeforeRun": true,
-    "security.workspace.trust.untrustedFiles": "open",
-    "terminal.integrated.tabs.description": "${task}",
-    "terminal.explorerKind": "external",
-    "terminal.integrated.enableFileLinks": false,
-    "terminal.integrated.environmentChangesIndicator": "off",
-    "terminal.integrated.tabs.enableAnimation": false,
-    "terminal.integrated.tabs.hideCondition": "never",
-    "notebook.breadcrumbs.showCodeCells": false,
-    "breadcrumbs.filePath": "off",
-    "breadcrumbs.symbolPath": "off",
-    "breadcrumbs.enabled": false,
-    "breadcrumbs.icons": false,
-    "breadcrumbs.showBooleans": false,
-    "breadcrumbs.showArrays": false,
-    "editor.accessibilityPageSize": 14,
-    "editor.codeActionsOnSave": {
-        
-    },
+    "files.autoSave": "afterDelay",
     "code-runner.executorMap": {
-    
-    
-
         
-
-        
-
-
+                
         "javascript": "node",
         "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
-        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "cpp": "cd $dir && time g++ -std=c++17 -Wall -DTESLA -Wextra -O2 -Wshadow -Wconversion -Wlogical-op -Wvla -Wno-char-subscripts -D_FORTIFY_SOURCE=2 -Wfloat-equal -DDEBUG  $fileName -o $fileNameWithoutExt && echo Successfully Compiled, Mukul! && time ./$fileNameWithoutExt < in.txt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt && rm $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && time g++ -std=c++17 -DTESLA -Wall -Wextra -O2 -Wshadow -Wconversion -Wlogical-op -Wvla -Wno-char-subscripts -D_FORTIFY_SOURCE=2 -Wfloat-equal -DDEBUG  $fileName -o $fileNameWithoutExt && echo Successfully Compiled, Mukul! && time ./$fileNameWithoutExt < in.txt && rm $fileNameWithoutExt",
         "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "php": "php",
         "python": "python -u",
@@ -70,7 +44,7 @@
         "dart": "dart",
         "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
         "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
-        "haskell": "runhaskell",
+        "haskell": "runghc",
         "nim": "nim compile --verbosity:0 --hints:off --run",
         "lisp": "sbcl --script",
         "kit": "kitc --run",
@@ -81,71 +55,12 @@
         "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "sml": "cd $dir && sml $fileName",
+        "mojo": "mojo run"
     },
-    "debug.terminal.clearBeforeReusing": true,
-    "terminal.integrated.defaultProfile.windows": "Ubuntu-22.04 (WSL)",
-    "bracket-pair-colorizer-2.depreciation-notice": false,
-    "workbench.localHistory.enabled": false,
-    "php.validate.run": "onType",
-    "files.refactoring.autoSave": false,
-    "workbench.editor.untitled.hint": "hidden",
-    "workbench.startupEditor": "none",
+    "git.openRepositoryInParentFolders": "never",
     "editor.minimap.enabled": false,
-    "editor.renderWhitespace": "none",
-    "editor.renderControlCharacters": false,
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 100,
-    "git.enabled": false,
-    "settingsSync.ignoredSettings": [
-
-    
-    ],
-    "json.schemas": [
-    
-    ],
-    "editor.stickyScroll.enabled": true,
-    "workbench.editor.enablePreview": false,
-    "launch": {
-        "configurations": [
-        
-        ]
-    },
-    "editor.inlineSuggest.enabled": true,
-    "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            "source": "PowerShell",
-            "icon": "terminal-powershell"
-        },
-        "Command Prompt": {
-            "path": [
-                "${env:windir}\\Sysnative\\cmd.exe",
-                "${env:windir}\\System32\\cmd.exe"
-            ],
-            "args": [],
-            "icon": "terminal-cmd"
-        },
-        "Git Bash": {
-            "source": "Git Bash"
-        },
-        "Ubuntu-22.04 (WSL)": {
-            "path": "C:\\WINDOWS\\System32\\wsl.exe",
-            "args": [
-                "-d",
-                "Ubuntu-22.04"
-            ]
-        }
-    },
-    "github.copilot.advanced": {
-    
-    },
-    "editor.accessibilitySupport": "off",
-    "github.copilot.enable": {
-        "*": true,
-        "yaml": false,
-        "plaintext": true,
-        "markdown": false
-    },
     "terminal.integrated.fontFamily": "Ubuntu mono",
     "terminal.integrated.fontSize": 16,
     "editor.fontFamily": "Fira Code",
@@ -157,4 +72,7 @@
     "terminal.integrated.automationProfile.linux": {
     
     },
+    "breadcrumbs.enabled": false,
+    "terminal.integrated.tabs.enabled": false,
+    "explorer.confirmDelete": false,
 }
