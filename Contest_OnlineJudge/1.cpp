@@ -33,59 +33,43 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int n;
-    cin >> n;
-    n += 10;
-    n %= 30;
-    char grid[5][30];
-    FOR(i, 5){
-        FOR(j, 30){
-            grid[i][j] = '.';
-        }
+    int n, q;
+    cin >> n >> q;
+    vector <int> a(n);
+    int sum = 0;
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+        sum += a[i];
     }
-    int x = n;
-    int y = (x + 9) % 30;
-    // dbg(x, y);
-    if(x <= y && y < 30){
-        grid[2][x] = 'T';
-        grid[2][y] = 'H';
-        for(int i = 2; i < 3; i++){
-            for(int j = x + 1; j < y; j++){
-                grid[i][j] = '-';
+    string s, s1;
+    int x, mx = 0;
+    while(q--){
+        cin >> x;
+        s = bitset<20>(x).to_string();
+        dbg(s);
+        for(int i = 0; i < n; i++){
+            s1 = bitset<20>(a[i]).to_string();
+            dbg(s1);
+            for(int j = 0; j < 20; j++){
+                if(s[j] == s1[j] && s[j] == '1'){
+                    s1[j] = '0';
+                }
+                else s1[j] = '1';
             }
+            dbg(s1);
+            int num = 0;
+            for(int j = 0; j < 20; j++){
+                if(s1[j] == '1'){
+                    num += (1 << j);
+                }
+            }
+            mx = max(mx, max(sum, sum - a[i] + num));
+            dbg(num, mx);
         }
 
-        cout << "Case #" << tt << ":\n";
-        FOR(i, 5){
-            FOR(j, 30){
-                cout << grid[i][j];
-            }
-            cout << endl;
-        }
     }
-    else{
-        grid[2][x] = 'T';
-        grid[2][y] = 'H';
-        for(int i = 2; i < 3; i++){
-            for(int j = x + 1; j < 30; j++){
-                grid[i][j] = '-';
-            }
-        }
-        for(int i = 2; i < 3; i++){
-            for(int j = 0; j < y; j++){
-                grid[i][j] = '-';
-            }
-        }
+    cout << mx << endl;
 
-        cout << "Case #" << tt << ":\n";
-        FOR(i, 5){
-            FOR(j, 30){
-                cout << grid[i][j];
-            }
-            cout << endl;
-        }
-    
-    }
 }
 int32_t main(){
 #ifndef DEBUG
@@ -93,7 +77,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
