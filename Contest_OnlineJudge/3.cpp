@@ -33,7 +33,30 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    int cnt = 0;
+    bool one = false;
+    int prev = 0;
+    vector <pair <int, int>> v;
+    map <int, int> mp;
+    for(int i = 0; i < n; i++){
+        if(s[i] == '1' and !one){
+            one = true;
+            prev = i;
+        }
+        else if(i + 1 < n && s[i] == '1' && s[i + 1] == '0' and one){
+            cnt++;
+            v.pb({prev, i - prev});
+            one = false;
+        }
+    }
+    cout << cnt << endl;
+    for(auto x : v){
+        cout << x.first + 1 << ' ' << x.second + 1 << endl;
+    }
 }
 int32_t main(){
 #ifndef DEBUG
