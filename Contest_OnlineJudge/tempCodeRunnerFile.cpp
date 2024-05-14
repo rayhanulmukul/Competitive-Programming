@@ -33,34 +33,29 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int n, m;
-    cin >> n >> m;
-    vector <int> a(n + 1, -1);
-    for(int i = 1; i <= m; i++){
-        int x, y;
-        cin >> x >> y;
-        if(a[x] != -1 and a[x] != y){
-            cout << -1 << endl;
-            return;
+    int n, k;
+    cin >> n >> k;
+    vector <int> a(n);
+    FOR(i, n){
+        cin >> a[i];
+    }
+    int cnt = 0;
+    int sum = 0;
+    for(int i = 0; i < n; i++){
+        if(sum == k){
+            cnt++;
+            sum = 0;
         }
-        a[x] = y;
-    }
-    dbg(a);
-    if(a[1] == 0){
-        cout << -1 << endl;
-        return;
-    }
-    else if(a[1] == -1){
-        a[0] = 1;
-    }
-    for(int i = 2; i <= n; i++){
-        if(a[i] == -1){
-            a[i] = 0;
+        else if(sum + a[i] < k){
+            sum += a[i];
         }
+        else{
+            sum = a[i];
+            cnt++;
+        }
+        dbg(i, sum, cnt);
     }
-    for(int i = 1; i <= n; i++){
-        cout << a[i];
-    }
+    cout << cnt << en;
 }
 int32_t main(){
 #ifndef DEBUG
