@@ -27,13 +27,30 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define FOR(i,a) F0R(i,0,a)
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
-const int N = 1005;
 const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    
+    int n;
+    cin >> n;
+    vector <int> a(n), b(n + 1);
+    int mn = INT_MAX;
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+    }
+    for(int i = 0; i <= n; i++){
+        cin >> b[i];
+    }
+    int ans = 0;
+    for(int i = 0; i < n; i++){
+        ans += abs(a[i] - b[i]);
+        if(b[n] >= b[i] and b[n] <= a[i]){
+            mn = 1;
+        }
+        else mn = min(mn, (abs(b[n] - a[i]) + 1));
+    }
+    cout << ans + mn << en;
 }
 int32_t main(){
 #ifndef DEBUG

@@ -33,29 +33,27 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int n, k;
-    cin >> n >> k;
-    vector <int> a(n);
-    FOR(i, n){
-        cin >> a[i];
-    }
-    int cnt = 0;
-    int sum = 0;
+    int n;
+    cin >> n;
+    int y, x;
+    unordered_map <int, int> left, right;
     for(int i = 0; i < n; i++){
-        if(sum == k){
-            cnt++;
-            sum = 0;
-        }
-        else if(sum + a[i] < k){
-            sum += a[i];
-        }
-        else{
-            sum = a[i];
-            cnt++;
-        }
-        dbg(i, sum, cnt);
+        cin >> x >> y;
+        left[x]++;
+        right[y]++;
     }
-    cout << cnt << en;
+    int mx = 0;
+    int cnt1 = 0, cnt2 = 0;
+    for(auto it : left){
+        if(it.second > 1) cnt1 += (it.second)/2;
+    }
+    for(auto it : right){
+        if(it.second > 1) cnt2 += (it.second)/2;
+    }
+    if(cnt1 % 2 or cnt2 % 2){
+        cout << "Takahashi\n";
+    }
+    else cout << "Aoki" << en;
 }
 int32_t main(){
 #ifndef DEBUG
