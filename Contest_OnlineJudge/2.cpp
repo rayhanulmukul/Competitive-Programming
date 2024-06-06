@@ -1,66 +1,19 @@
-/*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
-#include "ext/pb_ds/assoc_container.hpp"
-#include "ext/pb_ds/tree_policy.hpp"
-#include <bits/stdc++.h>
-using namespace std;
-using namespace __gnu_pbds;
-
-#define ll long long int
-#define int ll
-#define ld long double
-#define pb push_back
-#define ft front()
-#define bk back()
-#define pi 2*acos(0.0)
-#define gap ' '
-#define en '\n'
-#define endl en
-#define mem(a, b) memset(a, b, sizeof(a))
-#ifdef TESLA
-#include "main.hpp"
-#else
-#define dbg(...)
-#endif
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
-#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
-#define FOR(i,a) F0R(i,0,a)
-const int MOD = 1e9+7; // 998244353;
-const int MAX = 2e5+5;
-const int INF = 1e18;
-int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
-int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
-
-void solve(int tt){
-    int n;
-    cin >> n;
-    vector <int> a(n), b(n + 1);
-    int mn = INT_MAX;
-    for(int i = 0; i < n; i++){
-        cin >> a[i];
+class Solution {
+public:
+    vector<string> commonChars(vector<string>& words) {
+        map <char, int> mp;
+        
+        for(int i = 0; i < n; i++){
+            if(i == 0){
+                string temp = words[i];
+                for(auto it : temp) mp[it]++;
+            }
+            else{
+                string temp = words[i];
+                for(auto it : temp){
+                    if(mp[it]) 
+                }
+            }
+        }   
     }
-    for(int i = 0; i <= n; i++){
-        cin >> b[i];
-    }
-    int ans = 0;
-    for(int i = 0; i < n; i++){
-        ans += abs(a[i] - b[i]);
-        if(b[n] >= b[i] and b[n] <= a[i]){
-            mn = 1;
-        }
-        else mn = min(mn, (abs(b[n] - a[i]) + 1));
-    }
-    cout << ans + mn << en;
-}
-int32_t main(){
-#ifndef DEBUG
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-#endif
-    int t = 1;
-    cin >> t;
-    for(int i = 1; i <= t; i++){
-        solve(i);
-    }
-    return 0;
-}
+};
