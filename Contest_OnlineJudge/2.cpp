@@ -27,21 +27,12 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define FOR(i,a) F0R(i,0,a)
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
-const int N = 1005;
 const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int x, y;
-    cin >> x >> y;
-    if(x < 50){
-        cout << "Z\n";
-    }
-    else if(x >= 50 && y < 50){
-        cout << "F\n";
-    }
-    else cout << "A\n";
+    
 }
 int32_t main(){
 #ifndef DEBUG

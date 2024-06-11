@@ -27,40 +27,16 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define FOR(i,a) F0R(i,0,a)
 const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
-const int N = 1005;
 const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int n, m;
-    cin >> n >> m;
-    vector <int> a(n + 1, -1);
-    for(int i = 1; i <= m; i++){
-        int x, y;
-        cin >> x >> y;
-        if(a[x] != -1 and a[x] != y){
-            cout << -1 << endl;
-            return;
-        }
-        a[x] = y;
-    }
-    dbg(a);
-    if(a[1] == 0){
-        cout << -1 << endl;
-        return;
-    }
-    else if(a[1] == -1){
-        a[0] = 1;
-    }
-    for(int i = 2; i <= n; i++){
-        if(a[i] == -1){
-            a[i] = 0;
-        }
-    }
-    for(int i = 1; i <= n; i++){
-        cout << a[i];
-    }
+    int x;
+    cin >> x;
+    if(x <= 3) cout << "BRONZW" << en;
+    else if(x <= 6) cout << "SILVER" << en;
+    else cout << "GOLD\n";
 }
 int32_t main(){
 #ifndef DEBUG
@@ -68,7 +44,7 @@ int32_t main(){
     cin.tie(NULL);
 #endif
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for(int i = 1; i <= t; i++){
         solve(i);
     }
