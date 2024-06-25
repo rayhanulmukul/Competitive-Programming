@@ -23,6 +23,7 @@ void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
 #else
 #define dbg(...)
 #endif
+
 #ifndef ONLINE_JUDGE
 //#define cerr cout
 #include "ram.hpp"
@@ -31,9 +32,8 @@ void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
 #endif
 #define watch(x) cerr << "\n" << (#x) << " is " << (x) << endl
 
-
 const auto start_time = chrono::high_resolution_clock::now();
-void output_run_time() {
+void run_time() {
     // will work for ac,cc&&cf.
 #ifndef ONLINE_JUDGE
     auto end_time = chrono::high_resolution_clock::now();
