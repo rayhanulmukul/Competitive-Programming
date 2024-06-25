@@ -32,10 +32,7 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int a, b;
-    cin >> a >> b;
-    if(a >= b) cout << "YES\n";
-    else cout << "NO\n";
+    
 }
 int32_t main(){
 #ifndef DEBUG
