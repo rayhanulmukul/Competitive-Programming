@@ -31,8 +31,47 @@ const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
+const int N = 1e7;
+vector<bool> is_prime(N + 1, true);
+vector <int> primes;
+vector <int> soluton(N + 1, 0);
+vector<int> generatePrimes(int N){
+    is_prime[0] = is_prime[1] = false;
+    for (int i = 2; i <= N; ++i) {
+        if (is_prime[i]) {
+            primes.push_back(i);
+            for (int j = 2 * i; j <= N; j += i) {
+                is_prime[j] = false;
+            }
+        }
+    }
+    return primes;
+}
+void preCal() {
+    vector <int> freq(N, 0);
+    for(int i = 0; i < primes.size(); i++){
+        freq[primes[i]] = 1;
+    }
+    soluton[5] = 2;
+    for(int i = 6; i <= 1e7; i++){
+        if(freq[i] == 1){
+            int diff = i - 2;
+            if(freq[diff] == 1){
+                soluton[i] = soluton[i - 1] + 1;
+            }
+            else{
+                soluton[i] = soluton[i - 1];
+            }
+        }
+        else{
+            soluton[i] = soluton[i - 1];
+        }
+    }
+}
 void solve(int tt){
-    
+    int n;
+    cin >> n;
+    cout << "Case #" << tt << ": " << soluton[n] << endl;
 }
 int32_t main(){
 #ifndef DEBUG
@@ -41,6 +80,8 @@ int32_t main(){
 #endif
     int t = 1;
     cin >> t;
+    generatePrimes(N);
+    preCal();
     for(int i = 1; i <= t; i++){
         solve(i);
     }

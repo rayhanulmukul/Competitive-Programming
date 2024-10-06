@@ -1,48 +1,89 @@
-/*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
-#include "ext/pb_ds/assoc_container.hpp"
-#include "ext/pb_ds/tree_policy.hpp"
-#include <bits/stdc++.h>
-using namespace std;
+//ami pari na ar pari na
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace std ;
 using namespace __gnu_pbds;
-
-#define ll long long int
-#define int ll
-#define ld long double
-#define pb push_back
-#define ft front()
-#define bk back()
-#define pi 2*acos(0.0)
-#define gap ' '
-#define en '\n'
-#define endl en
-#define mem(a, b) memset(a, b, sizeof(a))
+#define                pb push_back 
+#define                mp make_pair
+#define                in insert  
+#define                fi first
+#define                se second
+#define                ll long long 
+#define                ld long double
+#define                ull unsigned long long 
+#define                pi acos(-1)
+#define                test() int T,t=1;cin>>T;
+#define                all(x) (x).begin(),(x).end()
+#define                sz(x) (int)(x.size())
+#define                int    long long int
+#define bits(x)        __builtin_popcountll(x)
+#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
+              
 #ifdef TESLA
 #include "main.hpp"
 #else
 #define dbg(...)
 #endif
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
-#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
-#define FOR(i,a) F0R(i,0,a)
-const int MOD = 1e9+7; // 998244353;
-const int MAX = 2e5+5;
-const int INF = 1e18;
-int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
-int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
-void solve(int tt){
-    
+const ll INF = 1e18 ;
+const int N = 1e7 + 10 ;
+
+// Global Variablea
+int dx[]={0, 0, 1, -1, 1, 1, -1, -1};
+int dy[]={1, -1, 0, 0, 1, -1, 1, -1};
+
+//priority_queue <int, vector<int>, greater<int>> pq;
+//---------------------------------------------------------------------------------------------
+bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return (a.second < b.second);}
+ll Ceil(ll dividend , ll divisor){return (dividend / divisor +  (dividend % divisor ? 1 : 0));}
+vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
+long long binpow(long long a, long long b) { if (b == 0) return 1;long long res = binpow(a, b / 2);if (b % 2) return res * res * a; else return res * res;}
+int binpowMod(int a, int b , int mod ){ if(b == 0) return 1 ; int ans = 1 ;while(b > 0){if(b & 1) ans = (ans * a) % mod ;a = (a * a) % mod ;b = b >> 1;}return ans % mod;}
+//---------------------------------------------------------------------------------------------
+
+
+vector<int> primes = sieve(1e7);
+vector<int> ans(N, 0);
+void solve(){
+    int n;
+    cin >> n;
+    int cnt = ans[n];
+    cout << cnt << '\n';
 }
-int32_t main(){
-#ifndef DEBUG
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-#endif
-    int t = 1;
-    cin >> t;
-    for(int i = 1; i <= t; i++){
-        solve(i);
+
+void preCal(){
+    vector<int> marked(N, 0);
+    for(int i = 0; i < sz(primes); i += 1) marked[primes[i]] = 1;
+    ans[5] = 2;
+    for(int i = 6; i <= 1e7; i += 1){
+        if(marked[i] == 1){
+            int diff = i - 2;
+            if(marked[diff] == 1){
+                ans[i] = ans[i - 1] + 1;
+            }else{
+                ans[i] = ans[i - 1];
+            }
+        }else{
+            ans[i] = ans[i - 1];
+        }
+
     }
-    return 0;
+}
+int32_t main(){   
+       ios_base::sync_with_stdio(false);cin.tie(NULL);
+       freopen("prime_subtractorization_input.txt" , "r" , stdin) ;
+       freopen("output.txt" , "w" , stdout) ;
+       preCal();
+       int testCase = 1 , T = 1;
+       cin >> T;            
+       while(testCase <= T){
+              cout << "Case #" << testCase << ": ";
+              //cout << "Case " << testCase << ": " ;   
+              //cout << "Scenario #" << testCase << ": " ;
+              solve();
+              testCase++; 
+       } 
+
+       return 0; 
 }

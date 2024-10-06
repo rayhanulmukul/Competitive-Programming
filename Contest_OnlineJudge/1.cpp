@@ -1,56 +1,131 @@
-/*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
-#include "ext/pb_ds/assoc_container.hpp"
-#include "ext/pb_ds/tree_policy.hpp"
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <vector>
+#include <algorithm>
+#include <queue>
+
 using namespace std;
-using namespace __gnu_pbds;
 
-#define ll long long int
-#define int ll
-#define ld long double
-#define pb push_back
-#define ft front()
-#define bk back()
-#define pi 2*acos(0.0)
-#define gap ' '
-#define en '\n'
-#define endl en
-#define mem(a, b) memset(a, b, sizeof(a))
-#ifdef TESLA
-#include "main.hpp"
-#else
-#define dbg(...)
-#endif
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
-#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
-#define FOR(i,a) F0R(i,0,a)
-const int MOD = 1e9+7; // 998244353;
-const int MAX = 2e5+5;
-const int INF = 1e18;
-int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
-int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
+const long long MOD = 998244353;
 
-void solve(int tt){
-    int n;
-    cin >> n;
-    set <pair<string, string>> sp;
-    for(int i = 0; i < n; i++){
-        string s1, s2;
-        cin >> s1 >> s2;
-        sp.insert({s1, s2});
+// Function to count the number of ways to decode a string with `?`
+long long countDecodings(const string &s) {
+    int n = s.length();
+    vector<long long> dp(n + 1, 0);
+    dp[0] = 1; // Base case: one way to decode an empty string
+
+    for (int i = 1; i <= n; ++i) {
+        // Single digit decode (1-9)
+        if (s[i - 1] == '?') {
+            dp[i] = (dp[i] + 9 * dp[i - 1]) % MOD; // 1-9
+        } else if (s[i - 1] != '0') {
+            dp[i] = (dp[i] + dp[i - 1]) % MOD; // Only valid digits
+        }
+
+        // Two digit decode (10-26)
+        if (i > 1) {
+            if (s[i - 2] == '?' && s[i - 1] == '?') {
+                dp[i] = (dp[i] + 15 * dp[i - 2]) % MOD; // 10-26
+            } else if (s[i - 2] == '?') {
+                if (s[i - 1] >= '0' && s[i - 1] <= '6') {
+                    dp[i] = (dp[i] + 2 * dp[i - 2]) % MOD; // 10 or 20
+                } else {
+                    dp[i] = (dp[i] + dp[i - 2]) % MOD; // 1-2 prefix with 0-9
+                }
+            } else if (s[i - 1] == '?') {
+                if (s[i - 2] == '1') {
+                    dp[i] = (dp[i] + 9 * dp[i - 2]) % MOD; // 10-19
+                } else if (s[i - 2] == '2') {
+                    dp[i] = (dp[i] + 7 * dp[i - 2]) % MOD; // 20-26
+                }
+            } else {
+                int two_digit = (s[i - 2] - '0') * 10 + (s[i - 1] - '0');
+                if (two_digit >= 10 && two_digit <= 26) {
+                    dp[i] = (dp[i] + dp[i - 2]) % MOD; // Valid two-digit decode
+                }
+            }
+        }
     }
-    cout << sp.size() << en;
+    return dp[n];
 }
-int32_t main(){
-#ifndef DEBUG
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-#endif
-    int t = 1;
-    //cin >> t;
-    for(int i = 1; i <= t; i++){
-        solve(i);
+
+// Generate the uncorrupted string with the maximum number of decodings
+void generateMaxStrings(const string &E, int K, string &result, long long &max_count) {
+    // We can store the possible combinations and their counts
+    unordered_map<string, long long> count_map;
+
+    // We'll generate possible uncorrupted strings by replacing '?' and counting the decodings
+    string current;
+
+    // A lambda function to explore replacements
+    function<void(int)> explore = [&](int idx) {
+        if (idx == E.size()) {
+            long long count = countDecodings(current);
+            count_map[current] = (count_map[current] + count) % MOD;
+            return;
+        }
+
+        if (E[idx] == '?') {
+            for (char digit = '0'; digit <= '9'; ++digit) {
+                // Prevent leading zero
+                if (current.empty() && digit == '0') continue;  
+                current += digit;
+                explore(idx + 1);
+                current.pop_back();
+            }
+        } else {
+            // Prevent leading zero
+            if (current.empty() && E[idx] == '0') return; 
+            current += E[idx];
+            explore(idx + 1);
+            current.pop_back();
+        }
+    };
+
+    explore(0);
+
+    // Now find the max_count and strings
+    max_count = 0;
+    vector<string> max_strings;
+
+    for (const auto &pair : count_map) {
+        if (pair.second > max_count) {
+            max_count = pair.second;
+            max_strings.clear();
+            max_strings.push_back(pair.first);
+        } else if (pair.second == max_count) {
+            max_strings.push_back(pair.first);
+        }
     }
+
+    // Sort strings to find the K-th largest
+    sort(max_strings.begin(), max_strings.end());
+
+    if (K <= max_strings.size()) {
+        result = max_strings[K - 1];
+    } else {
+        result = ""; // Should not happen based on constraints
+    }
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    for (int t = 1; t <= T; ++t) {
+        string E;
+        int K;
+        cin >> E >> K;
+
+        string result;
+        long long max_count;
+
+        generateMaxStrings(E, K, result, max_count);
+
+        // Output the result
+        cout << "Case #" << t << ": " << result << " " << max_count << endl;
+    }
+
     return 0;
 }
