@@ -1,114 +1,48 @@
-//ami pari na ar pari na
-#include<bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace std ;
+/*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
+#include "ext/pb_ds/assoc_container.hpp"
+#include "ext/pb_ds/tree_policy.hpp"
+#include <bits/stdc++.h>
+using namespace std;
 using namespace __gnu_pbds;
-#define                pb push_back 
-#define                mp make_pair
-#define                in insert  
-#define                fi first
-#define                se second
-#define                ll long long 
-#define                ld long double
-#define                ull unsigned long long 
-#define                pi acos(-1)
-#define                test() int T,t=1;cin>>T;
-#define                all(x) (x).begin(),(x).end()
-#define                sz(x) (int)(x.size())
-#define                int    long long int
-#define bits(x)        __builtin_popcountll(x)
-#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
-              
+
+#define ll long long int
+#define int ll
+#define ld long double
+#define pb push_back
+#define ft front()
+#define bk back()
+#define pi 2*acos(0.0)
+#define gap ' '
+#define en '\n'
+#define endl en
+#define mem(a, b) memset(a, b, sizeof(a))
 #ifdef TESLA
 #include "main.hpp"
 #else
 #define dbg(...)
 #endif
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
+#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
+#define FOR(i,a) F0R(i,0,a)
+const int MOD = 1e9+7;
+const int MAX = 2e5+5;
+const int INF = 1e18;
+int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
+int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
-const ll INF = 1e18 ;
-const int N = 3e5 + 10  ;
-
-// Global Variablea
-int dx[]={0, 0, 1, -1, 1, 1, -1, -1};
-int dy[]={1, -1, 0, 0, 1, -1, 1, -1};
-
-//priority_queue <int, vector<int>, greater<int>> pq;
-//---------------------------------------------------------------------------------------------
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return (a.second < b.second);}
-ll Ceil(ll dividend , ll divisor){return (dividend / divisor +  (dividend % divisor ? 1 : 0));}
-vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
-long long binpow(long long a, long long b) { if (b == 0) return 1;long long res = binpow(a, b / 2);if (b % 2) return res * res * a; else return res * res;}
-int binpowMod(int a, int b , int mod ){ if(b == 0) return 1 ; int ans = 1 ;while(b > 0){if(b & 1) ans = (ans * a) % mod ;a = (a * a) % mod ;b = b >> 1;}return ans % mod;}
-//---------------------------------------------------------------------------------------------
-
-
-void solve(){
-    int n;
-    cin >> n;
-    unordered_map<int, vector<int>> mm;
-
-    vector<int> arr(n);
-    for(int i = 0; i < n; i += 1){
-        cin >> arr[i];
-        if(arr[i] < 0) mm[arr[i]].push_back(i);
-        else if(arr[i] > 0) mm[arr[i]].push_back(i);
-        else mm[arr[i]].push_back(i);
-    }
-
-
-    int cnt = 0;
-    for(int i = 0; i < n; i += 1){
-        if(arr[i] < 0){
-            int posVal = abs(arr[i]);
-            if(sz(mm[posVal]) == 0) continue;
-
-            auto it = lower_bound(all(mm[posVal]), i);
-            if(it == mm[posVal].begin()) continue;
-            it--;
-            int niche = it - mm[posVal].begin() + 1;
-            int uppore = sz(mm[arr[i]]) - (lower_bound(all(mm[arr[i]]), i) - mm[arr[i]].begin()) - 1;
-            uppore += (sz(mm[posVal])) - (upper_bound(all(mm[posVal]), i) - mm[posVal].begin());
-            uppore = n - (i + 1) - uppore;
-            cnt += (niche * uppore);
-
-        }else if(arr[i] > 0){
-            int negVal = arr[i] * -1ll;
-            if(sz(mm[negVal]) == 0) continue;
-
-            auto it = lower_bound(all(mm[negVal]), i);
-            if(it == mm[negVal].begin()) continue;
-            it--;
-            int niche = it - mm[negVal].begin() + 1;
-            int uppore = sz(mm[arr[i]]) - (lower_bound(all(mm[arr[i]]), i) - mm[arr[i]].begin()) - 1;
-            uppore += (sz(mm[negVal])) - (upper_bound(all(mm[negVal]), i) - mm[negVal].begin()) ;
-            uppore = n - (i + 1) - uppore;
-            cnt += (niche * uppore);
-        }else{
-            if(i == *mm[arr[i]].begin()) continue;
-            int idx = lower_bound(all(mm[arr[i]]), i) - mm[arr[i]].begin();
-            int niche = idx;
-            int uppore = sz(mm[arr[i]]) - niche - 1;
-            uppore = (n - (i + 1) - uppore);
-            cnt += (niche * uppore);
-        }
-    }
-
-    cout << cnt << '\n';
+void solve(int tt){
+    
 }
-int32_t main(){   
-       ios_base::sync_with_stdio(false);cin.tie(NULL);
-       // freopen("input.txt" , "r" , stdin) ;
-       // freopen("output.txt" , "w" , stdout) ;
-       int testCase = 1 , T = 1;
-       cin >> T;            
-       while(testCase <= T){
-              //cout << "Case #" << testCase << ": ";
-              //cout << "Case " << testCase << ": " ;   
-              //cout << "Scenario #" << testCase << ": " ;
-              solve();
-              testCase++; 
-       } 
-
-       return 0; 
-}      
+int32_t main(){
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
+    int t = 1;
+    cin >> t;
+    for(int i = 1; i <= t; i++){
+        solve(i);
+    }
+    return 0;
+}

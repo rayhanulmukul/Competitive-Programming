@@ -1,21 +1,13 @@
-def verticalSum(self, root):
-    if root == None:
-        return 0
-    q = deque([(root, 0)])
-    d = defaultdict(list)
-
-    while q:
-        node, level = q.popleft()
-        d[level].append(node.data)
-
-        if node.left != None:
-            q.append((node.left, level - 1))
-        if node.right != None:
-            q.append((node.right, level + 1))
-        
-    ans = []
-
-    for key, val in sorted(d.items()):
-        ans.append(sum(val))
-
-    return ans;
+void solve(int tc)
+{
+  int n,p;
+  string s;
+  cin>>n>>p;
+  if(n==1 and p==1)s="Evenious";
+  else if(n==1 and p==2)s="Oddius";
+  else if(n%2==0 and p==2)s="Oddius";
+  else if(n%2==0 and p!=2)s="Evenious";
+  else if(n%2!=0 and p==2)s="Oddius";
+  else if(n%2!=0 and p!=2)s="Oddius";
+  cout<<"Case "<<tc<<": "<<s<<endl;
+}
