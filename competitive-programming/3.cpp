@@ -17,7 +17,7 @@ using namespace __gnu_pbds;
 #define endl en
 #define mem(a, b) memset(a, b, sizeof(a))
 #ifdef TESLA
-#include "main.hpp"
+#include "dbg.h"
 #else
 #define dbg(...)
 #endif
@@ -32,7 +32,14 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+    }
+    dbg(a);
+
 }
 int32_t main(){
 #ifndef DEBUG
