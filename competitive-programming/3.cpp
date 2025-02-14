@@ -32,14 +32,31 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for(int i = 0; i < n; i++){
-        cin >> a[i];
+    string s;
+    cin >> s;
+    vector <char> v;
+    for(int i = 0; i < s.size(); i++){
+        v.push_back(s[i]);
     }
-    dbg(a);
-
+    while(1){
+        int sz = v.size();
+        bool ok = true;
+        for(int i = sz; i >= 0; i--){
+            if(i - 1 < sz && v[i] == v[i - 1]){
+                v.pop_back();
+                if(i - 2 < 0){
+                    ok = true;
+                    break;
+                }
+                v[i - 1] = v[i - 2];
+                ok = false;
+            }
+        }
+        if(ok) break;
+    }
+    int ans = v.size();
+    if(ans == 0) ans++;
+    cout << ans << en;
 }
 int32_t main(){
 #ifndef DEBUG

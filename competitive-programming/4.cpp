@@ -17,7 +17,7 @@ using namespace __gnu_pbds;
 #define endl en
 #define mem(a, b) memset(a, b, sizeof(a))
 #ifdef TESLA
-#include "main.hpp"
+#include "dbg.h"
 #else
 #define dbg(...)
 #endif

@@ -17,9 +17,9 @@ using namespace __gnu_pbds;
 #define endl en
 #define mem(a, b) memset(a, b, sizeof(a))
 #ifdef TESLA
-#include "main.hpp"
+#include "dbg.h"
 #else
-#define debug(...)
+#define dbg(...)
 #endif
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
@@ -32,16 +32,10 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int l, r;
-    cin >> l >> r;
-
-    for(int i = 1; i <= 32; i++){
-        for(int j = 1; j <= 32; j++){
-        }
-    }
+    
 }
 int32_t main(){
-#ifndef TESLA
+#ifndef DEBUG
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 #endif
