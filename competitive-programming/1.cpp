@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 /*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
 #include "ext/pb_ds/assoc_container.hpp"
 #include "ext/pb_ds/tree_policy.hpp"
@@ -18,7 +17,7 @@ using namespace __gnu_pbds;
 #define endl en
 #define mem(a, b) memset(a, b, sizeof(a))
 #ifdef TESLA
-#include "main.hpp"
+#include "dbg.h"
 #else
 #define dbg(...)
 #endif
@@ -33,23 +32,7 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    int x;
-    cin >> x;
-
-    int y = 1;
-    while(y * 2 < x){
-        y *= 2;
-    }
-    for (int it : {y, y - 1}) {
-        if (it >= 1 && it < x) {
-            int z = x ^ it;
-            if (x + it > z && it + z > x && x + z > it) {
-                cout << it << endl;
-                return;
-            }
-        }
-    }
-    cout << -1 << en;
+    
 }
 int32_t main(){
 #ifndef DEBUG
@@ -63,36 +46,3 @@ int32_t main(){
     }
     return 0;
 }
-=======
-class Solution {
-    public:
-        int maxTaskAssign(vector<int>& tasks, vector<int>& workers, int pills, int strength) {
-            int n = tasks.size();
-            int m = workers.size();
-            sort(tasks.begin(), tasks.end());
-            sort(workers.begin(), workers.end());
-            int l = 0, r = min(n, m);
-            while (l < r) {
-                int mid = (l + r) / 2;
-                if(task[l] <= workers[mid]){
-                    l = mid + 1;
-                } else {
-                    r = mid;
-                }
-            }
-            int cnt = l;
-            for(int i = l; l < max(n, m); i++){
-                if(pill > 0){
-                    if(tasks[i] <= workers[i] + strength){
-                        cnt++;
-                        pills--;
-                    } else {
-                        break;
-                    }
-                }
-            }
-            return cnt;
-        }
-        
-    };
->>>>>>> Stashed changes

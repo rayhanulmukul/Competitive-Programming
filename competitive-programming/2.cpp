@@ -1,76 +1,48 @@
-#include <iostream>
-<<<<<<< Updated upstream
+/*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
+#include "ext/pb_ds/assoc_container.hpp"
+#include "ext/pb_ds/tree_policy.hpp"
+#include <bits/stdc++.h>
 using namespace std;
+using namespace __gnu_pbds;
 
-void solve(int tt) {
-    int x;
-    cin >> x;
+#define ll long long int
+#define int ll
+#define ld long double
+#define pb push_back
+#define ft front()
+#define bk back()
+#define pi 2*acos(0.0)
+#define gap ' '
+#define en '\n'
+#define endl en
+#define mem(a, b) memset(a, b, sizeof(a))
+#ifdef TESLA
+#include "dbg.h"
+#else
+#define dbg(...)
+#endif
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
+#define F0R(i,a,b) for (int i = (a); i < (b); ++i)
+#define FOR(i,a) F0R(i,0,a)
+const int MOD = 1e9+7;
+const int MAX = 2e5+5;
+const int INF = 1e18;
+int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
+int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
-    // Try y as the largest power of 2 less than x
-    int y = 1;
-    while (y * 2 < x) {
-        y *= 2;
-    }
-
-    // Check y and y-1 as candidates
-    for (int candidate : {y, y - 1}) {
-        if (candidate >= 1 && candidate < x) {
-            int z = x ^ candidate;
-            if (x + candidate > z && candidate + z > x && x + z > candidate) {
-                cout << candidate << endl;
-                return;
-            }
-        }
-    }
-
-    // If no valid y is found, output -1
-    cout << -1 << endl;
+void solve(int tt){
+    
 }
-
-int main() {
-    int tt;
-    cin >> tt;
-    while (tt--) {
-        solve(tt);
-=======
-#include <vector>
-#include <algorithm>
-
-using namespace std;
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    int t;
+int32_t main(){
+#ifndef DEBUG
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#endif
+    int t = 1;
     cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        vector<long long> a(n);
-        for (auto &x : a) cin >> x;
-
-        vector<long long> suffix(n + 2, 0);
-        for (int i = n-1; i >= 0; --i) {
-            suffix[i] = suffix[i+1] + a[i];
-        }
-
-        vector<long long> pref_max(n, 0);
-        pref_max[0] = a[0];
-        for (int i = 1; i < n; ++i) {
-            pref_max[i] = max(pref_max[i-1], a[i]);
-        }
-
-        for (int k = 1; k <= n; ++k) {
-            long long ans = suffix[n - k];
-
-            if (n - k - 1 >= 0) {
-                ans = max(ans, suffix[n - k + 1] + pref_max[n - k - 1]);
-            }
-
-            cout << ans << " ";
-        }
-        cout << '\n';
->>>>>>> Stashed changes
+    for(int i = 1; i <= t; i++){
+        solve(i);
     }
+    return 0;
 }
