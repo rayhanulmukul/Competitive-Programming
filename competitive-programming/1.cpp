@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
 #include "ext/pb_ds/assoc_container.hpp"
 #include "ext/pb_ds/tree_policy.hpp"
@@ -62,3 +63,36 @@ int32_t main(){
     }
     return 0;
 }
+=======
+class Solution {
+    public:
+        int maxTaskAssign(vector<int>& tasks, vector<int>& workers, int pills, int strength) {
+            int n = tasks.size();
+            int m = workers.size();
+            sort(tasks.begin(), tasks.end());
+            sort(workers.begin(), workers.end());
+            int l = 0, r = min(n, m);
+            while (l < r) {
+                int mid = (l + r) / 2;
+                if(task[l] <= workers[mid]){
+                    l = mid + 1;
+                } else {
+                    r = mid;
+                }
+            }
+            int cnt = l;
+            for(int i = l; l < max(n, m); i++){
+                if(pill > 0){
+                    if(tasks[i] <= workers[i] + strength){
+                        cnt++;
+                        pills--;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            return cnt;
+        }
+        
+    };
+>>>>>>> Stashed changes
