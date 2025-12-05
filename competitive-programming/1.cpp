@@ -1,4 +1,3 @@
-/*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
 #include "ext/pb_ds/assoc_container.hpp"
 #include "ext/pb_ds/tree_policy.hpp"
 #include <bits/stdc++.h>
@@ -32,7 +31,32 @@ int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
-    
+    string s;
+    cin >> s;
+    vector <int> v;
+    int one = 0;
+    for(char c : s){
+        if(c == '1') one++;
+        else if(one > 0){
+            v.pb(one);
+            one = 0;
+        }
+    }
+    if(one > 0) v.pb(one);
+    sort(v.rbegin(), v.rend());
+    int zara = 0;
+    int sz = v.size();
+
+    // for(int i = 0; i < sz; i++){
+    //     cout << v[i] << gap;
+    // }
+    // cout << en;
+
+    for(int i = 0; i < sz; i += 2){
+        zara += v[i];
+    }
+    // cout << "Size : " << sz << endl;
+    cout << zara << en;
 }
 int32_t main(){
 #ifndef DEBUG
