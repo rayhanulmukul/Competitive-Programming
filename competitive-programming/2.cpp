@@ -1,9 +1,6 @@
 /*بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ*/
-#include "ext/pb_ds/assoc_container.hpp"
-#include "ext/pb_ds/tree_policy.hpp"
 #include <bits/stdc++.h>
 using namespace std;
-using namespace __gnu_pbds;
 
 #define ll long long int
 #define int ll
@@ -25,14 +22,31 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define rng(x,y) uniform_int_distribution<int>(x,y)(rng)
 #define F0R(i,a,b) for (int i = (a); i < (b); ++i)
 #define FOR(i,a) F0R(i,0,a)
-const int MOD = 1e9+7;
+const int MOD = 1e9+7; // 998244353;
 const int MAX = 2e5+5;
+const int N = 1005;
 const int INF = 1e18;
 int dx[] = {0, 0, +1, -1, -1, +1, -1, +1};
 int dy[] = {+1, -1, 0, 0, +1, +1, -1, -1};
 
 void solve(int tt){
+    string s;
+    cin >> s;
+    int n = s.size();
+    for(int i = 0; i < n; i++){
+        if(s[i] == '0'){
+            s.erase(i, 1);
+            break;
+        }
+    }
     
+    for(int i = 0; i < n; i++){
+        if(s[i] == '1'){
+            s.erase(i, 1);
+            break;
+        }
+    }
+    cout << s << endl;
 }
 int32_t main(){
 #ifndef DEBUG
